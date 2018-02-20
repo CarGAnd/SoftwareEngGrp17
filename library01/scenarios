@@ -1,0 +1,23 @@
+Week 1:
+	Admin adds a book
+	User searches for books
+	
+Admin adds a book
+	check that admin is not logged in
+	Admin logs in (by providing a password; no user name necessary)
+	check that admin is logged in
+	Admin selects add a book
+	Admin fills in: Title, Author
+	check that the book with the title and author is added
+
+Alternative scenarios
+	check that admin is not logged in
+	Admin logs in with wrong password
+	check that admin is not logged in
+	Admin adds a book returns an exception: Admin not logged in (only for the application layer but not for the UI layer)
+
+User searches for books (check for one book, several books, no books)
+	User selects "search for books"
+	User inputs keyword to search for
+	System returns a collection with books that contain the keyword either in the title or in author field
+
