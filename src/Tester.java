@@ -2,6 +2,9 @@
 public class Tester {
 
 	public Tester() {
-		fejlfejl;
+		System.out.println("fejlfejl");
+		System.out.println("fejlfejl");
+		System.out.println("fejlfejl");
+		System.out.println("fejlfejl");
 	}
 }
