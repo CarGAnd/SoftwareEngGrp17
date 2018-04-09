@@ -6,6 +6,6 @@ public class TimeManagementApp {
 		TimeManagementApp timeManagementApp = new TimeManagementApp();
 	}
 	public TimeManagementApp() {
-		
+		System.out.println("dsa");
 	}
 }
