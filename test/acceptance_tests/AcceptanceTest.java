@@ -1,4 +1,4 @@
-package dtu.library.acceptance_tests;
+package acceptance_tests;
 
 import org.junit.runner.RunWith;
 
@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
 	snippets = SnippetType.CAMELCASE, 
-	glue = { "dtu.library.acceptance_tests"})
+	glue = { "test.acceptance_tests"})
 public class AcceptanceTest {
 
 }
