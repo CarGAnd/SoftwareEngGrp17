@@ -1,5 +1,8 @@
-Use case: Add or remove employee to or from activity
-
+Feature: xxx
+	Description: xxx
+	Actor: xxx
+	
+#comment
 Scenario: Add employee to activity
 	Given a project exists and a user wishes to add an employee
 	And the user ID matches the project leader ID

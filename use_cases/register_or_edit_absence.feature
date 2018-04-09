@@ -1,3 +1,8 @@
+Feature: xxx
+	Description: xxx
+	Actor: xxx
+	
+#comment
 Scenario: Register sick
 	Given an employee wishes to register his absence due to illness
 	And the employee is logged in with his ID
