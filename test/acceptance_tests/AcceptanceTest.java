@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
-
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "use_cases", 
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
@@ -13,5 +12,4 @@ import cucumber.api.junit.Cucumber;
 	snippets = SnippetType.CAMELCASE, 
 	glue = { "test.acceptance_tests"})
 public class AcceptanceTest {
-
 }
