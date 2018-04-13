@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class Management {
 	
-<<<<<<< HEAD
 	public static ArrayList<Employee> Employees = new ArrayList<Employee>();
-=======
 	private static String loggedInUserID;
 	private static userType loggedInUserType;
 	private static ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -94,8 +92,6 @@ public class Management {
 		}
 		return null;
 	}
->>>>>>> branch 'master' of https://github.com/PepperYourAnguss/SoftwareEngGrp17.git
-
 	public static userType getLoggedInUserType() {
 		return loggedInUserType;
 	}

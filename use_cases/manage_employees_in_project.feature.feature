@@ -1,4 +1,4 @@
-Feature: xxx
+Feature: When 
 	Description: xxx
 	Actor: xxx
 	
@@ -38,3 +38,14 @@ Feature: xxx
 #	And the employee is not assigned to the activity
 #	When the user removes the employee to the activity
 #	Then the user gets an error message
+
+Feature: x
+	Description: xxx
+	Actor: Admin
+	
+#comment
+#Scenario: Admin sets project leader
+#	Given a project exists with an ID number
+#	And the project does not have a leader
+#	When the admin selects a project leader from the list of employees
+#	Then the projects leader is set to that employees ID number

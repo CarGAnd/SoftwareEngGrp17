@@ -1,8 +1,15 @@
-Feature: xxx
-	Description: xxx
-	Actor: xxx
+Feature: Create a project or edit the details of an existing project.
+	Description: 
+	Actor: Administrator and Project Leader
 	
 #comment
+#Scenario: Create a project
+#	Given the user is logged in as an administrator
+#	And he wishes to create a project
+#	When a set of activities is predetermined
+#	And a start time is estimated
+#	Then a project is created
+
 #Scenario: Project is finished
 #	Given a project exists and a user wishes to edit the project details
 #	And the user ID matches project leader ID
