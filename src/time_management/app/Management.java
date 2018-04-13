@@ -2,8 +2,8 @@ package time_management.app;
 
 import java.util.ArrayList;
 
-public class Mangement {
+public class Management {
 	
-	static ArrayList<Employee> Employees = new ArrayList<Employee>();
+	public static ArrayList<Employee> Employees = new ArrayList<Employee>();
 
 }
