@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -27,78 +28,76 @@ public class GUI extends JFrame {
 	protected static boolean guiInitialized = true;
 	private static JFrame timeManagementApplication;
 	protected static JTextField userInputField;
-	private static JTextArea messages;
+	private static JTextArea queryRetrievalPanel;
 	private static JLabel promptUserLabel;
-	private static JScrollPane scrollPane;
+	private static JScrollPane projectAndActivityScrollPane;
 	private static JButton changeCalendarViewButton;
-	private static JPanel northPanel;
+	private static JPanel infoPanel;
 	private static JLabel timeLabel;
-	protected static JTextField portField;
-	protected static JTextField ipField;
+	protected static JTextField searchDateTextField;
+	protected static JTextField passwordField;
 	private static JPanel innerPanel;
 	protected static final Color[] COLOUR = { new Color(251, 234, 225), new Color(153, 150, 149) };
 	private static JTextArea projectAndActivityPanel;
 	private static JScrollPane scrollPanelForProjecAndActivities;
 	private static JPanel southPanel;
 	private static JPanel conPanel;
-	private static JPanel buttonsChatPanel;
+	private static JPanel inputPanel;
 	private static JLabel motdLabel;
 	private static JPanel userMessagePanel;
-
 	public GUI() {
 		initializeGUI();
-		initializeTopLayoutManager();
+		initializeNestedLayouts();
 		initializeMainIOComponents();
 		initializeScrollPane();
-
-
 		setMOTD("Some important message concerning all users is shown here.");
-
-		JButton quit = quitButton();
 		userPrompt(userPromptLogic());
+		setAndAttachLayouts();
+		setInputPanelLayout();
+		setComponentColours();
+	}
 
-		// Set port Label and port textfield @ NORTH
-		JLabel portLabel = new JLabel("Find Date:: ");
-		portLabel.setAlignmentX(RIGHT_ALIGNMENT);
-		portField = new JTextField("..");
-		portField.setAlignmentX(RIGHT_ALIGNMENT);
-		portField.setColumns(3);
-
-		// Set IP Label and IP textfield
-		JLabel ipLabel = new JLabel("Admin Login: ");
-		ipLabel.setAlignmentX(RIGHT_ALIGNMENT);
-		ipField = new JTextField("127.0.0.1");
-		ipField.setAlignmentX(RIGHT_ALIGNMENT);
-		ipField.setColumns(6);
-
-		// Add Panels and components unto JFrame
-		northPanel.add(motdLabel, 0);
-		northPanel.add(timeLabel, 1);
-		innerPanel.add(scrollPane, BorderLayout.CENTER);
+	private void setAndAttachLayouts() {
+		infoPanel.add(motdLabel, 0);
+		infoPanel.add(timeLabel, 1);
+		innerPanel.add(projectAndActivityScrollPane, BorderLayout.CENTER);
 		innerPanel.add(promptUserLabel, BorderLayout.SOUTH);
-
-		getContentPane().add(northPanel, BorderLayout.NORTH);
+		getContentPane().add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
+		getContentPane().add(infoPanel, BorderLayout.NORTH);
 		getContentPane().add(innerPanel, BorderLayout.CENTER);
 		getContentPane().add(southPanel, BorderLayout.SOUTH);
+	}
+
+	private void setInputPanelLayout() {
+		JLabel searchDateLabel = new JLabel("Find Date: ");
+		searchDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
+		searchDateTextField = new JTextField("yy-mm-dd");
+		searchDateTextField.setAlignmentX(RIGHT_ALIGNMENT);
+		searchDateTextField.setColumns(6);
+
+		JLabel adminLoginLabel = new JLabel("Admin Login: ");
+		adminLoginLabel.setAlignmentX(RIGHT_ALIGNMENT);
+		passwordField = new JPasswordField(".........");
+		passwordField.setAlignmentX(RIGHT_ALIGNMENT);
+		passwordField.setColumns(6);
+
+		JButton quit = quitButton();
+		inputPanel = new JPanel();
+		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		inputPanel.add(changeCalendarViewButton);
+		inputPanel.add(quit);
 
 		conPanel = new JPanel();
 		conPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-		buttonsChatPanel = new JPanel();
-		buttonsChatPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonsChatPanel.add(changeCalendarViewButton);
-		buttonsChatPanel.add(quit);
-
-		conPanel.add(portLabel);
-		conPanel.add(portField);
-		conPanel.add(ipLabel);
-		conPanel.add(ipField);
+		conPanel.add(searchDateLabel);
+		conPanel.add(searchDateTextField);
+		conPanel.add(adminLoginLabel);
+		conPanel.add(passwordField);
+		
 		userMessagePanel.add(userInputField);
-		userMessagePanel.add(buttonsChatPanel);
+		userMessagePanel.add(inputPanel);
 		southPanel.add(conPanel, 0);
 		southPanel.add(userMessagePanel, 1);
-		getContentPane().add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
-		setComponentColours();
 	}
 
 	private void initializeScrollPane() {
@@ -133,7 +132,7 @@ public class GUI extends JFrame {
 	}
 
 	private void initializeGUI() {
-		timeManagementApplication = this;
+		timeManagementApplication = this; // Used for setting JFrame to visible.
 		setTitle("SoftwareHuset's Calendar Application");
 		setBounds(200, 200, 1200, 800);
 		setAlwaysOnTop(false);
@@ -142,8 +141,8 @@ public class GUI extends JFrame {
 	}
 
 	private void setComponentColours() {
-		northPanel.setBackground(COLOUR[0]);
-		messages.setBackground(COLOUR[1]);
+		infoPanel.setBackground(COLOUR[0]);
+		queryRetrievalPanel.setBackground(COLOUR[1]);
 	}
 
 	private void userPrompt(String prompt) {
@@ -162,14 +161,14 @@ public class GUI extends JFrame {
 
 	private void initializeMainIOComponents() {
 		// rows and columns locks the textarea from auto-rezizing on input.
-		messages = new JTextArea(5, 10);
-		messages.setAutoscrolls(true);
-		messages.setSize(this.getWidth(), 200);
-		messages.setLineWrap(true);
-		messages.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		messages.setEditable(false);
-		scrollPane = new JScrollPane(messages);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		queryRetrievalPanel = new JTextArea(5, 10);
+		queryRetrievalPanel.setAutoscrolls(true);
+		queryRetrievalPanel.setSize(this.getWidth(), 200);
+		queryRetrievalPanel.setLineWrap(true);
+		queryRetrievalPanel.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		queryRetrievalPanel.setEditable(false);
+		projectAndActivityScrollPane = new JScrollPane(queryRetrievalPanel);
+		projectAndActivityScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userInputField = new JTextField(); // @ BorderLayout -> CENTER
 		userInputField.setEditable(true);
 		userInputField.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -177,22 +176,27 @@ public class GUI extends JFrame {
 		timeLabel = new JLabel();
 	}
 
-	private void initializeTopLayoutManager() {
-		northPanel = new JPanel();
-		northPanel.setFont(new Font("Courier", Font.PLAIN, 10));
+	private void initializeNestedLayouts() {
+		infoPanel = new JPanel();
+		infoPanel.setFont(new Font("Courier", Font.PLAIN, 10));
 		innerPanel = new JPanel();
 		southPanel = new JPanel();
 		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		southPanel = new JPanel();
 		southPanel.setBorder(BorderFactory.createEtchedBorder());
 		innerPanel.setLayout(new BorderLayout());
-		northPanel.setLayout(new GridLayout(2, 1));
+		infoPanel.setLayout(new GridLayout(2, 1));
 		southPanel.setLayout(new GridLayout(3, 1));
 		userMessagePanel = new JPanel();
 	}
 
+	/*
+	 * Main method invokes three different threads. One for the GUI; one for a
+	 * KeyboardListener; one for a real-time clock. Not much else in this method,
+	 * the magic happends in the class constructor for GUI.
+	 */
 	public static void main(String[] args) throws IOException {
-		EventQueue.invokeLater(new Runnable() {// GUI-thread
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					// System.out.println(Thread.currentThread().getName() + About to make GUI.");
@@ -218,11 +222,11 @@ public class GUI extends JFrame {
 	}
 
 	public static String getMessages() {
-		return messages.getText();
+		return queryRetrievalPanel.getText();
 	}
 
 	public static void setMessages(String setTextPane) {
-		messages.setText(setTextPane);
+		queryRetrievalPanel.setText(setTextPane);
 	}
 
 	public static String getPromptLabel() {
@@ -230,7 +234,7 @@ public class GUI extends JFrame {
 	}
 
 	public static void setPromptLabel(String string) {
-		GUI.promptUserLabel.setText(string);
+		promptUserLabel.setText(string);
 	}
 
 	public static JButton getActionButton() {
@@ -242,19 +246,19 @@ public class GUI extends JFrame {
 	}
 
 	public static String getPortField() {
-		return portField.getText();
+		return searchDateTextField.getText();
 	}
 
 	public static void setPortField(String portField) {
-		GUI.portField.setText(portField);
+		searchDateTextField.setText(portField);
 	}
 
 	public static String getIpField() {
-		return ipField.getText();
+		return passwordField.getText();
 	}
 
 	public static void setIpField(String ipField) {
-		GUI.ipField.setText(ipField);
+		GUI.passwordField.setText(ipField);
 	}
 
 }
