@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Management {
 	
-	public static ArrayList<Employee> Employees = new ArrayList<Employee>();
 	private static String loggedInUserID;
 	private static userType loggedInUserType;
 	private static ArrayList<Employee> employees = new ArrayList<Employee>();
 	private static ArrayList<Admin> admins = new ArrayList<Admin>();
+	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
 		
 	public static boolean userIsLoggedIn() {
 		return loggedInUserType != null;
 	}
 	
-	public static void logEmployeeIn(String ID, String password) throws FailedLoginException {
+	public static void employeeLogin(String ID, String password) throws FailedLoginException {
 		Employee user = getEmployeeByID(ID);
 		if(user != null && password.equals(user.employeePass)) {
 			setLoggedInUserType(userType.Employee);
@@ -25,7 +25,7 @@ public class Management {
 		}
 	}
 	
-	public static void logAdminIn(String ID, String password) throws FailedLoginException {
+	public static void adminLogin(String ID, String password) throws FailedLoginException {
 		Admin user = getAdminByID(ID);
 		if(user != null && password.equals(user.adminPass)) {
 			setLoggedInUserType(userType.Admin);
@@ -45,8 +45,26 @@ public class Management {
 		employees.add(emp);
 	}
 	
+	public static void removeEmployee(Employee emp) {
+		employees.remove(emp);
+	}
+	
 	public static void addAdmin(Admin ad) {
 		admins.add(ad);
+	}
+	
+	public static void removeAdmin(Admin ad) {
+		admins.remove(ad);
+	}
+	
+	public static Project addProject(Project pro) {
+		listOfProjects.add(pro);
+		return pro;
+	}
+	
+	public static Project removeProject(Project pro) {
+		listOfProjects.remove(pro);
+		return pro;
 	}
 	
 	public enum userType{
@@ -63,7 +81,7 @@ public class Management {
 			}
 		}
 		
-		public int powerLevel() { 
+		public int toInteger() { 
 			switch(this) {
 			case Admin:
 				return 10;
@@ -92,6 +110,16 @@ public class Management {
 		}
 		return null;
 	}
+	
+	public static Project getProjectByID(String ID) {
+		for(int i = 0; i < listOfProjects.size(); i++) {
+			if(listOfProjects.get(i).projectID.equals(ID)) {
+				return listOfProjects.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public static userType getLoggedInUserType() {
 		return loggedInUserType;
 	}

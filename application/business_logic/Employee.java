@@ -1,9 +1,13 @@
 package business_logic;
 
+import java.util.ArrayList;
+
 public class Employee {
 
-	String employeePass = "";
-	String employeeID = "";
+	String employeePass;
+	String employeeID;
+	
+	public ArrayList<Project> leaderOfProjects;
 	
 	public Employee(String employeePass, String employeeID) {
 	
