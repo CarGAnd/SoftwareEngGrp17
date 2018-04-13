@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Dictionary;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,19 +26,19 @@ public class GUI extends JFrame {
 
 	protected static boolean guiInitialized = true;
 	private static JFrame timeManagementApplication;
-	protected static JTextField userMessage;
+	protected static JTextField userInputField;
 	private static JTextArea messages;
 	private static JLabel promptUserLabel;
 	private static JScrollPane scrollPane;
-	private static JButton actionButton;
+	private static JButton changeCalendarViewButton;
 	private static JPanel northPanel;
 	private static JLabel timeLabel;
 	protected static JTextField portField;
 	protected static JTextField ipField;
 	private static JPanel innerPanel;
 	protected static final Color[] COLOUR = { new Color(251, 234, 225), new Color(153, 150, 149) };
-	private static JTextArea online;
-	private static JScrollPane scrollPaneOnline;
+	private static JTextArea projectAndActivityPanel;
+	private static JScrollPane scrollPanelForProjecAndActivities;
 	private static JPanel southPanel;
 	private static JPanel conPanel;
 	private static JPanel buttonsChatPanel;
@@ -47,37 +48,14 @@ public class GUI extends JFrame {
 	public GUI() {
 		initializeGUI();
 		initializeTopLayoutManager();
-		initializeInputComponent();
-		// ONLINE_USERS
-		online = new JTextArea(5, 12);
-		online.setAutoscrolls(false);
-		online.setLineWrap(false);
-		online.setFont(new Font("Arial", Font.PLAIN, 12));
-		online.setEditable(false);
-		scrollPaneOnline = new JScrollPane(online);
-		scrollPaneOnline.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		initializeMainIOComponents();
+		initializeScrollPane();
 
-		// USER_INPUT
-		// Implemented @ BorderLayout -> CENTER
-		userMessage = new JTextField();
-		userMessage.setEditable(true);
-		userMessage.setFont(new Font("Arial", Font.PLAIN, 16));
-		userMessage.setColumns(40);
-		timeLabel = new JLabel();
+
 		setMOTD("Some important message concerning all users is shown here.");
 
-		// Simple exit method added.
-		JButton quit = new JButton("Quit");
-		quit.setAlignmentX(CENTER_ALIGNMENT);
-		quit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-
-			}
-		});
-
-		userPrompt();
+		JButton quit = quitButton();
+		userPrompt(userPromptLogic());
 
 		// Set port Label and port textfield @ NORTH
 		JLabel portLabel = new JLabel("Find Date:: ");
@@ -108,19 +86,46 @@ public class GUI extends JFrame {
 
 		buttonsChatPanel = new JPanel();
 		buttonsChatPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonsChatPanel.add(actionButton);
+		buttonsChatPanel.add(changeCalendarViewButton);
 		buttonsChatPanel.add(quit);
 
 		conPanel.add(portLabel);
 		conPanel.add(portField);
 		conPanel.add(ipLabel);
 		conPanel.add(ipField);
-		userMessagePanel.add(userMessage);
+		userMessagePanel.add(userInputField);
 		userMessagePanel.add(buttonsChatPanel);
 		southPanel.add(conPanel, 0);
 		southPanel.add(userMessagePanel, 1);
-		getContentPane().add(scrollPaneOnline, BorderLayout.WEST);
+		getContentPane().add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
 		setComponentColours();
+	}
+
+	private void initializeScrollPane() {
+		projectAndActivityPanel = new JTextArea(5, 28);
+		projectAndActivityPanel.setAutoscrolls(false);
+		projectAndActivityPanel.setLineWrap(false);
+		projectAndActivityPanel.setFont(new Font("Arial", Font.PLAIN, 12));
+		projectAndActivityPanel.setEditable(false);
+		scrollPanelForProjecAndActivities = new JScrollPane(projectAndActivityPanel);
+		scrollPanelForProjecAndActivities.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+	}
+
+	private String userPromptLogic() {
+		String promptMessage = "What's the prompt?";
+		return promptMessage;
+	}
+
+	private JButton quitButton() {
+		JButton quit = new JButton("Quit");
+		quit.setAlignmentX(CENTER_ALIGNMENT);
+		quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		return quit;
 	}
 
 	private void setMOTD(String message) {
@@ -129,8 +134,8 @@ public class GUI extends JFrame {
 
 	private void initializeGUI() {
 		timeManagementApplication = this;
-		setTitle("SoftwareHuset's Timemanagement Application");
-		setBounds(200, 200, 800, 600);
+		setTitle("SoftwareHuset's Calendar Application");
+		setBounds(200, 200, 1200, 800);
 		setAlwaysOnTop(false);
 		setDefaultCloseOperation(JFrame.ICONIFIED);
 		getContentPane().setLayout(new BorderLayout());// Top Layout manager
@@ -141,23 +146,21 @@ public class GUI extends JFrame {
 		messages.setBackground(COLOUR[1]);
 	}
 
-	private void userPrompt() {
-		promptUserLabel = new JLabel("");
+	private void userPrompt(String prompt) {
+		promptUserLabel = new JLabel(prompt);
 		promptUserLabel.setBorder(BorderFactory.createEtchedBorder());
 
-		actionButton = new JButton("Change View (D-W-M-Y)");
-		actionButton.addActionListener(new ActionListener() {
+		changeCalendarViewButton = new JButton("Change View (D-W-M-Y)");
+		changeCalendarViewButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-
 			}
-
 		});
 	}
 
-	private void initializeInputComponent() {
+	private void initializeMainIOComponents() {
 		// rows and columns locks the textarea from auto-rezizing on input.
 		messages = new JTextArea(5, 10);
 		messages.setAutoscrolls(true);
@@ -167,6 +170,11 @@ public class GUI extends JFrame {
 		messages.setEditable(false);
 		scrollPane = new JScrollPane(messages);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userInputField = new JTextField(); // @ BorderLayout -> CENTER
+		userInputField.setEditable(true);
+		userInputField.setFont(new Font("Arial", Font.PLAIN, 16));
+		userInputField.setColumns(40);
+		timeLabel = new JLabel();
 	}
 
 	private void initializeTopLayoutManager() {
@@ -201,12 +209,12 @@ public class GUI extends JFrame {
 	}
 
 	public static String getUserMessage() {
-		return userMessage.getText();
+		return userInputField.getText();
 	}
 
 	public static void setUserMessage(String setString) {
-		System.out.println("Setting userMessage = " + setString);
-		userMessage.setText(setString);
+		System.out.println("Setting userInputField = " + setString);
+		userInputField.setText(setString);
 	}
 
 	public static String getMessages() {
@@ -226,7 +234,7 @@ public class GUI extends JFrame {
 	}
 
 	public static JButton getActionButton() {
-		return actionButton;
+		return changeCalendarViewButton;
 	}
 
 	public static void setTimeLabel(String timeLabel) {

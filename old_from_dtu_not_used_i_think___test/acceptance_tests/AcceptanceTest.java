@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
 	snippets = SnippetType.CAMELCASE, 
-	glue = { "test.app.acceptance_tests"},
+	glue = { "ap.acceptance_tests"},
 	dryRun = true
 	)
 	

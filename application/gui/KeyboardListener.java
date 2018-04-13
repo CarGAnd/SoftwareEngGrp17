@@ -15,24 +15,24 @@ public class KeyboardListener extends GUI implements Runnable {
 		setUserIdentity("admin");
 		setPassword("password");
 
-		GUI.userMessage.addActionListener(new ActionListener() {
+		GUI.userInputField.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent enteredKeystrokes) {
 				if (!credidentialsObtained) {
 					if (GUI.getPromptLabel().contains("username")) {
-						userIdentity = userMessage.getText();
+						userIdentity = userInputField.getText();
 						setMessages(getMessages() + "\nUsername: " + userIdentity);
 						GUI.setUserMessage("");
 						run();
 					} else if (GUI.getPromptLabel().contains("password")) {
-						password = userMessage.getText();
+						password = userInputField.getText();
 						setMessages(getMessages() + "\nPassword: " + "#########");
 						GUI.setUserMessage("");
 						credidentialsObtained = true;
 						setMessages(getMessages() + "\nConnecting");
-						userMessage.setEditable(false);
-						userMessage.setFocusable(false);
+						userInputField.setEditable(false);
+						userInputField.setFocusable(false);
 						// Disables port and ip textfields.
 						GUI.portField.setEnabled(false);
 						GUI.ipField.setEnabled(false);
@@ -47,8 +47,8 @@ public class KeyboardListener extends GUI implements Runnable {
 										setMessages(getMessages() + ".");
 
 										if (currentlyComputing) {
-											userMessage.setEditable(true);
-											userMessage.setFocusable(true);
+											userInputField.setEditable(true);
+											userInputField.setFocusable(true);
 											setPromptLabel("Enter your message: ");
 										}
 									} catch (InterruptedException e) {
@@ -68,7 +68,7 @@ public class KeyboardListener extends GUI implements Runnable {
 			setPromptLabel("Please enter username: ");
 		} else if (!userIdentity.isEmpty() && password.isEmpty()) {
 			setPromptLabel("Please enter password: ");
-			System.out.println(userMessage.getText());
+			System.out.println(userInputField.getText());
 		} else if (!userIdentity.isEmpty() && !password.isEmpty() && currentlyComputing) {
 			// User is currentlyComputing, invoke smack
 		}
