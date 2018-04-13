@@ -1,9 +1,9 @@
-package time_management.app;
+package business_logic;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import time_management.app.Management.userType;
+import business_logic.Management.userType;
 
 public class Project {
 	ArrayList<Activity> Activities;

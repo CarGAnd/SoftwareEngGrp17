@@ -1,8 +1,8 @@
 package acceptance_tests;
 
+import business_logic.Management;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-import time_management.app.Management;
 
 public class AdminLoggedInSteps {
 	Management management = new Management();

@@ -1,8 +1,7 @@
 Feature: xxx
 	Description: xxx
 	Actor: xxx
-	
-#comment
+
 #Scenario: Create an activity
 #	Given a project exists and a user wishes to create an activity for that project
 #	And the user ID matches the project leader ID

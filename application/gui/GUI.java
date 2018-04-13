@@ -1,4 +1,4 @@
-package gui.app;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import javax.swing.ScrollPaneConstants;
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
 
-	protected static boolean guiInitialized = false;
+	protected static boolean guiInitialized = true;
 	private static JFrame timeManagementApplication;
 	protected static JTextField userMessage;
 	private static JTextArea messages;
@@ -35,7 +35,7 @@ public class GUI extends JFrame {
 	protected static JTextField portField;
 	protected static JTextField ipField;
 	private static JPanel innerPanel;
-	protected static Color[] color;
+	protected static final Color[] COLOUR = { new Color(251, 234, 225), new Color(153, 150, 149) };
 	private static JTextArea online;
 	private static JScrollPane scrollPaneOnline;
 	private static JPanel southPanel;
@@ -45,21 +45,9 @@ public class GUI extends JFrame {
 	private static JPanel userMessagePanel;
 
 	public GUI() {
-		timeManagementApplication = this;
-		setTitle("SoftwareHuset's Timemanagement Application");
-		setBounds(200, 200, 800, 600);
-		setAlwaysOnTop(false);
-		setDefaultCloseOperation(JFrame.ICONIFIED);
-		getContentPane().setLayout(new BorderLayout());// Top Layout manager
-		
-		Color[] color = new Color[3];
-		color[1] = new Color(251, 234, 225);
-		color[0] = new Color(153, 150, 149);
-
+		initializeGUI();
 		initializeTopLayoutManager();
-
 		initializeInputComponent();
-
 		// ONLINE_USERS
 		online = new JTextArea(5, 12);
 		online.setAutoscrolls(false);
@@ -76,7 +64,8 @@ public class GUI extends JFrame {
 		userMessage.setFont(new Font("Arial", Font.PLAIN, 16));
 		userMessage.setColumns(40);
 		timeLabel = new JLabel();
-		motdLabel = new JLabel("MOTD: Unimplemented / not instantiated");
+		setMOTD("Some important message concerning all users is shown here.");
+
 		// Simple exit method added.
 		JButton quit = new JButton("Quit");
 		quit.setAlignmentX(CENTER_ALIGNMENT);
@@ -88,20 +77,7 @@ public class GUI extends JFrame {
 			}
 		});
 
-		// USER_PROMPT
-		promptUserLabel = new JLabel("");
-		promptUserLabel.setBorder(BorderFactory.createEtchedBorder());
-
-		actionButton = new JButton("Change View (D-W-M-Y)");
-		actionButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
+		userPrompt();
 
 		// Set port Label and port textfield @ NORTH
 		JLabel portLabel = new JLabel("Find Date:: ");
@@ -139,27 +115,50 @@ public class GUI extends JFrame {
 		conPanel.add(portField);
 		conPanel.add(ipLabel);
 		conPanel.add(ipField);
-
 		userMessagePanel.add(userMessage);
 		userMessagePanel.add(buttonsChatPanel);
-
 		southPanel.add(conPanel, 0);
 		southPanel.add(userMessagePanel, 1);
 		getContentPane().add(scrollPaneOnline, BorderLayout.WEST);
+		setComponentColours();
+	}
 
-		// Assign color to various components/containers
-		northPanel.setBackground(color[0]);
-		messages.setBackground(color[1]);
+	private void setMOTD(String message) {
+		motdLabel = new JLabel(message);
+	}
 
-		// This ensures that inherited classes do not instantiate new
-		// frames and components.
-		guiInitialized = true;
+	private void initializeGUI() {
+		timeManagementApplication = this;
+		setTitle("SoftwareHuset's Timemanagement Application");
+		setBounds(200, 200, 800, 600);
+		setAlwaysOnTop(false);
+		setDefaultCloseOperation(JFrame.ICONIFIED);
+		getContentPane().setLayout(new BorderLayout());// Top Layout manager
+	}
 
+	private void setComponentColours() {
+		northPanel.setBackground(COLOUR[0]);
+		messages.setBackground(COLOUR[1]);
+	}
+
+	private void userPrompt() {
+		promptUserLabel = new JLabel("");
+		promptUserLabel.setBorder(BorderFactory.createEtchedBorder());
+
+		actionButton = new JButton("Change View (D-W-M-Y)");
+		actionButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
 	}
 
 	private void initializeInputComponent() {
-		// CHATWINDOW.
-		// rows, columns locks the textarea from auto-rezizing on input.
+		// rows and columns locks the textarea from auto-rezizing on input.
 		messages = new JTextArea(5, 10);
 		messages.setAutoscrolls(true);
 		messages.setSize(this.getWidth(), 200);
@@ -185,42 +184,35 @@ public class GUI extends JFrame {
 	}
 
 	public static void main(String[] args) throws IOException {
-		// GUI-thread
-		EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {// GUI-thread
 			public void run() {
 				try {
-					// System.out.println(Thread.currentThread().getName() + "
-					// -- About to make GUI.");
+					// System.out.println(Thread.currentThread().getName() + About to make GUI.");
 					new GUI();
 					timeManagementApplication.setVisible(true);
-
 				} catch (Exception e) {
 				}
 				new Thread(new KeyboardListener()).start();
 			}
 		});
-		Thread t1 = (new Thread(new TimeStamp()));
-		t1.start();
+		Thread timeStamp = (new Thread(new TimeStamp()));
+		timeStamp.start();
 
 	}
 
-	// Get userinput-field
 	public static String getUserMessage() {
 		return userMessage.getText();
 	}
 
-	// set userinput-field
 	public static void setUserMessage(String setString) {
 		System.out.println("Setting userMessage = " + setString);
 		userMessage.setText(setString);
 	}
 
-	// get chatlog
 	public static String getMessages() {
 		return messages.getText();
 	}
 
-	// set chatlog
 	public static void setMessages(String setTextPane) {
 		messages.setText(setTextPane);
 	}

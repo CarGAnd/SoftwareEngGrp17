@@ -1,4 +1,4 @@
-package time_management.app;
+package business_logic;
 
 import java.util.ArrayList;
 

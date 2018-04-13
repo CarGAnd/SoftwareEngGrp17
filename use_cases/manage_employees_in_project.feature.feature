@@ -2,7 +2,6 @@ Feature: When
 	Description: xxx
 	Actor: xxx
 	
-#comment
 #Scenario: Add employee to activity
 #	Given a project exists and a user wishes to add an employee
 #	And the user ID matches the project leader ID
@@ -38,12 +37,7 @@ Feature: When
 #	And the employee is not assigned to the activity
 #	When the user removes the employee to the activity
 #	Then the user gets an error message
-
-Feature: x
-	Description: xxx
-	Actor: Admin
-	
-#comment
+#
 #Scenario: Admin sets project leader
 #	Given a project exists with an ID number
 #	And the project does not have a leader

@@ -1,4 +1,4 @@
-package time_management.app;
+package business_logic;
 
 public class Admin {
 	

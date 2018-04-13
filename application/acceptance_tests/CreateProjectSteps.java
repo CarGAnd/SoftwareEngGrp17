@@ -8,14 +8,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import business_logic.Management;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-import time_management.app.TimeManagementApp;
 
 public class CreateProjectSteps {
-	private TimeManagementApp timeManagementApp;
+	private Management managementApp;
 
-	public CreateProjectSteps(TimeManagementApp timeManagementApp) {
-		this.timeManagementApp = timeManagementApp;
+	public <managementApp> CreateProjectSteps(managementApp timeManagementApp) {
+		this.managementApp = managementApp;
 	}
 }

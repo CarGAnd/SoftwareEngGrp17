@@ -2,7 +2,6 @@ Feature: xxx
 	Description: xxx
 	Actor: xxx
 	
-#comment
 #Scenario: Request assistance from available employee
 #	Given an employee requires assistance
 #	And the employee is working on an activity

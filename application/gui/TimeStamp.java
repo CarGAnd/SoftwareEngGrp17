@@ -1,4 +1,4 @@
-package gui.app;
+package gui;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

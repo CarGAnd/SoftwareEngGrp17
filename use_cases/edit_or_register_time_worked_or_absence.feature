@@ -2,7 +2,6 @@ Feature: xxx
 	Description: xxx
 	Actor: xxx
 	
-#comment
 #Scenario: Register sick
 #	Given an employee wishes to register his absence due to illness
 #	And the employee is logged in with his ID
@@ -27,12 +26,7 @@ Feature: xxx
 #	And he wishes to edit the time or length of his vacation
 #	When the employee enters the new information
 #	Then his scheduled vacation is updated within the system
-
-Feature: xxx
-	Description: xxx
-	Actor: xxx
-	
-#comment
+#
 #Scenario: Input is invalid
 #	Given an employee wishes to register or edit his working hours of a day
 #	And the employee is logged in with his ID
