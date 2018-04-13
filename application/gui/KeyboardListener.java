@@ -69,7 +69,7 @@ public class KeyboardListener extends GUI implements Runnable {
 		} else if (!userIdentity.isEmpty() && password.isEmpty()) {
 			setPromptLabel("Please enter password: ");
 			System.out.println(userInputField.getText());
-		} else if (!userIdentity.isEmpty() && !password.isEmpty() && currentlyComputing) {
+		} else if (!userIdentity.isEmpty() && !password.isEmpty()) {
 			// User is currentlyComputing, invoke smack
 		}
 	}

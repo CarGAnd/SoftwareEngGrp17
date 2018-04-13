@@ -8,10 +8,13 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.Dictionary;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,15 +39,17 @@ public class GUI extends JFrame {
 	private static JLabel timeLabel;
 	protected static JTextField searchDateTextField;
 	protected static JTextField passwordField;
-	private static JPanel innerPanel;
-	protected static final Color[] COLOUR = { new Color(251, 234, 225), new Color(153, 150, 149) };
+	private static JPanel innerPromptPanel;
+	protected static final Color[] COLOUR = { new Color(251, 244, 225), new Color(242, 242, 248), new Color(234,235,240),new Color(151,194,208) };
 	private static JTextArea projectAndActivityPanel;
 	private static JScrollPane scrollPanelForProjecAndActivities;
-	private static JPanel southPanel;
-	private static JPanel conPanel;
+	private static JPanel subPanelempty;
+	private static JPanel subPanelControlView;
 	private static JPanel inputPanel;
 	private static JLabel motdLabel;
-	private static JPanel userMessagePanel;
+	private static JPanel subPanelUserInput;
+	private JButton quitButton;
+	
 	public GUI() {
 		initializeGUI();
 		initializeNestedLayouts();
@@ -60,12 +65,12 @@ public class GUI extends JFrame {
 	private void setAndAttachLayouts() {
 		infoPanel.add(motdLabel, 0);
 		infoPanel.add(timeLabel, 1);
-		innerPanel.add(projectAndActivityScrollPane, BorderLayout.CENTER);
-		innerPanel.add(promptUserLabel, BorderLayout.SOUTH);
+		innerPromptPanel.add(projectAndActivityScrollPane, BorderLayout.CENTER);
+		innerPromptPanel.add(promptUserLabel, BorderLayout.SOUTH);
 		getContentPane().add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
 		getContentPane().add(infoPanel, BorderLayout.NORTH);
-		getContentPane().add(innerPanel, BorderLayout.CENTER);
-		getContentPane().add(southPanel, BorderLayout.SOUTH);
+		getContentPane().add(innerPromptPanel, BorderLayout.CENTER);
+		getContentPane().add(subPanelempty, BorderLayout.SOUTH);
 	}
 
 	private void setInputPanelLayout() {
@@ -87,17 +92,17 @@ public class GUI extends JFrame {
 		inputPanel.add(changeCalendarViewButton);
 		inputPanel.add(quit);
 
-		conPanel = new JPanel();
-		conPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		conPanel.add(searchDateLabel);
-		conPanel.add(searchDateTextField);
-		conPanel.add(adminLoginLabel);
-		conPanel.add(passwordField);
+		subPanelControlView = new JPanel();
+		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		subPanelControlView.add(searchDateLabel);
+		subPanelControlView.add(searchDateTextField);
+		subPanelControlView.add(adminLoginLabel);
+		subPanelControlView.add(passwordField);
 		
-		userMessagePanel.add(userInputField);
-		userMessagePanel.add(inputPanel);
-		southPanel.add(conPanel, 0);
-		southPanel.add(userMessagePanel, 1);
+		subPanelUserInput.add(userInputField);
+		subPanelUserInput.add(inputPanel);
+		subPanelempty.add(subPanelControlView, 0);
+		subPanelempty.add(subPanelUserInput, 1);
 	}
 
 	private void initializeScrollPane() {
@@ -116,15 +121,17 @@ public class GUI extends JFrame {
 	}
 
 	private JButton quitButton() {
-		JButton quit = new JButton("Quit");
-		quit.setAlignmentX(CENTER_ALIGNMENT);
-		quit.addActionListener(new ActionListener() {
+		quitButton = new JButton("Quit");
+		quitButton.setBorderPainted(false);
+		quitButton.addMouseListener(
+		quitButton.setAlignmentX(CENTER_ALIGNMENT);
+		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		return quit;
+		return quitButton;
 	}
 
 	private void setMOTD(String message) {
@@ -143,6 +150,15 @@ public class GUI extends JFrame {
 	private void setComponentColours() {
 		infoPanel.setBackground(COLOUR[0]);
 		queryRetrievalPanel.setBackground(COLOUR[1]);
+		projectAndActivityPanel.setBackground(COLOUR[2]);
+		innerPromptPanel.setBackground(COLOUR[0]);
+		subPanelUserInput.setBackground(COLOUR[3]);
+		subPanelControlView.setBackground(COLOUR[3]);
+		subPanelempty.setBackground(COLOUR[3]);
+		changeCalendarViewButton.setBackground(COLOUR[3]);
+		quitButton.setBackground(COLOUR[3]);
+
+		
 	}
 
 	private void userPrompt(String prompt) {
@@ -179,15 +195,15 @@ public class GUI extends JFrame {
 	private void initializeNestedLayouts() {
 		infoPanel = new JPanel();
 		infoPanel.setFont(new Font("Courier", Font.PLAIN, 10));
-		innerPanel = new JPanel();
-		southPanel = new JPanel();
-		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		southPanel = new JPanel();
-		southPanel.setBorder(BorderFactory.createEtchedBorder());
-		innerPanel.setLayout(new BorderLayout());
+		innerPromptPanel = new JPanel();
+		subPanelempty = new JPanel();
+		innerPromptPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanelempty = new JPanel();
+		subPanelempty.setBorder(BorderFactory.createEtchedBorder());
+		innerPromptPanel.setLayout(new BorderLayout());
 		infoPanel.setLayout(new GridLayout(2, 1));
-		southPanel.setLayout(new GridLayout(3, 1));
-		userMessagePanel = new JPanel();
+		subPanelempty.setLayout(new GridLayout(3, 1));
+		subPanelUserInput = new JPanel();
 	}
 
 	/*
