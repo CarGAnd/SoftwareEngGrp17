@@ -14,8 +14,4 @@ public class Employee {
 		employeeID = this.employeeID;
 		employeePass = this.employeePass;
 	}
-	public static void getEmployee(String employeeID) {
-		
-	
-	}
 }

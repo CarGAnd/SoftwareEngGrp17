@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Management {
 	
-	private static String loggedInUserID;
 	private static userType loggedInUserType;
+	private static String loggedInUserID;
 	private static ArrayList<Employee> employees = new ArrayList<Employee>();
 	private static ArrayList<Admin> admins = new ArrayList<Admin>();
 	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
