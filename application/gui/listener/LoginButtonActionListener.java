@@ -11,7 +11,7 @@ public class LoginButtonActionListener implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent login) {
+	public void actionPerformed(ActionEvent pushLoginButton) {
 		if (GUI.getUserLoginName().isEmpty() && GUI.getUserLoginPassword().isEmpty()) {
 			GUI.setPromptLabel("Please enter username and password: ");
 		} else if (!GUI.getUserLoginName().isEmpty() && GUI.getUserLoginPassword().isEmpty()) {

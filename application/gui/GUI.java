@@ -2,16 +2,19 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.desktop.QuitEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,18 +25,14 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
+import gui.jcomponent.QuitButton;
 import gui.listener.ColorizeComponentsMouseListener;
 import gui.listener.LoginButtonActionListener;
 import gui.logic.TimeStamp;
 
-/**
- * @author manjana
- *
- */
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
 
-	protected static boolean guiInitialized = true;
 	private static JFrame timeManagementApplication;
 	protected static JTextField userInputField;
 	private static JTextArea queryRetrievalPanel;
@@ -63,25 +62,30 @@ public class GUI extends JFrame {
 		initializeScrollPane();
 		setMOTD("Some important message concerning all users is shown here.");
 		userPrompt(userPromptLogic());
+		
 		setAndAttachLayouts();
+		
 		setInputPanelLayout();
+		
 		setComponentColours();
+		System.out.println("ff");
 	}
 
 	public static void main(String[] args) throws IOException {
-		EventQueue.invokeLater(new Runnable() {// GUI-thread
-
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					// System.out.println(Thread.currentThread().getName() + About to make GUI.");
+					System.out.println(Thread.currentThread().getName() + "About to make GUI.");
 					new GUI();
+
 					timeManagementApplication.setVisible(true);
 				} catch (Exception e) {
+					System.out.println("err");
 				}
 			}
 		});
-		Thread timeStamp = (new Thread(new TimeStamp()));
-		timeStamp.start();
+		//Thread timeStamp = (new Thread(new TimeStamp()));
+		//timeStamp.start();
 
 	}
 
@@ -109,11 +113,11 @@ public class GUI extends JFrame {
 		userLoginPasswordField.setAlignmentX(RIGHT_ALIGNMENT);
 		userLoginPasswordField.setColumns(6);
 
-		JButton quitSystemButton = quitButton();
+		
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		inputPanel.add(submitLoginButton);
-		inputPanel.add(quitSystemButton);
+		inputPanel.add(new QuitButton());
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -135,29 +139,12 @@ public class GUI extends JFrame {
 		projectAndActivityPanel.setFont(new Font("Arial", Font.PLAIN, 12));
 		projectAndActivityPanel.setEditable(false);
 		scrollPanelForProjecAndActivities = new JTree();
-		scrollPanelForProjecAndActivities.setSize(400, GUI.HEIGHT);
+		//scrollPanelForProjecAndActivities.setSize(400, GUI.HEIGHT);
 	}
 
 	private String userPromptLogic() {
 		String promptMessage = "What's the prompt?";
 		return promptMessage;
-	}
-
-	private JButton quitButton() {
-		quitButton = new JButton("Quit");
-		quitButton.setBorderPainted(false);
-<<<<<<< HEAD
-=======
-		//quitButton.addMouseListener(
->>>>>>> branch 'master' of https://github.com/PepperYourAnguss/SoftwareEngGrp17.git
-		quitButton.setAlignmentX(CENTER_ALIGNMENT);
-		quitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		return quitButton;
 	}
 
 	private void setMOTD(String message) {
@@ -184,7 +171,7 @@ public class GUI extends JFrame {
 		subPanelControlView.setBackground(COLOUR[3]);
 		subPanelempty.setBackground(COLOUR[3]);
 		submitLoginButton.setBackground(COLOUR[3]);
-		quitButton.setBackground(COLOUR[3]);
+		//quitButton.setBackground(COLOUR[3]);
 
 	}
 

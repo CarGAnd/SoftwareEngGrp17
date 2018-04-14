@@ -7,7 +7,7 @@ import java.util.TimeZone;
 
 import gui.GUI;
 
-//Made primarily by: Lars Staalhagen @ DTU. I've only implemented the run-method.
+//Made primarily by: Lars Staalhagen @ DTU.
 public class TimeStamp implements Runnable {
 	public String gmtFormat() {
 		SimpleDateFormat gmtFmt = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
