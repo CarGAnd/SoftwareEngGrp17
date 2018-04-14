@@ -1,9 +1,11 @@
-package gui;
+package gui.logic;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import gui.GUI;
 
 //Made primarily by: Lars Staalhagen @ DTU. I've only implemented the run-method.
 public class TimeStamp implements Runnable {
