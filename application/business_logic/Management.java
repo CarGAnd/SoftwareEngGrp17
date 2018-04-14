@@ -4,17 +4,33 @@ import java.util.ArrayList;
 
 public class Management {
 	
-	private static userType loggedInUserType;
-	private static String loggedInUserID;
-	private static ArrayList<Employee> employees = new ArrayList<Employee>();
-	private static ArrayList<Admin> admins = new ArrayList<Admin>();
-	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	private userType loggedInUserType;
+	private String loggedInUserID;
+	private ArrayList<Employee> employees = new ArrayList<Employee>();
+	private ArrayList<Admin> admins = new ArrayList<Admin>();
+	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	
+	public Management() {
+		this.addAdmin(new Admin()); 
+	}
+	
+	public static void main(String[] args) {
 		
-	public static boolean userIsLoggedIn() {
+	}
+	
+	public boolean userIsLoggedIn() {
 		return loggedInUserType != null;
 	}
 	
-	public static void employeeLogin(String ID, String password) throws FailedLoginException {
+	public boolean adminIsLoggedIn() {
+		return loggedInUserType == userType.Admin;
+	}
+	
+	public boolean employeeIsLoggedIn() {
+		return loggedInUserType == userType.Employee;
+	}
+	
+	public void employeeLogin(String ID, String password) throws FailedLoginException {
 		Employee user = getEmployeeByID(ID);
 		if(user != null && password.equals(user.employeePass)) {
 			setLoggedInUserType(userType.Employee);
@@ -25,7 +41,7 @@ public class Management {
 		}
 	}
 	
-	public static void adminLogin(String ID, String password) throws FailedLoginException {
+	public void adminLogin(String ID, String password) throws FailedLoginException {
 		Admin user = getAdminByID(ID);
 		if(user != null && password.equals(user.adminPass)) {
 			setLoggedInUserType(userType.Admin);
@@ -36,33 +52,33 @@ public class Management {
 		}
 	}
 	
-	public static void logUserOut() {
+	public void logUserOut() {
 		setLoggedInUserType(null);
 		setLoggedInUserID(null);
 	}
 	
-	public static void addEmployee(Employee emp) {
+	public void addEmployee(Employee emp) {
 		employees.add(emp);
 	}
 	
-	public static void removeEmployee(Employee emp) {
+	public void removeEmployee(Employee emp) {
 		employees.remove(emp);
 	}
 	
-	public static void addAdmin(Admin ad) {
+	public void addAdmin(Admin ad) {
 		admins.add(ad);
 	}
 	
-	public static void removeAdmin(Admin ad) {
+	public void removeAdmin(Admin ad) {
 		admins.remove(ad);
 	}
 	
-	public static Project addProject(Project pro) {
+	public Project addProject(Project pro) {
 		listOfProjects.add(pro);
 		return pro;
 	}
 	
-	public static Project removeProject(Project pro) {
+	public Project removeProject(Project pro) {
 		listOfProjects.remove(pro);
 		return pro;
 	}
@@ -70,6 +86,7 @@ public class Management {
 	public enum userType{
 		Admin,Employee; //all the types of users
 		
+		@Override
 		public String toString() {
 			switch(this) {
 			case Admin:
@@ -93,7 +110,7 @@ public class Management {
 		}
 	}
 	
-	public static Employee getEmployeeByID(String ID) {
+	public Employee getEmployeeByID(String ID) {
 		for(int i = 0; i < employees.size(); i++) {
 			if(employees.get(i).employeeID.equals(ID)) {
 				return employees.get(i);
@@ -102,7 +119,7 @@ public class Management {
 		return null;
 	}
 	
-	public static Admin getAdminByID(String ID) {
+	public Admin getAdminByID(String ID) {
 		for(int i = 0; i < admins.size(); i++) {
 			if(admins.get(i).adminID.equals(ID)) {
 				return admins.get(i);
@@ -111,7 +128,7 @@ public class Management {
 		return null;
 	}
 	
-	public static Project getProjectByID(String ID) {
+	public Project getProjectByID(String ID) {
 		for(int i = 0; i < listOfProjects.size(); i++) {
 			if(listOfProjects.get(i).projectID.equals(ID)) {
 				return listOfProjects.get(i);
@@ -120,22 +137,22 @@ public class Management {
 		return null;
 	}
 	
-	public static userType getLoggedInUserType() {
+	public userType getLoggedInUserType() {
 		return loggedInUserType;
 	}
 
 
-	public static void setLoggedInUserType(userType loggedInUserType) {
-		Management.loggedInUserType = loggedInUserType;
+	public void setLoggedInUserType(userType loggedInUserType) {
+		this.loggedInUserType = loggedInUserType;
 	}
 
 
-	public static String getLoggedInUserID() {
+	public String getLoggedInUserID() {
 		return loggedInUserID;
 	}
 
 
-	public static void setLoggedInUserID(String loggedInUserID) {
-		Management.loggedInUserID = loggedInUserID;
+	public void setLoggedInUserID(String loggedInUserID) {
+		this.loggedInUserID = loggedInUserID;
 	}
 }

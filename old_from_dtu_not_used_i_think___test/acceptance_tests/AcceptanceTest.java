@@ -12,7 +12,6 @@ import cucumber.api.junit.Cucumber;
 	monochrome=true, 
 	snippets = SnippetType.CAMELCASE, 
 	glue = { "ap.acceptance_tests"},
-	dryRun = true
 	)
 	
 public class AcceptanceTest {

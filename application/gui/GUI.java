@@ -5,12 +5,11 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Dictionary;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -137,7 +136,7 @@ public class GUI extends JFrame {
 		setTitle("SoftwareHuset's Calendar Application");
 		setBounds(200, 200, 1200, 800);
 		setAlwaysOnTop(false);
-		setDefaultCloseOperation(JFrame.ICONIFIED);
+		setDefaultCloseOperation(Frame.ICONIFIED);
 		getContentPane().setLayout(new BorderLayout());// Top Layout manager
 	}
 
@@ -193,6 +192,7 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {// GUI-thread
+			@Override
 			public void run() {
 				try {
 					// System.out.println(Thread.currentThread().getName() + About to make GUI.");

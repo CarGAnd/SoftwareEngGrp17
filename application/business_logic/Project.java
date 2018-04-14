@@ -43,11 +43,4 @@ public class Project {
 	public String getProjectLeaderID() {
 		return projectLeaderID;
 	}
-
-	public void setProjectLeaderID(String projectLeaderID) {
-		if(Management.userIsLoggedIn() && Management.getLoggedInUserType() == userType.Admin) {
-			this.projectLeaderID = projectLeaderID;
-		}
-	}
-
 }

@@ -13,10 +13,15 @@ public class Activity {
 	Date startDate;
 	Date endDate;
 	String projectLeaderID;
-	ArrayList<Employee> listOfEmployees;
+	private ArrayList<Employee> listOfEmployees;
 	
 	public Activity() {
 		
+	}
+	
+	public void addEmployeeToActivity(Employee emp) {
+		listOfEmployees.add(emp);
+		emp.addActivityToEmployee(this);
 	}
 	
 

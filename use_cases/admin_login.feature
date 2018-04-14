@@ -7,7 +7,8 @@ Scenario: Administrator can login
 	When the adminstrator enters the password "adminadmin" and the ID "admin"
 	Then the adminstrator is logged in
 	
-#Scenario: Administrator has the wrong password
-#	Given that the administrator is not logged in
-#	And the adminstrator enters the password "wrong password" and the ID "admin"
-#	Then the administrator is not logged in
+Scenario: Administrator has the wrong password
+	Given that the administrator is not logged in
+	When the adminstrator enters the password "wrong password" and the ID "admin"
+	Then the administrator is not logged in
+	And i get the error message "incorrect ID or password"

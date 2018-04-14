@@ -10,9 +10,7 @@ import cucumber.api.junit.Cucumber;
 	features = "use_cases", 
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
-	snippets = SnippetType.CAMELCASE, 
-	glue = { "application.acceptance_tests"}
+	snippets = SnippetType.CAMELCASE	
 	)
-
 public class AcceptanceTest {
 }
