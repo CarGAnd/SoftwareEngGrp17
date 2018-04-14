@@ -67,7 +67,7 @@ public class LoginSteps {
 	
 	@Then("^the administrator is not logged in$")
 	public void theAdministratorIsNotLoggedIn() throws Exception {
-		assertFalse(Management.adminIsLoggedIn());
+		assertTrue(Management.getLoggedInUserID() == null || !Management.getLoggedInUserID().equals(testAdmin.getAdminID()));
 	}
 	
 	@Then("^i get the error message \"([^\"]*)\"$")
