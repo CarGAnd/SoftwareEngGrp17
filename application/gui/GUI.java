@@ -146,10 +146,8 @@ public class GUI extends JFrame {
 	private JButton quitButton() {
 		quitButton = new JButton("Quit");
 		quitButton.setBorderPainted(false);
-<<<<<<< HEAD
-=======
+
 		//quitButton.addMouseListener(
->>>>>>> branch 'master' of https://github.com/PepperYourAnguss/SoftwareEngGrp17.git
 		quitButton.setAlignmentX(CENTER_ALIGNMENT);
 		quitButton.addActionListener(new ActionListener() {
 			@Override
