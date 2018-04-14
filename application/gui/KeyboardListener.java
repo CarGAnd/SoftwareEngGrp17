@@ -34,8 +34,8 @@ public class KeyboardListener extends GUI implements Runnable {
 						userInputField.setEditable(false);
 						userInputField.setFocusable(false);
 						// Disables port and ip textfields.
-						GUI.portField.setEnabled(false);
-						GUI.ipField.setEnabled(false);
+						GUI.searchDateTextField.setEnabled(false);
+						GUI.passwordField.setEnabled(false);
 						new Thread(new Runnable() {
 
 							@Override
@@ -69,7 +69,7 @@ public class KeyboardListener extends GUI implements Runnable {
 		} else if (!userIdentity.isEmpty() && password.isEmpty()) {
 			setPromptLabel("Please enter password: ");
 			System.out.println(userInputField.getText());
-		} else if (!userIdentity.isEmpty() && !password.isEmpty() && currentlyComputing) {
+		} else if (!userIdentity.isEmpty() && !password.isEmpty()) {
 			// User is currentlyComputing, invoke smack
 		}
 	}
