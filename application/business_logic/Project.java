@@ -8,7 +8,9 @@ import business_logic.Management.userType;
 public class Project {
 	ArrayList<Activity> Activities;
 	String projectname = "";
-	String projectID = "";
+	private String projectID = "";
+	
+
 	String adminID = "";
 	String adminPass = "";
 	private String projectLeaderID = "";
@@ -42,5 +44,13 @@ public class Project {
 
 	public String getProjectLeaderID() {
 		return projectLeaderID;
+	}
+	
+	public String getProjectID() {
+		return projectID;
+	}
+
+	public void setProjectID(String projectID) {
+		this.projectID = projectID;
 	}
 }

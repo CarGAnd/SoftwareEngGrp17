@@ -12,31 +12,31 @@ import cucumber.api.java.en.*;
 
 public class LoginSteps {
 	
-	Management management;
 	ErrorHandler errorHandler;
 	Employee testEmployee;
+	Admin testAdmin = new Admin();
 	
-	public LoginSteps(Management mag, ErrorHandler errorHandler) {
-		this.management = mag;
+	public LoginSteps(ErrorHandler errorHandler) {
 		this.errorHandler = errorHandler;
 	}
-
 	
 	@Given("^a user is logged in$")
 	public void aUserIsLoggedIn() throws Exception {
-		management.adminLogin("admin", "adminadmin");
-	    assertTrue(management.userIsLoggedIn());
+		Management.adminLogin("admin", "adminadmin");
+	    assertTrue(Management.userIsLoggedIn());
 	}
 	
 	@Given("^a user is not logged in$")
 	public void aUserIsNotLoggedIn() throws Exception {
-	    assertFalse(management.userIsLoggedIn());
+		Management.logUserOut();
+	    assertFalse(Management.userIsLoggedIn());
 	}
 
 	@When("^the adminstrator enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theAdminstratorEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
+		Management.addAdmin(testAdmin);
 		try {
-			management.adminLogin(arg1, arg2);
+			Management.adminLogin(arg1, arg2);
 		}
 		catch(FailedLoginException e) {
 			errorHandler.errorMessage = e.getMessage();
@@ -45,14 +45,14 @@ public class LoginSteps {
 	
 	@When("^the user logs out$")
 	public void theUserLogsOut() throws Exception {
-	    management.logUserOut();
+		Management.logUserOut();
 	}
 	
 	@When("^the employee enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theEmployeeEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
-	    testEmployee = management.addEmployee(new Employee("test", "password"));
+	    testEmployee = Management.addEmployee(new Employee("test", "password"));
 	    try {
-	    	management.employeeLogin(arg1, arg2);
+	    	Management.employeeLogin(arg1, arg2);
 	    }
 	    catch(FailedLoginException e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -61,12 +61,13 @@ public class LoginSteps {
 
 	@Then("^the adminstrator is logged in$")
 	public void theAdminstratorIsLoggedIn() throws Exception {
-		assertTrue(management.adminIsLoggedIn());
+		
+		assertTrue(Management.adminIsLoggedIn());
 	}
 	
 	@Then("^the administrator is not logged in$")
 	public void theAdministratorIsNotLoggedIn() throws Exception {
-		assertFalse(management.adminIsLoggedIn());
+		assertFalse(Management.adminIsLoggedIn());
 	}
 	
 	@Then("^i get the error message \"([^\"]*)\"$")
@@ -76,17 +77,17 @@ public class LoginSteps {
 	
 	@Then("^the user is no longer logged in$")
 	public void theUserIsNoLongerLoggedIn() throws Exception {
-	    assertFalse(management.userIsLoggedIn());
+	    assertFalse(Management.userIsLoggedIn());
 	}
 	
 	@Then("^the employee is not logged in$")
 	public void theEmployeeIsNotLoggedIn() throws Exception {
-	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
+	    assertTrue(Management.getLoggedInUserID() == null || !Management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
 	}
 	
 	@Then("^the employee is logged in$")
 	public void theEmployeeIsLoggedIn() throws Exception {
-	    assertTrue(management.employeeIsLoggedIn());
-	    assertTrue(management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
+	    assertTrue(Management.employeeIsLoggedIn());
+	    assertTrue(Management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
 	}	
 }
