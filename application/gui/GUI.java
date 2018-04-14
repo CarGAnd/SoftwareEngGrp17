@@ -122,7 +122,7 @@ public class GUI extends JFrame {
 	private JButton quitButton() {
 		quitButton = new JButton("Quit");
 		quitButton.setBorderPainted(false);
-		quitButton.addMouseListener(
+		//quitButton.addMouseListener(
 		quitButton.setAlignmentX(CENTER_ALIGNMENT);
 		quitButton.addActionListener(new ActionListener() {
 			@Override

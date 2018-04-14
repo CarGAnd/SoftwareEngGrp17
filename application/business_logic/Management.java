@@ -31,6 +31,9 @@ public class Management {
 	}
 	
 	public void employeeLogin(String ID, String password) throws FailedLoginException {
+		if(userIsLoggedIn()) {
+			throw new FailedLoginException("another user is already logged in");
+		}
 		Employee user = getEmployeeByID(ID);
 		if(user != null && password.equals(user.employeePass)) {
 			setLoggedInUserType(userType.Employee);
@@ -57,8 +60,9 @@ public class Management {
 		setLoggedInUserID(null);
 	}
 	
-	public void addEmployee(Employee emp) {
+	public Employee addEmployee(Employee emp) {
 		employees.add(emp);
+		return emp;
 	}
 	
 	public void removeEmployee(Employee emp) {
@@ -112,7 +116,9 @@ public class Management {
 	
 	public Employee getEmployeeByID(String ID) {
 		for(int i = 0; i < employees.size(); i++) {
-			if(employees.get(i).employeeID.equals(ID)) {
+			if(employees.get(i)
+					.getEmployeeID()
+					.equals(ID)) {
 				return employees.get(i);
 			}
 		}
