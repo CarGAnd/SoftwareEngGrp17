@@ -13,7 +13,7 @@ import cucumber.api.java.en.*;
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee;
+	Employee testEmployee = new Employee("test","password");
 	Admin testAdmin = new Admin();
 	
 	public LoginSteps(ErrorHandler errorHandler) {
@@ -22,7 +22,9 @@ public class LoginSteps {
 	
 	@Given("^a user is logged in$")
 	public void aUserIsLoggedIn() throws Exception {
-		Management.adminLogin("admin", "adminadmin");
+		if(!Management.userIsLoggedIn()) {
+			Management.adminLogin("admin", "adminadmin");
+		}
 	    assertTrue(Management.userIsLoggedIn());
 	}
 	
@@ -31,10 +33,31 @@ public class LoginSteps {
 		Management.logUserOut();
 	    assertFalse(Management.userIsLoggedIn());
 	}
+	
+	@Given("^an adminstrator exists$")
+	public void anAdminstratorExists() throws Exception {
+	    if(Management.getAdmins().size() == 0) {
+	    	Management.addAdmin(testAdmin);
+	    }
+	    assertTrue(Management.getAdmins().size() > 0);
+	}
+	
+	@Given("^an employee exists$")
+	public void anEmployeeExists() throws Exception {
+	    if(Management.getEmployees().size() == 0) {
+	    	Management.addEmployee(testEmployee);
+	    }
+	    assertTrue(Management.getEmployees().size() > 0);
+	}
+	
+	@Given("^a user exists$")
+	public void aUserExists() throws Exception {
+		anEmployeeExists();
+		anAdminstratorExists();
+	}
 
 	@When("^the adminstrator enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theAdminstratorEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
-		Management.addAdmin(testAdmin);
 		try {
 			Management.adminLogin(arg1, arg2);
 		}
@@ -50,7 +73,6 @@ public class LoginSteps {
 	
 	@When("^the employee enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theEmployeeEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
-	    testEmployee = Management.addEmployee(new Employee("test", "password"));
 	    try {
 	    	Management.employeeLogin(arg1, arg2);
 	    }

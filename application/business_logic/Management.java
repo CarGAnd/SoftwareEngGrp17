@@ -11,7 +11,7 @@ public class Management {
 	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	
 	public static void main(String[] args) {
-
+		
 	}
 	
 	public static boolean userIsLoggedIn() {
@@ -66,7 +66,9 @@ public class Management {
 	}
 	
 	public static Employee addEmployee(Employee emp) {
-		employees.add(emp);
+		if(!employees.contains(emp)) {
+			employees.add(emp);			
+		}
 		return emp;
 	}
 	
@@ -75,7 +77,9 @@ public class Management {
 	}
 	
 	public static Admin addAdmin(Admin ad) {
-		admins.add(ad);
+		if(!admins.contains(ad)) {
+			admins.add(ad);
+		}
 		return ad;
 	}
 	
