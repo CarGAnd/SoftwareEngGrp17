@@ -4,37 +4,38 @@ import java.util.ArrayList;
 
 public class Management {
 	
-	private static userType loggedInUserType;
-	private static String loggedInUserID;
-	private static ArrayList<Employee> employees = new ArrayList<Employee>();
-	private static ArrayList<Admin> admins = new ArrayList<Admin>();
-	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	private User loggedInUser;
+	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	private ArrayList<User> users = new ArrayList<User>();
 	
 	public static void main(String[] args) {
 		
 	}
 	
-	public static boolean userIsLoggedIn() {
-		return loggedInUserType != null;
+	public Management() {
+		users.add(new Admin());
 	}
 	
-	public static boolean adminIsLoggedIn() {
-		return loggedInUserType == userType.Admin;
+	public boolean userIsLoggedIn() {
+		return loggedInUser != null;
 	}
 	
-	public static boolean employeeIsLoggedIn() {
-		return loggedInUserType == userType.Employee;
+	public boolean adminIsLoggedIn() {
+		return userIsLoggedIn() && loggedInUser.getTypeOfUser() == userType.Admin;
 	}
 	
-	public static boolean employeeLogin(String ID, String password) throws FailedLoginException {
+	public boolean employeeIsLoggedIn() {
+		return userIsLoggedIn() && loggedInUser.getTypeOfUser() == userType.Employee;
+	}
+	
+	public boolean userLogin(String ID, String password) throws FailedLoginException {
 		if(userIsLoggedIn()) {
 			throw new FailedLoginException("another user is already logged in");
 		}
 		else {
-			Employee user = getEmployeeByID(ID);
-			if(user != null && password.equals(user.employeePass)) {
-				setLoggedInUserType(userType.Employee);
-				setLoggedInUserID(ID);
+			User user = getUserByID(ID);
+			if(user != null && password.equals(user.getPassword())) {
+				setLoggedInUser(user);
 				return true;
 			}
 			else {
@@ -43,61 +44,28 @@ public class Management {
 		}
 	}
 	
-	public static boolean adminLogin(String ID, String password) throws FailedLoginException {
-		if(userIsLoggedIn()) {
-			throw new FailedLoginException("another user is already logged in");
-		}
-		else {
-			Admin user = getAdminByID(ID);
-			if(user != null && password.equals(user.adminPass)) {
-				setLoggedInUserType(userType.Admin);
-				setLoggedInUserID(ID);
-				return true;
-			}
-			else {
-				throw new FailedLoginException("incorrect ID or password");
-			}
-		}
+	public void logUserOut() {
+		setLoggedInUser(null);
 	}
 	
-	public static void logUserOut() {
-		setLoggedInUserType(null);
-		setLoggedInUserID(null);
-	}
-	
-	public static Employee addEmployee(Employee emp) {
-		if(!employees.contains(emp)) {
-			employees.add(emp);			
+
+	public User addUser(User emp) {
+		if(!users.contains(emp)) {
+			users.add(emp);			
 		}
 		return emp;
 	}
 	
-	public static void removeEmployee(Employee emp) {
-		employees.remove(emp);
+	public void removeUser(User user) {
+		users.remove(user);
 	}
 	
-	public static Admin addAdmin(Admin ad) {
-		if(!admins.contains(ad)) {
-			admins.add(ad);
-		}
-		return ad;
-	}
-	
-	public static void removeAdmin(Admin ad) throws Exception {
-		if(admins.size() > 1) {
-			admins.remove(ad);
-		}
-		else {
-			throw new Exception("must be at least one admin");
-		}
-	}
-	
-	public static Project addProject(Project pro) {
+	public Project addProject(Project pro) {
 		listOfProjects.add(pro);
 		return pro;
 	}
 	
-	public static Project removeProject(Project pro) {
+	public Project removeProject(Project pro) {
 		listOfProjects.remove(pro);
 		return pro;
 	}
@@ -109,9 +77,9 @@ public class Management {
 		public String toString() {
 			switch(this) {
 			case Admin:
-				return "admin";
+				return "Admin";
 			case Employee:
-				return "employee";
+				return "Employee";
 			default:
 				return null;			
 			}
@@ -129,27 +97,16 @@ public class Management {
 		}
 	}
 	
-	public static Employee getEmployeeByID(String ID) {
-		for(int i = 0; i < employees.size(); i++) {
-			if(employees.get(i)
-					.getEmployeeID()
-					.equals(ID)) {
-				return employees.get(i);
+	public User getUserByID(String ID) {
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUserID().equals(ID)) {
+				return users.get(i);
 			}
 		}
 		return null;
 	}
 	
-	public static Admin getAdminByID(String ID) {
-		for(int i = 0; i < admins.size(); i++) {
-			if(admins.get(i).adminID.equals(ID)) {
-				return admins.get(i);
-			}
-		}
-		return null;
-	}
-	
-	public static Project getProjectByID(String ID) {
+	public Project getProjectByID(String ID) {
 		for(int i = 0; i < listOfProjects.size(); i++) {
 			if(listOfProjects.get(i).getProjectID().equals(ID)) {
 				return listOfProjects.get(i);
@@ -158,31 +115,47 @@ public class Management {
 		return null;
 	}
 	
-	public static userType getLoggedInUserType() {
-		return loggedInUserType;
-	}
-
-	private static void setLoggedInUserType(userType loggedInUserType) {
-		Management.loggedInUserType = loggedInUserType;
-	}
-
-	public static String getLoggedInUserID() {
-		return loggedInUserID;
-	}
-
-	private static void setLoggedInUserID(String loggedInUserID) {
-		Management.loggedInUserID = loggedInUserID;
-	}
-	
-	public static ArrayList<Employee> getEmployees() {
-		return employees;
-	}
-
-	public static ArrayList<Admin> getAdmins() {
+	public ArrayList<User> getAdmins(){ // returns all users that are admins. does not return users that are employees
+		ArrayList<User> admins = new ArrayList<User>();
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getTypeOfUser() == userType.Admin) {
+				admins.add(users.get(i));
+			}
+		}
 		return admins;
 	}
+	
+	public ArrayList<User> getEmployees(){ // returns all users that are employees. does not return users that are admins
+		ArrayList<User> employees = new ArrayList<User>();
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getTypeOfUser() == userType.Employee) {
+				employees.add(users.get(i));
+			}
+		}
+		return employees;
+	}
+		
+	public userType getLoggedInUserType() {
+		return userIsLoggedIn() ? getLoggedInUser().getTypeOfUser() : null;
+	}
 
-	public static ArrayList<Project> getListOfProjects() {
+	public String getLoggedInUserID() {
+		return userIsLoggedIn() ? getLoggedInUser().getUserID() : null;
+	}
+	
+	public ArrayList<User> getUsers() {
+		return users;
+	}
+
+	public ArrayList<Project> getListOfProjects() {
 		return listOfProjects;
+	}
+	
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	private void setLoggedInUser(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
 	}
 }

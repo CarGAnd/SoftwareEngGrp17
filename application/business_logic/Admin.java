@@ -1,16 +1,10 @@
 package business_logic;
 
-public class Admin {
-	
-	String adminID = "admin";
-	String adminPass = "adminadmin";
+import business_logic.Management.userType;
+
+public class Admin extends User{
 	
 	public Admin(){
-		
+		super("admin","adminadmin", userType.Admin);
 	}
-
-	public Object getAdminID() {
-		return adminID;
-	}
-
 }
