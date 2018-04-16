@@ -13,7 +13,7 @@ import cucumber.api.java.en.*;
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee = new Employee("test","password");
+	Employee testEmployee = new Employee("Controller","password");
 	Admin testAdmin = new Admin();
 	
 	public LoginSteps(ErrorHandler errorHandler) {

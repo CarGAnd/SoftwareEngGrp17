@@ -1,16 +1,16 @@
-package gui.listeners;
+package gui.model;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JPanel;
+import gui.interfaces.ColorTheme;
 
 @SuppressWarnings("serial")
-public class ColorizeComponentsMouseListener extends JPanel implements MouseListener{
+public class ColorizeComponentsMouseListener implements MouseListener, ColorTheme{
 
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

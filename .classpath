@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="lib" path="lib/maven-surefire-plugin-2.12.4.jar"/>
 	<classpathentry kind="src" path="application"/>
+	<classpathentry kind="src" path="GUI"/>
 	<classpathentry kind="lib" path="lib/cucumber-core-2.3.1.jar" sourcepath="/Users/huba/.m2/repository/io/cucumber/cucumber-core/2.3.1/cucumber-core-2.3.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/cucumber-html-0.2.6.jar"/>
 	<classpathentry kind="lib" path="lib/cucumber-java-2.3.1.jar"/>

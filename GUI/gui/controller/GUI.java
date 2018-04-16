@@ -1,20 +1,12 @@
-package gui;
+package gui.controller;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
-//import java.awt.desktop.QuitEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,32 +17,42 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.jcomponent.SwingButton;
-import gui.listeners.ColorizeComponentsMouseListener;
-import gui.listeners.LoginButtonActionListener;
-import gui.logic.TimeStamp;
+import gui.model.ActionEvents;
+import gui.model.ColorizeComponentsMouseListener;
+import gui.model.TimeStamp;
+import gui.view.SwingButton;
 
 @SuppressWarnings("serial")
-public class GUI extends JFrame implements UserPrompt {
+public class GUI extends JFrame implements TimeStamp, ActionEvents {
 
-	private static JFrame timeManagementApplication;
-	protected static JTextField userInputField;
-	private static JTextArea queryRetrievalPanel;
-	private static JLabel promptLabel;
-	private static JScrollPane queryRetrievalScrollPane;
-	private static JButton submitLoginButton;
-	private static JPanel infoPanel;
-	private static JLabel timeLabel;
-	protected static JTextField userLoginNameField;
-	protected static JTextField userLoginPasswordField;
-	private static JPanel innerPromptPanel;
-	private static JTextArea projectAndActivityPanel;
-	private static JTree scrollPanelForProjecAndActivities;
-	private static JPanel subPanelempty;
-	private static JPanel subPanelControlView;
-	private static JPanel inputPanel;
-	private static JLabel motdLabel;
-	private static JPanel subPanelUserInput;
+	protected JTextField userInputField;
+	public GUI thisGUI;
+	private JTextArea queryRetrievalPanel;
+	private JLabel promptLabel;
+	private JScrollPane queryRetrievalScrollPane;
+	private JButton submitLoginButton;
+	private JPanel infoPanel;
+	private JLabel timeLabel;
+	protected JTextField userLoginNameField;
+	protected JTextField userLoginPasswordField;
+	private JPanel innerPromptPanel;
+	private JTextArea projectAndActivityPanel;
+	private JTree scrollPanelForProjecAndActivities;
+	private JPanel subPanelempty;
+	private JPanel subPanelControlView;
+	private JPanel inputPanel;
+	private JLabel motdLabel;
+	private JPanel subPanelUserInput;
+	
+	public void run() {
+		try {
+			// System.out.println(Thread.currentThread().getName() + "About to make GUI.");
+			thisGUI = new GUI();
+			thisGUI.setVisible(true);
+		} catch (Exception e) {
+			System.out.println("Failed to run GUI");
+		}
+	}
 
 	public GUI() {
 		initializeGUI(200, 200, 1200, 800);
@@ -58,27 +60,9 @@ public class GUI extends JFrame implements UserPrompt {
 		initializeMainIOComponents();
 		initializeScrollPane();
 		setMOTD("Some important message concerning all users is shown here.");
-		userPrompt(userPromptLogic());
+		userPrompt();
 		setAndAttachLayouts();
 		setInputPanelLayout();
-	}
-
-	public static void main(String[] args) throws IOException {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// System.out.println(Thread.currentThread().getName() + "About to make GUI.");
-					new GUI().setVisible(true);
-					;
-
-				} catch (Exception e) {
-					System.out.println("err");
-				}
-			}
-		});
-		Thread timeStamp = (new Thread(new TimeStamp()));
-		timeStamp.start();
-
 	}
 
 	private void setAndAttachLayouts() {
@@ -107,8 +91,12 @@ public class GUI extends JFrame implements UserPrompt {
 
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		inputPanel.add(submitLoginButton);
-		inputPanel.add(new SwingButton());
+
+		// ActionListener loginAction = new LoginButtonActionListener();
+		// submitLoginButton.addActionListener(loginAction); // MVC pattern
+
+		inputPanel.add(new SwingButton("Login", TryLoginWhenClicked()));
+		inputPanel.add(new SwingButton("Quit", ExitWhenClicked()));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -132,12 +120,6 @@ public class GUI extends JFrame implements UserPrompt {
 		scrollPanelForProjecAndActivities = new JTree();
 	}
 
-	private String userPromptLogic() {
-		/* Move to interface */
-		String promptMessage = "What's the prompt?";
-		return promptMessage;
-	}
-
 	private void setMOTD(String message) {
 		motdLabel = new JLabel(message);
 	}
@@ -151,26 +133,11 @@ public class GUI extends JFrame implements UserPrompt {
 		this.setDefaultCloseOperation(Frame.ICONIFIED);
 		this.getContentPane().setLayout(new BorderLayout());// Top Layout manager
 	}
-	/* Fix for the rest */
-	// private void setComponentColours() {
-	// infoPanel.setBackground(COLOUR[0]);
-	// queryRetrievalPanel.setBackground(COLOUR[1]);
-	// projectAndActivityPanel.setBackground(COLOUR[2]);
-	// innerPromptPanel.setBackground(COLOUR[0]);
-	// subPanelUserInput.setBackground(COLOUR[3]);
-	// subPanelControlView.setBackground(COLOUR[3]);
-	// subPanelempty.setBackground(COLOUR[3]);
-	// submitLoginButton.setBackground(COLOUR[3]);
-	//
-	//
-	// }
 
-	private void userPrompt(String prompt) {
-		promptLabel = new JLabel(prompt);
+	private void userPrompt() {
+
+		promptLabel = new JLabel();
 		promptLabel.setBorder(BorderFactory.createEtchedBorder());
-		submitLoginButton = new JButton("Login)");
-		ActionListener loginAction = new LoginButtonActionListener();
-		submitLoginButton.addActionListener(loginAction); // MVC pattern
 	}
 
 	private void initializeMainIOComponents() {
@@ -204,39 +171,40 @@ public class GUI extends JFrame implements UserPrompt {
 		subPanelUserInput = new JPanel();
 	}
 
-	public static String getUserMessage() {
+	public String getUserMessage() {
 		return userInputField.getText();
 	}
 
-	public static void setUserMessage(String setString) {
+	public void setUserMessage(String setString) {
 		userInputField.setText(setString);
 	}
 
-	public static void setProjectOrActivityMessage(String setTextPane) {
+	public void setProjectOrActivityMessage(String setTextPane) {
 		queryRetrievalPanel.setText(setTextPane);
 	}
 
-	public static String getPromptLabel() {
+	public String getPromptLabel() {
 		return promptLabel.getText();
 	}
 
-	public static void setPromptLabel(String string) {
+	public void setPromptLabel(String string) {
 		promptLabel.setText(string);
 	}
 
-	public static JButton getLoginButton() {
+	public JButton getLoginButton() {
 		return submitLoginButton;
 	}
 
-	public static void setTimeLabel(String time) {
-		GUI.timeLabel.setText(time);
+	public void setTimeLabel(String time) {
+		this.timeLabel.setText(time);
 	}
 
-	public static String getUserLoginName() {
+	public String getUserLoginName() {
 		return userLoginNameField.getText();
 	}
 
-	public static String getUserLoginPassword() {
+	public String getUserLoginPassword() {
 		return userLoginPasswordField.getText();
 	}
+
 }

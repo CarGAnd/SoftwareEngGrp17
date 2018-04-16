@@ -35,7 +35,7 @@ public class Project {
 	}
 
 	public void EditProjectDetails(String projectID) {
-
+		
 	}
 
 	public void SetProjectLeader(String employeeID, String adminID, String adminPass, String projectID) {
