@@ -1,18 +1,20 @@
 package gui.view;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import gui.interfaces.ColorTheme;
+import gui.interfaces.GUIStyle;
 
 @SuppressWarnings("serial")
-public class SwingLabel extends JLabel implements ColorTheme {
-	public final float CENTER_ALIGNMENT = 0;
+public class SwingLabel extends JLabel implements GUIStyle {
+	public float CENTER_ALIGNMENT = 0;
 	public JButton jButton;
 
-	public SwingLabel(String label) {
+	public SwingLabel(String label, Color color) {
 		super(label);
 		this.setAlignmentX(EAST);
-		//this.setBackground(Button.getBackGroundColor());
+		this.setBackground(color);
 	}
 }

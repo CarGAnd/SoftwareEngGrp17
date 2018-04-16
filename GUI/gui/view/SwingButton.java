@@ -1,21 +1,23 @@
 package gui.view;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import gui.interfaces.ColorTheme;
+import gui.interfaces.GUIStyle;
 
 @SuppressWarnings("serial")
-public class SwingButton extends JButton implements ColorTheme {
+public class SwingButton extends JButton implements GUIStyle {
 	public final float CENTER_ALIGNMENT = 0;
 	public JButton jButton;
 
-	public SwingButton(String label, ActionListener actionListener) {
+	public SwingButton(String label, ActionListener actionListener, ButtonStyle buttonStyle) {
 		super();
 		this.setText(label);
 		this.setBorderPainted(false);
 		this.setAlignmentX(CENTER_ALIGNMENT);
-		this.setBackground(ColorTheme.Button.COLOR[3]);
+		this.setBackground(buttonStyle.getBackground());
+		this.setFont(buttonStyle.getFont());
 	}
 }

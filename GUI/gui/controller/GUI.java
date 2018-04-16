@@ -17,16 +17,16 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
+import gui.interfaces.GUIStyle;
 import gui.model.ActionEvents;
-import gui.model.ColorizeComponentsMouseListener;
 import gui.model.TimeStamp;
 import gui.view.SwingButton;
 
 @SuppressWarnings("serial")
-public class GUI extends JFrame implements TimeStamp, ActionEvents {
+public class GUI extends JFrame implements ActionEvents, GUIStyle {
 
+	public static GUI gooey;
 	protected JTextField userInputField;
-	public GUI thisGUI;
 	private JTextArea queryRetrievalPanel;
 	private JLabel promptLabel;
 	private JScrollPane queryRetrievalScrollPane;
@@ -44,11 +44,16 @@ public class GUI extends JFrame implements TimeStamp, ActionEvents {
 	private JLabel motdLabel;
 	private JPanel subPanelUserInput;
 	
+	public static void main(String[] args) {
+		gooey = new GUI();
+		gooey.run();
+	}
 	public void run() {
 		try {
 			// System.out.println(Thread.currentThread().getName() + "About to make GUI.");
-			thisGUI = new GUI();
-			thisGUI.setVisible(true);
+			new GUI().setVisible(true);
+			TimeStamp t = new TimeStamp();
+			t.run();
 		} catch (Exception e) {
 			System.out.println("Failed to run GUI");
 		}
@@ -95,8 +100,8 @@ public class GUI extends JFrame implements TimeStamp, ActionEvents {
 		// ActionListener loginAction = new LoginButtonActionListener();
 		// submitLoginButton.addActionListener(loginAction); // MVC pattern
 
-		inputPanel.add(new SwingButton("Login", TryLoginWhenClicked()));
-		inputPanel.add(new SwingButton("Quit", ExitWhenClicked()));
+		inputPanel.add(new SwingButton("Login", TryLoginWhenClicked(), new ButtonStyle()));
+		inputPanel.add(new SwingButton("Quit", ExitWhenClicked(), new ButtonStyle()));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -125,8 +130,6 @@ public class GUI extends JFrame implements TimeStamp, ActionEvents {
 	}
 
 	private void initializeGUI(int x, int y, int dx, int dy) {
-		ColorizeComponentsMouseListener motionListener = new ColorizeComponentsMouseListener();
-		this.addMouseListener(motionListener);
 		this.setTitle("SoftwareHuset's Calendar Application");
 		this.setBounds(x, y, dx, dy);
 		this.setAlwaysOnTop(false);

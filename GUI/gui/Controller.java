@@ -18,8 +18,8 @@ public class Controller {
 		guiin = gui;
 	}
 
-	public static void main(String[] args) {
-		Controller control = new Controller();
-	}
+	//public static void main(String[] args) {
+	//	Controller control = new Controller();
+	//}
 
 }
