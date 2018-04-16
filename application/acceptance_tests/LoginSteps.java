@@ -15,39 +15,41 @@ public class LoginSteps {
 	ErrorHandler errorHandler;
 	Employee testEmployee = new Employee("test","password");
 	Admin testAdmin = new Admin();
+	Management management;
 	
-	public LoginSteps(ErrorHandler errorHandler) {
+	public LoginSteps(ErrorHandler errorHandler, Management management) {
 		this.errorHandler = errorHandler;
+		this.management = management;
 	}
 	
 	@Given("^a user is logged in$")
 	public void aUserIsLoggedIn() throws Exception {
-		if(!Management.userIsLoggedIn()) {
-			Management.adminLogin("admin", "adminadmin");
+		if(!management.userIsLoggedIn()) {
+			management.userLogin("admin", "adminadmin");
 		}
-	    assertTrue(Management.userIsLoggedIn());
+	    assertTrue(management.userIsLoggedIn());
 	}
 	
 	@Given("^a user is not logged in$")
 	public void aUserIsNotLoggedIn() throws Exception {
-		Management.logUserOut();
-	    assertFalse(Management.userIsLoggedIn());
+		management.logUserOut();
+	    assertFalse(management.userIsLoggedIn());
 	}
 	
 	@Given("^an adminstrator exists$")
 	public void anAdminstratorExists() throws Exception {
-	    if(Management.getAdmins().size() == 0) {
-	    	Management.addAdmin(testAdmin);
+	    if(management.getAdmins().size() == 0) {
+	    	management.addUser(testAdmin);
 	    }
-	    assertTrue(Management.getAdmins().size() > 0);
+	    assertTrue(management.getAdmins().size() > 0);
 	}
 	
 	@Given("^an employee exists$")
 	public void anEmployeeExists() throws Exception {
-	    if(Management.getEmployees().size() == 0) {
-	    	Management.addEmployee(testEmployee);
+	    if(management.getEmployees().size() == 0) {
+	    	management.addUser(testEmployee);
 	    }
-	    assertTrue(Management.getEmployees().size() > 0);
+	    assertTrue(management.getEmployees().size() > 0);
 	}
 	
 	@Given("^a user exists$")
@@ -59,7 +61,7 @@ public class LoginSteps {
 	@When("^the adminstrator enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theAdminstratorEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
 		try {
-			Management.adminLogin(arg1, arg2);
+			management.userLogin(arg1, arg2);
 		}
 		catch(FailedLoginException e) {
 			errorHandler.errorMessage = e.getMessage();
@@ -68,13 +70,13 @@ public class LoginSteps {
 	
 	@When("^the user logs out$")
 	public void theUserLogsOut() throws Exception {
-		Management.logUserOut();
+		management.logUserOut();
 	}
 	
 	@When("^the employee enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void theEmployeeEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
 	    try {
-	    	Management.employeeLogin(arg1, arg2);
+	    	management.userLogin(arg1, arg2);
 	    }
 	    catch(FailedLoginException e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -84,12 +86,12 @@ public class LoginSteps {
 	@Then("^the adminstrator is logged in$")
 	public void theAdminstratorIsLoggedIn() throws Exception {
 		
-		assertTrue(Management.adminIsLoggedIn());
+		assertTrue(management.adminIsLoggedIn());
 	}
 	
 	@Then("^the administrator is not logged in$")
 	public void theAdministratorIsNotLoggedIn() throws Exception {
-		assertTrue(Management.getLoggedInUserID() == null || !Management.getLoggedInUserID().equals(testAdmin.getAdminID()));
+		assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testAdmin.getUserID()));
 	}
 	
 	@Then("^i get the error message \"([^\"]*)\"$")
@@ -99,17 +101,17 @@ public class LoginSteps {
 	
 	@Then("^the user is no longer logged in$")
 	public void theUserIsNoLongerLoggedIn() throws Exception {
-	    assertFalse(Management.userIsLoggedIn());
+	    assertFalse(management.userIsLoggedIn());
 	}
 	
 	@Then("^the employee is not logged in$")
 	public void theEmployeeIsNotLoggedIn() throws Exception {
-	    assertTrue(Management.getLoggedInUserID() == null || !Management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
+	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testEmployee.getUserID()));
 	}
 	
 	@Then("^the employee is logged in$")
 	public void theEmployeeIsLoggedIn() throws Exception {
-	    assertTrue(Management.employeeIsLoggedIn());
-	    assertTrue(Management.getLoggedInUserID().equals(testEmployee.getEmployeeID()));
+	    assertTrue(management.employeeIsLoggedIn());
+	    assertTrue(management.getLoggedInUserID().equals(testEmployee.getUserID()));
 	}	
 }

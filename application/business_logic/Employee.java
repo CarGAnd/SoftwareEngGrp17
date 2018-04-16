@@ -2,32 +2,19 @@ package business_logic;
 
 import java.util.ArrayList;
 
-public class Employee {
+import business_logic.Management.userType;
 
-	String employeePass;
-	private String employeeID;
-	
-	
+public class Employee extends User {
 
 	public ArrayList<Project> leaderOfProjects;
 	private ArrayList<Activity> memberOfActivities;
 	
 	public Employee(String employeeID, String employeePass) {
-	
-		this.employeeID = employeeID;
-		this.employeePass = employeePass;
+		super(employeeID, employeePass, userType.Employee);
 		
 	}
 	
 	public void addActivityToEmployee(Activity act) {
 		memberOfActivities.add(act);
-	}
-	
-	public String getEmployeeID() {
-		return employeeID;
-	}
-
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
 	}
 }
