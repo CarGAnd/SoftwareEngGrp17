@@ -26,7 +26,7 @@ public class Management {
 		return loggedInUserType == userType.Employee;
 	}
 	
-	public static void employeeLogin(String ID, String password) throws FailedLoginException {
+	public static boolean employeeLogin(String ID, String password) throws FailedLoginException {
 		if(userIsLoggedIn()) {
 			throw new FailedLoginException("another user is already logged in");
 		}
@@ -35,6 +35,7 @@ public class Management {
 			if(user != null && password.equals(user.employeePass)) {
 				setLoggedInUserType(userType.Employee);
 				setLoggedInUserID(ID);
+				return true;
 			}
 			else {
 				throw new FailedLoginException("incorrect ID or password");
@@ -42,7 +43,7 @@ public class Management {
 		}
 	}
 	
-	public static void adminLogin(String ID, String password) throws FailedLoginException {
+	public static boolean adminLogin(String ID, String password) throws FailedLoginException {
 		if(userIsLoggedIn()) {
 			throw new FailedLoginException("another user is already logged in");
 		}
@@ -51,6 +52,7 @@ public class Management {
 			if(user != null && password.equals(user.adminPass)) {
 				setLoggedInUserType(userType.Admin);
 				setLoggedInUserID(ID);
+				return true;
 			}
 			else {
 				throw new FailedLoginException("incorrect ID or password");
@@ -64,7 +66,9 @@ public class Management {
 	}
 	
 	public static Employee addEmployee(Employee emp) {
-		employees.add(emp);
+		if(!employees.contains(emp)) {
+			employees.add(emp);			
+		}
 		return emp;
 	}
 	
@@ -72,8 +76,11 @@ public class Management {
 		employees.remove(emp);
 	}
 	
-	public static void addAdmin(Admin ad) {
-		admins.add(ad);
+	public static Admin addAdmin(Admin ad) {
+		if(!admins.contains(ad)) {
+			admins.add(ad);
+		}
+		return ad;
 	}
 	
 	public static void removeAdmin(Admin ad) throws Exception {
@@ -155,18 +162,27 @@ public class Management {
 		return loggedInUserType;
 	}
 
-
 	private static void setLoggedInUserType(userType loggedInUserType) {
 		Management.loggedInUserType = loggedInUserType;
 	}
-
 
 	public static String getLoggedInUserID() {
 		return loggedInUserID;
 	}
 
-
 	private static void setLoggedInUserID(String loggedInUserID) {
 		Management.loggedInUserID = loggedInUserID;
+	}
+	
+	public static ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+
+	public static ArrayList<Admin> getAdmins() {
+		return admins;
+	}
+
+	public static ArrayList<Project> getListOfProjects() {
+		return listOfProjects;
 	}
 }

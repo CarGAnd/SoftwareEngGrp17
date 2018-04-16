@@ -102,7 +102,9 @@ public class Activity {
 	}
 
 	public void setProjectLeaderID(String projectLeaderID) {
-		this.projectLeaderID = projectLeaderID;
+		if(Management.userIsLoggedIn() && Management.getLoggedInUserID().equals(projectLeaderID)) {
+			this.projectLeaderID = projectLeaderID;
+		}
 	}
 
 	public ArrayList<Employee> getListOfEmployees() {

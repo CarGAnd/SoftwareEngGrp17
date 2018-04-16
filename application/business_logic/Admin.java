@@ -9,4 +9,8 @@ public class Admin {
 		
 	}
 
+	public Object getAdminID() {
+		return adminID;
+	}
+
 }
