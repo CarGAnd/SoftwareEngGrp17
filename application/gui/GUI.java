@@ -25,13 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.jcomponent.QuitButton;
-import gui.listener.ColorizeComponentsMouseListener;
-import gui.listener.LoginButtonActionListener;
+import gui.jcomponent.SwingButton;
+import gui.listeners.ColorizeComponentsMouseListener;
+import gui.listeners.LoginButtonActionListener;
 import gui.logic.TimeStamp;
 
 @SuppressWarnings("serial")
-public class GUI extends JFrame {
+public class GUI extends JFrame implements UserPrompt {
 
 	private static JFrame timeManagementApplication;
 	protected static JTextField userInputField;
@@ -44,8 +44,6 @@ public class GUI extends JFrame {
 	protected static JTextField userLoginNameField;
 	protected static JTextField userLoginPasswordField;
 	private static JPanel innerPromptPanel;
-	protected static final Color[] COLOUR = { new Color(251, 244, 225), new Color(242, 242, 248),
-			new Color(234, 235, 240), new Color(151, 194, 208), new Color(100, 100, 100) };
 	private static JTextArea projectAndActivityPanel;
 	private static JTree scrollPanelForProjecAndActivities;
 	private static JPanel subPanelempty;
@@ -53,39 +51,33 @@ public class GUI extends JFrame {
 	private static JPanel inputPanel;
 	private static JLabel motdLabel;
 	private static JPanel subPanelUserInput;
-	private JButton quitButton;
 
 	public GUI() {
-		initializeGUI();
+		initializeGUI(200, 200, 1200, 800);
 		initializeNestedLayouts();
 		initializeMainIOComponents();
 		initializeScrollPane();
 		setMOTD("Some important message concerning all users is shown here.");
 		userPrompt(userPromptLogic());
-		
 		setAndAttachLayouts();
-		
 		setInputPanelLayout();
-		
-		setComponentColours();
-		System.out.println("ff");
 	}
 
 	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					System.out.println(Thread.currentThread().getName() + "About to make GUI.");
-					new GUI();
+					// System.out.println(Thread.currentThread().getName() + "About to make GUI.");
+					new GUI().setVisible(true);
+					;
 
-					timeManagementApplication.setVisible(true);
 				} catch (Exception e) {
 					System.out.println("err");
 				}
 			}
 		});
-		//Thread timeStamp = (new Thread(new TimeStamp()));
-		//timeStamp.start();
+		Thread timeStamp = (new Thread(new TimeStamp()));
+		timeStamp.start();
 
 	}
 
@@ -113,11 +105,10 @@ public class GUI extends JFrame {
 		userLoginPasswordField.setAlignmentX(RIGHT_ALIGNMENT);
 		userLoginPasswordField.setColumns(6);
 
-		
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		inputPanel.add(submitLoginButton);
-		inputPanel.add(new QuitButton());
+		inputPanel.add(new SwingButton());
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -139,10 +130,10 @@ public class GUI extends JFrame {
 		projectAndActivityPanel.setFont(new Font("Arial", Font.PLAIN, 12));
 		projectAndActivityPanel.setEditable(false);
 		scrollPanelForProjecAndActivities = new JTree();
-		//scrollPanelForProjecAndActivities.setSize(400, GUI.HEIGHT);
 	}
 
 	private String userPromptLogic() {
+		/* Move to interface */
 		String promptMessage = "What's the prompt?";
 		return promptMessage;
 	}
@@ -151,36 +142,35 @@ public class GUI extends JFrame {
 		motdLabel = new JLabel(message);
 	}
 
-	private void initializeGUI() {
-		timeManagementApplication = this; // Used for setting JFrame to visible.
+	private void initializeGUI(int x, int y, int dx, int dy) {
 		ColorizeComponentsMouseListener motionListener = new ColorizeComponentsMouseListener();
-		timeManagementApplication.addMouseListener(motionListener);
-		setTitle("SoftwareHuset's Calendar Application");
-		setBounds(200, 200, 1200, 800);
-		setAlwaysOnTop(false);
-		setDefaultCloseOperation(Frame.ICONIFIED);
-		getContentPane().setLayout(new BorderLayout());// Top Layout manager
+		this.addMouseListener(motionListener);
+		this.setTitle("SoftwareHuset's Calendar Application");
+		this.setBounds(x, y, dx, dy);
+		this.setAlwaysOnTop(false);
+		this.setDefaultCloseOperation(Frame.ICONIFIED);
+		this.getContentPane().setLayout(new BorderLayout());// Top Layout manager
 	}
-
-	private void setComponentColours() {
-		infoPanel.setBackground(COLOUR[0]);
-		queryRetrievalPanel.setBackground(COLOUR[1]);
-		projectAndActivityPanel.setBackground(COLOUR[2]);
-		innerPromptPanel.setBackground(COLOUR[0]);
-		subPanelUserInput.setBackground(COLOUR[3]);
-		subPanelControlView.setBackground(COLOUR[3]);
-		subPanelempty.setBackground(COLOUR[3]);
-		submitLoginButton.setBackground(COLOUR[3]);
-		//quitButton.setBackground(COLOUR[3]);
-
-	}
+	/* Fix for the rest */
+	// private void setComponentColours() {
+	// infoPanel.setBackground(COLOUR[0]);
+	// queryRetrievalPanel.setBackground(COLOUR[1]);
+	// projectAndActivityPanel.setBackground(COLOUR[2]);
+	// innerPromptPanel.setBackground(COLOUR[0]);
+	// subPanelUserInput.setBackground(COLOUR[3]);
+	// subPanelControlView.setBackground(COLOUR[3]);
+	// subPanelempty.setBackground(COLOUR[3]);
+	// submitLoginButton.setBackground(COLOUR[3]);
+	//
+	//
+	// }
 
 	private void userPrompt(String prompt) {
 		promptLabel = new JLabel(prompt);
 		promptLabel.setBorder(BorderFactory.createEtchedBorder());
 		submitLoginButton = new JButton("Login)");
 		ActionListener loginAction = new LoginButtonActionListener();
-		submitLoginButton.addActionListener(loginAction); //MVC pattern
+		submitLoginButton.addActionListener(loginAction); // MVC pattern
 	}
 
 	private void initializeMainIOComponents() {

@@ -20,7 +20,7 @@ public class TimeStamp implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(150);
+				Thread.sleep(15000);
 				GUI.setTimeLabel(gmtFormat());
 			} catch (InterruptedException e) {
 			}
