@@ -1,15 +1,14 @@
-Feature: xxx
-	Description: xxx
-	Actor: xxx
+Feature: Create or edit an activity for a project
+	Description: Create or edit an activity for a project
+	Actor: Employee
 
 #Scenario: Create an activity
-#	Given a project exists and a user wishes to create an activity for that project
-#	And the user ID matches the project leader ID
-#	When the user enters a description for the activity
-#	And the users enters a due date for the activity
-#	And the user enters an estimated number of works hours
-#	Then an activity is created in the system with an ID
-#	
+#	Given a user is logged in 
+#	And a project exists
+#	And the logged in user's ID matches the project leader ID
+#	When the user creates an activity in the project with the description "test description" and the due date "01-01-2020" and 20 estimated work hours
+#	Then an activity is created in the project with the description "test description" and the due date "01-01-2020" and 20 estimated work hours
+	
 #Scenario: Finish an activity
 #	Given a project exists and a user wishes to edit an activity for that project
 #	And the user ID matches the project leader ID

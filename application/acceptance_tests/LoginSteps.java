@@ -13,8 +13,8 @@ import cucumber.api.java.en.*;
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee = new Employee("Controller","password");
-	Admin testAdmin = new Admin();
+	Employee testEmployee;
+	Admin testAdmin;
 	Management management;
 	
 	public LoginSteps(ErrorHandler errorHandler, Management management) {
@@ -39,22 +39,22 @@ public class LoginSteps {
 	@Given("^an adminstrator exists$")
 	public void anAdminstratorExists() throws Exception {
 	    if(management.getAdmins().size() == 0) {
-	    	management.addUser(testAdmin);
+	    	testAdmin = (Admin) management.addUser(new Admin());
 	    }
 	    assertTrue(management.getAdmins().size() > 0);
 	}
 	
-	@Given("^an employee exists$")
-	public void anEmployeeExists() throws Exception {
+	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
+	public void anEmployeeExistsWithTheIDAndThePassword(String arg1, String arg2) throws Exception {
 	    if(management.getEmployees().size() == 0) {
-	    	management.addUser(testEmployee);
+	    	testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
 	    }
 	    assertTrue(management.getEmployees().size() > 0);
 	}
 	
 	@Given("^a user exists$")
 	public void aUserExists() throws Exception {
-		anEmployeeExists();
+		anEmployeeExistsWithTheIDAndThePassword("test", "password");
 		anAdminstratorExists();
 	}
 

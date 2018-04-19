@@ -17,13 +17,13 @@ Scenario: Administrator has the wrong password
 	
 Scenario: Employee can login
 	Given a user is not logged in
-	And an employee exists
+	And an employee exists with the ID "test" and the password "password"
 	When the employee enters the ID "test" and the password "password"
 	Then the employee is logged in
 	
 Scenario: Employee has the wrong password
 	Given a user is not logged in
-	And an employee exists
+	And an employee exists with the ID "test" and the password "password"
 	When the employee enters the ID "test" and the password "wrong password"
 	Then the employee is not logged in
 	And i get the error message "incorrect ID or password"
@@ -35,7 +35,7 @@ Scenario: User wants to log out
 	Then the user is no longer logged in
 	
 Scenario: User logging in while another user is already logged in
-	Given a user exists
+	Given an employee exists with the ID "test" and the password "password"
 	And a user is logged in
 	When the employee enters the ID "test" and the password "password"
 	Then i get the error message "another user is already logged in"
