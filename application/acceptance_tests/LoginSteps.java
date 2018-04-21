@@ -7,6 +7,7 @@ import business_logic.Admin;
 import business_logic.Employee;
 import business_logic.FailedLoginException;
 import business_logic.Management;
+import business_logic.Management.userType;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 
@@ -36,6 +37,11 @@ public class LoginSteps {
 	    assertFalse(management.userIsLoggedIn());
 	}
 	
+	@Given("^an employee with the ID \"([^\"]*)\" and the password \"([^\"]*)\" is logged in$")
+	public void anEmployeeWithTheIDAndThePasswordIsLoggedIn(String arg1, String arg2) throws Exception {
+	    management.userLogin(arg1, arg2);
+	}
+	
 	@Given("^an adminstrator exists$")
 	public void anAdminstratorExists() throws Exception {
 	    if(management.getAdmins().size() == 0) {
@@ -46,7 +52,7 @@ public class LoginSteps {
 	
 	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void anEmployeeExistsWithTheIDAndThePassword(String arg1, String arg2) throws Exception {
-	    if(management.getEmployees().size() == 0) {
+	    if(management.getUserByID(arg1) == null) {
 	    	testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
 	    }
 	    assertTrue(management.getEmployees().size() > 0);

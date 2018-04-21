@@ -1,6 +1,7 @@
 package business_logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Management {
 	
@@ -28,6 +29,17 @@ public class Management {
 		return userIsLoggedIn() && loggedInUser.getTypeOfUser() == userType.Employee;
 	}
 	
+	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception {
+		if(userIsLoggedIn() && getLoggedInUser().hasAdminPermissions()) {
+			Project project = new Project(name,ID,startDate,endDate,estimatedTime); //TODO: change the constructor
+			this.addProject(project);
+			return project;
+		}
+		else {
+			throw new Exception("Insufficient permissions"); //TODO: use proper exception
+		}
+	}
+	
 	public boolean userLogin(String ID, String password) throws FailedLoginException {
 		if(userIsLoggedIn()) {
 			throw new FailedLoginException("another user is already logged in");
@@ -48,7 +60,6 @@ public class Management {
 		setLoggedInUser(null);
 	}
 	
-
 	public User addUser(User emp) {
 		if(!users.contains(emp)) {
 			users.add(emp);			
@@ -115,21 +126,21 @@ public class Management {
 		return null;
 	}
 	
-	public ArrayList<User> getAdmins(){ // returns all users that are admins. does not return users that are employees
-		ArrayList<User> admins = new ArrayList<User>();
+	public ArrayList<Admin> getAdmins(){ // returns all users that are admins. does not return users that are employees
+		ArrayList<Admin> admins = new ArrayList<Admin>();
 		for(int i = 0; i < users.size(); i++) {
 			if(users.get(i).getTypeOfUser() == userType.Admin) {
-				admins.add(users.get(i));
+				admins.add((Admin) users.get(i));
 			}
 		}
 		return admins;
 	}
 	
-	public ArrayList<User> getEmployees(){ // returns all users that are employees. does not return users that are admins
-		ArrayList<User> employees = new ArrayList<User>();
+	public ArrayList<Employee> getEmployees(){ // returns all users that are employees. does not return users that are admins
+		ArrayList<Employee> employees = new ArrayList<Employee>();
 		for(int i = 0; i < users.size(); i++) {
 			if(users.get(i).getTypeOfUser() == userType.Employee) {
-				employees.add(users.get(i));
+				employees.add((Employee) users.get(i));
 			}
 		}
 		return employees;

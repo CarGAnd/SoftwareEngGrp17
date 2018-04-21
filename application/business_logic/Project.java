@@ -18,8 +18,7 @@ public class Project {
 	Date endDate = null;
 	int estimatedTimeUsage;
 
-	public Project(String projectname, String projectID, Date startDate, Date endDate, String adminID, String adminPass,
-			int estimatedTimeUsage) throws FailedLoginException {
+	public Project(String projectname, String projectID, Date startDate, Date endDate, int estimatedTimeUsage) {
 		/*
 		 * There needs to be a check that the person who's calling the project is an
 		 * admin. this.adminID = adminID; this.adminPass = adminPass;
@@ -39,7 +38,7 @@ public class Project {
 	}
 
 	public void SetProjectLeader(String employeeID, String adminID, String adminPass, String projectID) {
-
+		// bliver muligvis nød til at sende en management ind som parameter. Kan ikke se hvordan man ellers skal checke hvem der er logget ind
 	}
 
 	public String getProjectLeaderID() {
