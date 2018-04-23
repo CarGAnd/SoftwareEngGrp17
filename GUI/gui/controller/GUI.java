@@ -1,10 +1,14 @@
 package gui.controller;
 
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.event.AWTEventListener;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,20 +47,23 @@ public class GUI extends JFrame implements ActionEvents, GUIStyle {
 	private JPanel inputPanel;
 	private JLabel motdLabel;
 	private JPanel subPanelUserInput;
-	
+
 	public static void main(String[] args) {
 		gooey = new GUI();
 		gooey.run();
 	}
+
 	public void run() {
+			
 		try {
-			// System.out.println(Thread.currentThread().getName() + "About to make GUI.");
-			new GUI().setVisible(true);
-			TimeStamp t = new TimeStamp();
-			t.run();
+			System.out.println(Thread.currentThread().getName() + "About to make GUI.");
+			gooey.setVisible(true);
+
 		} catch (Exception e) {
 			System.out.println("Failed to run GUI");
 		}
+		TimeStamp t = new TimeStamp();
+		t.run();
 	}
 
 	public GUI() {
@@ -97,11 +104,8 @@ public class GUI extends JFrame implements ActionEvents, GUIStyle {
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-		// ActionListener loginAction = new LoginButtonActionListener();
-		// submitLoginButton.addActionListener(loginAction); // MVC pattern
-
-		inputPanel.add(new SwingButton("Login", TryLoginWhenClicked(), new ButtonStyle()));
-		inputPanel.add(new SwingButton("Quit", ExitWhenClicked(), new ButtonStyle()));
+		inputPanel.add(new SwingButton("Login", new TryLoginWhenClicked(), new ButtonStyle()));
+		inputPanel.add(new SwingButton("Quit",  new Exit(), new ButtonStyle()));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -139,7 +143,7 @@ public class GUI extends JFrame implements ActionEvents, GUIStyle {
 
 	private void userPrompt() {
 
-		promptLabel = new JLabel();
+		promptLabel = new JLabel(" ");
 		promptLabel.setBorder(BorderFactory.createEtchedBorder());
 	}
 
@@ -157,7 +161,7 @@ public class GUI extends JFrame implements ActionEvents, GUIStyle {
 		userInputField.setEditable(true);
 		userInputField.setFont(new Font("Arial", Font.PLAIN, 16));
 		userInputField.setColumns(40);
-		timeLabel = new JLabel();
+		timeLabel = new JLabel(" ");
 	}
 
 	private void initializeNestedLayouts() {

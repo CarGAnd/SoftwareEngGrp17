@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import gui.controller.GUI;
+
 //Made primarily by: Lars Staalhagen @ DTU.
 public class TimeStamp implements Runnable {
 	public String gmtFormat() {
@@ -17,7 +19,7 @@ public class TimeStamp implements Runnable {
 	@Override
 	public void run() {
 		while(true) {
-			gmtFormat();
+			GUI.gooey.setTimeLabel(gmtFormat());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
