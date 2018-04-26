@@ -75,12 +75,12 @@ public class CreateProjectSteps {
 	    }
 	    management.getProjectByID("ID1234").setProjectLeader(arg1, management);
 	    
-	    assertTrue(management.getProjectByID("ID1234").getProjectLeader() == testEmployee.getUserID());
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == testEmployee.getUserID());
 	}
 
 	@Given("^the project state is \"([^\"]*)\"$")
 	public void theProjectStateIs(String arg1) throws Exception {
-	   if(management.getProjectByID("ID1234").getProjectLeader() != management.getLoggedInUserID()) {
+	   if(management.getProjectByID("ID1234").getProjectLeaderID() != management.getLoggedInUserID()) {
 		   management.logUserOut();
 		   management.userLogin("TestUser", "pass");
 	   }
@@ -109,7 +109,7 @@ public class CreateProjectSteps {
 	public void theUserIDDoesNotMatchTheProjectLeaderID(String arg1) throws Exception {
 		testEmployee = new Employee(arg1,"newpass");
 		management.addUser(testEmployee);
-		if(management.getProjectByID("ID1234").getProjectLeader() == management.getLoggedInUserID()) {
+		if(management.getProjectByID("ID1234").getProjectLeaderID() == management.getLoggedInUserID()) {
 			management.logUserOut();
 			management.userLogin(arg1, "newpass");
 		}

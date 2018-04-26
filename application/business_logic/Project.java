@@ -127,7 +127,7 @@ public class Project {
 	public int getEstimatedTimeUsed() {
 		return estimatedTimeUsage;
 	}
-	public String getProjectLeader() {
+	public String getProjectLeaderID() {
 		return projectLeaderID;
 	}
 	
