@@ -127,4 +127,20 @@ public class CreateProjectSteps {
 
 	}
 
+	@Given("^the project does not have a leader$")
+	public void theProjectDoesNotHaveALeader() throws Exception {
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == "");
+	}
+
+	@When("^the admin designates an employee to be project leader$")
+	public void theAdminDesignatesAnEmployeeToBeProjectLeader() throws Exception {
+	    testEmployee = new Employee("testID", "testPass");
+	    management.addUser(testEmployee);
+	    management.getProjectByID("ID1234").setProjectLeader("testID", management);
+	}
+
+	@Then("^the employee becomes project leader for the project$")
+	public void theEmployeeBecomesProjectLeaderForTheProject() throws Exception {
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == "testID");
+	}
 }
