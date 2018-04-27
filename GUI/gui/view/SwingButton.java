@@ -8,6 +8,7 @@ import gui.interfaces.GUIStyle;
 
 @SuppressWarnings("serial")
 public class SwingButton extends JButton implements GUIStyle {
+	@SuppressWarnings("hiding")
 	public final float CENTER_ALIGNMENT = 0;
 	public JButton jButton;
 

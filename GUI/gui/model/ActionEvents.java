@@ -3,34 +3,44 @@ package gui.model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import gui.controller.GUI;
+import gui.controller.UI;
 
+@SuppressWarnings("unused")
 public interface ActionEvents {
 	public class Exit implements ActionListener {
 		public Exit() {
 			super();
+			//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		}
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			System.exit(0);
 		}
 	}
-
+	public class Logout implements ActionListener {
+		public Logout() {
+			super();
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			//TODO: Add code which logouts the user.
+		}
+	}
 	public class TryLoginWhenClicked implements ActionListener {
 		public TryLoginWhenClicked() {
 		super();
 		}
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (GUI.gooey.getUserLoginName().isEmpty() && GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Please enter username and password before submitting.");
-			} else if (!GUI.gooey.getUserLoginName().isEmpty() && GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Password missing.");
-			} else if (GUI.gooey.getUserLoginName().isEmpty() && !GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Username missing or not found.");
-			} else {
-				GUI.gooey.setPromptLabel("Attempting login");
-			}
+//			if (UI.gui.getUserLoginName().isEmpty() && UI.gui.getUserLoginPassword().isEmpty()) {
+//				UI.gui.setPromptLabel("Please enter username and password before submitting.");
+//			} else if (!UI.gui.getUserLoginName().isEmpty() && UI.gui.getUserLoginPassword().isEmpty()) {
+//				UI.gui.setPromptLabel("Password missing.");
+//			} else if (UI.gui.getUserLoginName().isEmpty() && !UI.gui.getUserLoginPassword().isEmpty()) {
+//				UI.gui.setPromptLabel("Username missing or not found.");
+//			} else {
+//				UI.gui.setPromptLabel("Attempting login");
+//			}
 
 		}
 	};

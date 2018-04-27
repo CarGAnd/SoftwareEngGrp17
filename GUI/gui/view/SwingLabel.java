@@ -9,6 +9,7 @@ import gui.interfaces.GUIStyle;
 
 @SuppressWarnings("serial")
 public class SwingLabel extends JLabel implements GUIStyle {
+	@SuppressWarnings("hiding")
 	public float CENTER_ALIGNMENT = 0;
 	public JButton jButton;
 
