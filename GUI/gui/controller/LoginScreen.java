@@ -11,12 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import gui.interfaces.Styles.ButtonStyle;
+import gui.interfaces.StyleConfigurations;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
 @SuppressWarnings("serial")
-public class LoginScreen extends JPanel implements ActionEvents {
+public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
 	public LoginScreen() {
 		super();
 		JPanel loginpanel = new JPanel(new GridBagLayout());

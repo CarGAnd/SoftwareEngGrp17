@@ -13,26 +13,21 @@ import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.interfaces.Styles;
+import gui.interfaces.StyleConfigurations;
+import gui.interfaces.StyleConfigurations.ButtonStyle;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
 @SuppressWarnings("serial")
-public class UserInterface extends JPanel implements ActionEvents, Styles {
+public class UserInterface extends JPanel implements ActionEvents, StyleConfigurations {
 
-	public static UserInterface	gooey;
-	private JTextArea	queryRetrievalPanel;
-	private JLabel		promptLabel;
-	private JScrollPane	queryRetrievalScrollPane;
-	private JButton		submitLoginButton;
-	private JPanel		innerPromptPanel;
-	private JTextArea	projectAndActivityPanel;
-	private JTree		scrollPanelForProjecAndActivities;
-	private JPanel		subPanelempty;
-	private JPanel		subPanelControlView;
-	private JPanel		inputPanel;
-	private JPanel		subPanelUserInput;
-	private JPanel		connectingPanel;
+	private JTextArea	 queryRetrievalPanel;
+	private JLabel		 promptLabel;
+	private JScrollPane	 queryRetrievalScrollPane;
+	private JButton		 submitLoginButton;
+	private JTextArea	 projectAndActivityPanel;
+	private JTree		 scrollPanelForProjecAndActivities;
+	private JPanel		 innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
 		super();

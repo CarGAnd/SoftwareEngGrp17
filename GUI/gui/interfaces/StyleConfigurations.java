@@ -5,7 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
-public interface Styles {
+public interface StyleConfigurations {
 	Color[] COLOR = { new Color(251, 244, 225), new Color(242, 242, 248), new Color(234, 235, 240),
 			new Color(151, 194, 208), new Color(100, 100, 100) };
 	Font[] FONT = { new Font("Sans Serif", 0, 11) };
