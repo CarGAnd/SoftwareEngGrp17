@@ -1,5 +1,6 @@
 package gui.controller;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -18,7 +19,7 @@ import gui.view.SwingButton;
 @SuppressWarnings("serial")
 public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
 	public LoginScreen() {
-		super();
+		
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
 				new Font("Lucida", 0, 11), Color.DARK_GRAY));
@@ -54,10 +55,12 @@ public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurat
 		cs.gridx = 0;
 		cs.gridy = 3;
 		cs.gridwidth = 8;
-		cs.ipadx = 48;
-		// cs.ipady = -4; //TODO: Try to unset when GUI runs properly.
+		cs.ipadx = 32;
+		cs.ipady = -8; //TODO: Try to unset when GUI runs properly.
 
 		loginpanel.add(loginBtn, cs);
+		this.setLayout(new BorderLayout());
+		this.add(loginpanel, BorderLayout.CENTER);
 	}
 
 }

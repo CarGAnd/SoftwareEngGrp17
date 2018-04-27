@@ -3,69 +3,67 @@ package gui.controller;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import gui.controller.LoginScreen;
 
 public class FrameController {
 
 	private JPanel			  infopanels;
-	private Clock			  clock;
+	private static Clock	  clock;
 	private JLabel			  motdLabel	= new JLabel("");
 	public static JLabel	  timeLabel	= new JLabel("");
 	private UserInterface	  ui;
 	private LoginScreen		  lgscreen;
-	private Container		  applicationpanels;
+	private JPanel			  allCards;
 	protected JFrame		  frame;
-	protected FrameController gui;
-	private CardLayout		  cards;
-	
+	protected FrameController appGUI;
+	private JPanel			  card1;
+	private JPanel			  card2;
 
 	public static void main(String[] args) {
-		FrameController appGUI = new FrameController();
+		FrameController ctrller = new FrameController();
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				appGUI.frame = new JFrame();
-				initJFrame(appGUI.frame, 200, 200, 1200, 800, "SoftwareHuset's Calendar Application");
-				appGUI.frame.setVisible(true);
-				appGUI.frame.add(appGUI.infopanels, BorderLayout.NORTH);
-				appGUI.frame.add(appGUI.applicationpanels, BorderLayout.CENTER);
-				appGUI.cards = (CardLayout) appGUI.applicationpanels.getLayout();
-				appGUI.cards.first(appGUI.applicationpanels);
+				JFrame frame = new JFrame();
+				initJFrame(frame, 200, 200, 1200, 800, "SoftwareHuset's Calendar Application");
+				frame.setVisible(true);
+				frame.getContentPane().add(ctrller.allCards);
+				CardLayout cl = (CardLayout) (ctrller.allCards.getLayout());
+				cl.show(ctrller.allCards, "1");
 			}
 		});
-		
-		appGUI.clock.run();
+
+		clock.run();
 
 	}
 
-	private void setContainerLayout() {
+	public FrameController() {
+		card1 = new JPanel();
+		card1.setBackground(Color.RED);
+		card2 = new JPanel();
+		ui = new UserInterface();
+		clock = new Clock();
+		card1.setLayout(new BorderLayout());
+		card2.setLayout(new BorderLayout());
+		card1.add(ui, BorderLayout.CENTER);
+		lgscreen = new LoginScreen();
+		card2.add(lgscreen, BorderLayout.CENTER);
+		clock = new Clock();
 		infopanels = new JPanel();
 		infopanels.setFont(new Font("Courier", Font.PLAIN, 10));
 		infopanels.setLayout(new GridLayout(2, 1));
 		infopanels.add(motdLabel, 0);
 		infopanels.add(getTimeLabel(), 1);
-		
-		applicationpanels = new JPanel(new CardLayout(0, 150));
-		applicationpanels.add(lgscreen, "0");
-		applicationpanels.add(ui, "1");
+		allCards = new JPanel(new CardLayout(0, 100));
+		allCards.add(card1, "0");
+		allCards.add(card2, "1");
 
-	}
-
-	public FrameController() {
-		createObjects();
-		setContainerLayout();
 		setMOTD("Some important message concerning all users is shown here.");
-	}
-
-	private void createObjects() {
-		ui = new UserInterface();
-		lgscreen = new LoginScreen();
-		lgscreen.setBackground(Color.BLUE);
-		clock = new Clock();
 	}
 
 	private static void initJFrame(JFrame frame, int x, int y, int dx, int dy, String titleOfApplication) {
@@ -74,10 +72,6 @@ public class FrameController {
 		frame.setAlwaysOnTop(false);
 		frame.setDefaultCloseOperation(JFrame.ICONIFIED);
 		frame.getContentPane().setLayout(new BorderLayout());
-
-	}
-
-	public void setTimeLabel(String time) {
 
 	}
 
@@ -94,4 +88,3 @@ public class FrameController {
 	}
 
 }
-

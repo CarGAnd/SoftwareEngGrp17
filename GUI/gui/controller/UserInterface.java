@@ -14,7 +14,6 @@ import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
 import gui.interfaces.StyleConfigurations;
-import gui.interfaces.StyleConfigurations.ButtonStyle;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
