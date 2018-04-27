@@ -2,6 +2,7 @@ package gui.controller;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -23,6 +24,7 @@ public class FrameController {
 	protected JFrame		  frame;
 	protected FrameController gui;
 	private CardLayout		  cards;
+	
 
 	public static void main(String[] args) {
 		FrameController appGUI = new FrameController();
@@ -37,7 +39,7 @@ public class FrameController {
 				appGUI.cards.first(appGUI.applicationpanels);
 			}
 		});
-
+		
 		appGUI.clock.run();
 
 	}
@@ -48,6 +50,7 @@ public class FrameController {
 		infopanels.setLayout(new GridLayout(2, 1));
 		infopanels.add(motdLabel, 0);
 		infopanels.add(getTimeLabel(), 1);
+		
 		applicationpanels = new JPanel(new CardLayout(0, 150));
 		applicationpanels.add(lgscreen, "0");
 		applicationpanels.add(ui, "1");
@@ -63,6 +66,7 @@ public class FrameController {
 	private void createObjects() {
 		ui = new UserInterface();
 		lgscreen = new LoginScreen();
+		lgscreen.setBackground(Color.BLUE);
 		clock = new Clock();
 	}
 
