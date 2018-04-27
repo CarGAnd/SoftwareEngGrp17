@@ -2,57 +2,72 @@ package gui.controller;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GUI {
+public class FrameController {
 
-	private JPanel			 info_container;
-	private static TimeStamp t;
-	private JLabel			 motdLabel = new JLabel("");
-	private static JLabel	 timeLabel = new JLabel("");
-	private UI				 ui;
-	private LoginScreen		 lgscreen;
-	private static JPanel			 cardlayout_container;
-	protected static JFrame	 ui_controller;
-	protected static GUI	 gui;
-	private static CardLayout		 cl;
+	private JPanel			  infopanels;
+	private Clock			  clock;
+	private JLabel			  motdLabel	= new JLabel("");
+	public static JLabel	  timeLabel	= new JLabel("");
+	private UserInterface	  ui;
+	private LoginScreen		  lgscreen;
+	private Container		  applicationpanels;
+	protected JFrame		  frame;
+	protected FrameController gui;
+	private CardLayout		  cards;
 
 	public static void main(String[] args) {
+		FrameController appGUI = new FrameController();
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				ui_controller = new JFrame();
-				initJFrame(ui_controller, 200, 200, 1200, 800);
-				gui = new GUI();
-				// ui_controller.pack();
-				ui_controller.setVisible(true);
+				appGUI.frame = new JFrame();
+				initJFrame(appGUI.frame, 200, 200, 1200, 800, "SoftwareHuset's Calendar Application");
+				appGUI.frame.setVisible(true);
+				appGUI.frame.add(appGUI.infopanels, BorderLayout.NORTH);
+				appGUI.frame.add(appGUI.applicationpanels, BorderLayout.CENTER);
+				appGUI.cards = (CardLayout) appGUI.applicationpanels.getLayout();
+				appGUI.cards.first(appGUI.applicationpanels);
 			}
 		});
-		cl.show(cardlayout_container, "0");
-		t.run();
-		timeLabel.setText(t.gmtFormat());
+
+		appGUI.clock.run();
+
 	}
 
-	public GUI() {
-		super();
+	private void setContainerLayout() {
+		infopanels = new JPanel();
+		infopanels.setFont(new Font("Courier", Font.PLAIN, 10));
+		infopanels.setLayout(new GridLayout(2, 1));
+		infopanels.add(motdLabel, 0);
+		infopanels.add(getTimeLabel(), 1);
+		applicationpanels = new JPanel(new CardLayout(0, 150));
+		applicationpanels.add(lgscreen, "0");
+		applicationpanels.add(ui, "1");
+
+	}
+
+	public FrameController() {
 		createObjects();
 		setContainerLayout();
-		// Few tweaks
 		setMOTD("Some important message concerning all users is shown here.");
 	}
 
 	private void createObjects() {
-		ui = new UI();
+		ui = new UserInterface();
 		lgscreen = new LoginScreen();
-		t = new TimeStamp();
+		clock = new Clock();
 	}
 
-	private static void initJFrame(JFrame frame, int x, int y, int dx, int dy) {
-		frame.setTitle("SoftwareHuset's Calendar Application");
+	private static void initJFrame(JFrame frame, int x, int y, int dx, int dy, String titleOfApplication) {
+		frame.setTitle(titleOfApplication);
 		frame.setBounds(x, y, dx, dy);
 		frame.setAlwaysOnTop(false);
 		frame.setDefaultCloseOperation(JFrame.ICONIFIED);
@@ -60,28 +75,22 @@ public class GUI {
 
 	}
 
-	private void setContainerLayout() {
-		info_container = new JPanel();
-		info_container.setFont(new Font("Courier", Font.PLAIN, 10));
-		info_container.setLayout(new GridLayout(2, 1));
-		info_container.add(motdLabel, 0);
-		info_container.add(timeLabel, 1);
-		cardlayout_container = new JPanel(new CardLayout(0, 50));
-		ui_controller.add(info_container, BorderLayout.NORTH);
-		ui_controller.add(cardlayout_container, BorderLayout.CENTER);
-
-		cardlayout_container.add(lgscreen, "0");
-		cardlayout_container.add(ui, "1");
-		cl = (CardLayout) (cardlayout_container.getLayout());
-	}
-
 	public void setTimeLabel(String time) {
-		timeLabel.setText(time);
+
 	}
 
 	private void setMOTD(String message) {
 		motdLabel.setText(message);
 	}
+
+	public JLabel getTimeLabel() {
+		return timeLabel;
+	}
+
+	public static void setClockUpdate(String gmtFormat) {
+		timeLabel.setText(gmtFormat);
+	}
+
 }
 // https://stackoverflow.com/questions/3081913/center-swing-windows/3081925#3081925
 // public static Rectangle getScreenBounds(Component top){

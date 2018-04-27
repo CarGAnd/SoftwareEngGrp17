@@ -13,14 +13,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.interfaces.GUIStyle;
+import gui.interfaces.Styles;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
 @SuppressWarnings("serial")
-public class UI extends JPanel implements ActionEvents, GUIStyle {
+public class UserInterface extends JPanel implements ActionEvents, Styles {
 
-	public static UI	gooey;
+	public static UserInterface	gooey;
 	private JTextArea	queryRetrievalPanel;
 	private JLabel		promptLabel;
 	private JScrollPane	queryRetrievalScrollPane;
@@ -34,7 +34,7 @@ public class UI extends JPanel implements ActionEvents, GUIStyle {
 	private JPanel		subPanelUserInput;
 	private JPanel		connectingPanel;
 
-	public UI() {
+	public UserInterface() {
 		super();
 		initializeNestedLayouts();
 		initializeMainIOComponents();

@@ -4,10 +4,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import gui.interfaces.GUIStyle;
+import gui.interfaces.Styles;
+import gui.interfaces.Styles.ButtonStyle;
 
 @SuppressWarnings("serial")
-public class SwingButton extends JButton implements GUIStyle {
+public class SwingButton extends JButton implements Styles {
 	@SuppressWarnings("hiding")
 	public final float CENTER_ALIGNMENT = 0;
 	public JButton jButton;

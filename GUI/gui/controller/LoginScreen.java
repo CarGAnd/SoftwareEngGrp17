@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import gui.interfaces.GUIStyle.ButtonStyle;
+import gui.interfaces.Styles.ButtonStyle;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 

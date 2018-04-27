@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 //Snippet gmtFormat() by Lars Staalhagen, DTU.
-public class TimeStamp implements Runnable {
+public class Clock implements Runnable {
 
 	public String gmtFormat() {
 		SimpleDateFormat gmtFmt = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
@@ -18,7 +18,7 @@ public class TimeStamp implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			gmtFormat();
+			FrameController.setClockUpdate(gmtFormat());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
