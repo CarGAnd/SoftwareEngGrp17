@@ -104,8 +104,7 @@ public class GUI extends JFrame implements ActionEvents, GUIStyle {
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-		inputPanel.add(new SwingButton("Login", new TryLoginWhenClicked(), new ButtonStyle()));
-		inputPanel.add(new SwingButton("Quit",  new Exit(), new ButtonStyle()));
+		inputPanel.add(new SwingButton("Quit",  new Exit(), new ButtonStyle("UI")));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));

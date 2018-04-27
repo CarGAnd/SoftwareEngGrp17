@@ -12,9 +12,15 @@ public interface GUIStyle {
 
 	@SuppressWarnings("serial")
 	public class ButtonStyle extends JButton {
-		public ButtonStyle() {
+		public ButtonStyle(String string) {
+			if(string.equals("LoginScreen")) {
+				this.setBackground(COLOR[0]);
+				this.setFont(FONT[0]);
+			}
+			else if(string.equals("UI")) {
 			this.setBackground(COLOR[3]);
 			this.setFont(FONT[0]);
+			}
 		}
 
 	}

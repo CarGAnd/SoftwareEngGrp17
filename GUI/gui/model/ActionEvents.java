@@ -23,13 +23,13 @@ public interface ActionEvents {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (GUI.gooey.getUserLoginName().isEmpty() && GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Please enter username and password: ");
+				GUI.gooey.setPromptLabel("Please enter username and password before submitting.");
 			} else if (!GUI.gooey.getUserLoginName().isEmpty() && GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Please enter password: ");
+				GUI.gooey.setPromptLabel("Password missing.");
 			} else if (GUI.gooey.getUserLoginName().isEmpty() && !GUI.gooey.getUserLoginPassword().isEmpty()) {
-				GUI.gooey.setPromptLabel("Please enter username: ");
+				GUI.gooey.setPromptLabel("Username missing or not found.");
 			} else {
-				GUI.gooey.setPromptLabel("Attempting login..");
+				GUI.gooey.setPromptLabel("Attempting login");
 			}
 
 		}
