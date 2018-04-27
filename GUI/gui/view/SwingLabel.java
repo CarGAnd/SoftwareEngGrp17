@@ -5,10 +5,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import gui.interfaces.GUIStyle;
+import gui.interfaces.StyleConfigurations;
 
 @SuppressWarnings("serial")
-public class SwingLabel extends JLabel implements GUIStyle {
+public class SwingLabel extends JLabel implements StyleConfigurations {
+	@SuppressWarnings("hiding")
 	public float CENTER_ALIGNMENT = 0;
 	public JButton jButton;
 
