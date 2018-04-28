@@ -62,5 +62,8 @@ public interface ActionEvents {
 			  // }
 
 		}
-	};
+	}
+
+	ActionEvents NotImplementedJDialog = null;
+	ActionEvents DoNothing = null;;
 }

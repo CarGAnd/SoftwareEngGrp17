@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.interfaces.StyleConfigurations;
+import gui.interfaces.Style;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
@@ -22,7 +22,7 @@ import gui.view.SwingButton;
  *
  */
 @SuppressWarnings("serial")
-public class UserInterface extends JPanel implements ActionEvents, StyleConfigurations {
+public class UserInterface extends JPanel implements ActionEvents, Style {
 
 	private JTextArea	queryRetrievalPanel;
 	private JLabel		promptLabel;

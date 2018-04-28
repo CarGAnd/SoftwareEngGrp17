@@ -1,17 +1,19 @@
 package gui.view;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import gui.interfaces.StyleConfigurations;
+import gui.interfaces.Style;
 
 @SuppressWarnings("serial")
-public class SwingButton extends JButton implements StyleConfigurations {
-	public JButton	   jButton;
+public class SwingButton extends JButton implements Style {
+	public JButton jButton;
 
 	/**
-	 * StyleConfigurations has two seperate class entities which contain datastructures for color and fonts.
+	 * Style has two seperate class entities which contain datastructures for color and fonts.
 	 * 
 	 * @author Tobias
 	 * @version 1.00, 28 Apr 2018
@@ -29,13 +31,18 @@ public class SwingButton extends JButton implements StyleConfigurations {
 		this.setText(label);
 		this.setBorderPainted(false);
 		this.setAlignmentX(CENTER_ALIGNMENT);
-		this.setBackground(COLORS.getColor("Snow"));
-		this.setFont(FONT_DEFINITIONS.getFont("SwingButton"));
-		if (label.equals("LoginScreen")) {
-			this.setBackground(COLORS.getColor("Snow"));
+		this.setFont(Style.Fonts.BUTTON.getFont());
+		if (buttonStyle.toLowerCase().equals("LoginScreen".toLowerCase())) {
+			this.setBackground(COLOR.ANTIQUE_WHITE);
+			this.setBorderPainted(true);
+			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
+			this.setSize(200, 200);
 		}
 		else if (label.equals("UI")) {
-			this.setBackground(COLORS.getColor("Snow"));
+			this.setBackground(COLOR.ANTIQUE_WHITE);
+		}
+		else {
+			this.setBackground(COLOR.GHOST_WHITE);
 		}
 	}
 }

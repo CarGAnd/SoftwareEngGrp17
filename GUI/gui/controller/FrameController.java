@@ -16,21 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
 import gui.controller.LoginScreen;
-import gui.interfaces.StyleConfigurations;
-import gui.interfaces.StyleConfigurations.Fonts;
 
 public class FrameController {
 
-	private JLabel			  motdLabel	= new JLabel("");
-	private static JLabel	  timeLabel	= new JLabel("");
+	private JLabel				   motdLabel = new JLabel("");
+	private static JLabel		   timeLabel = new JLabel("");
 
-	protected JFrame		  frame;
-	protected FrameController appGUI;
-	private JPanel			  uiCard, loginScreenCard, allCards, infopanels;
-	private LoginScreen		  loginscreen;
-	private UserInterface	  ui;
-	private Fonts fonts;
-	private static Clock	  clock;
+	protected JFrame			   frame;
+	protected FrameController	   appGUI;
+	private JPanel				   uiCard, loginScreenCard, allCards, infopanels;
+	private LoginScreen			   loginscreen;
+	private UserInterface		   ui;
+	private static Clock		   clock;
 	private static FrameController controller;
 
 	public static FrameController getController() {
@@ -49,22 +46,23 @@ public class FrameController {
 				frame.getContentPane().add(controller.allCards);
 				CardLayout cl = (CardLayout) (controller.allCards.getLayout());
 				cl.show(controller.allCards, "1");
-				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1	, 1, 1, 1,Color.BLACK));
+				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				frame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
 			}
 		});
 		clock.run();
 	}
 
+	@SuppressWarnings("static-access")
 	public FrameController() {
 		GridBagConstraints cs = new GridBagConstraints();
 		GridBagLayout gb = new GridBagLayout();
-		
+
 		ui = new UserInterface();
 		clock = new Clock();
 		loginscreen = new LoginScreen();
 		uiCard = new JPanel();
-		
+
 		uiCard.setBackground(Color.RED);
 		uiCard.setLayout(new FlowLayout());
 		uiCard.add(ui, BorderLayout.CENTER);
@@ -76,14 +74,14 @@ public class FrameController {
 		loginScreenCard.setLayout(gb);
 
 		loginScreenCard.add(loginscreen, cs);
-		
+
 		infopanels = new JPanel();
 		infopanels.setFont(new Font("Courier", Font.PLAIN, 10));
 		infopanels.setLayout(new GridLayout(3, 1));
-		infopanels.add(new gui.view.SwingMenu(),0);
+		infopanels.add(new gui.view.SwingMenu(), 0);
 		infopanels.add(motdLabel, 1);
 		infopanels.add(getTimeLabel(), 2);
-		
+
 		allCards = new JPanel(new CardLayout(0, 75));
 		allCards.add(uiCard, "0");
 		allCards.add(loginScreenCard, "1");

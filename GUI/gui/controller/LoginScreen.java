@@ -2,7 +2,6 @@ package gui.controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import gui.interfaces.StyleConfigurations;
+import gui.interfaces.Style;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 import gui.view.SwingLabel;
@@ -25,25 +24,26 @@ import gui.view.SwingLabel;
  * @version 1.00, 28 Apr 2018
  */
 @SuppressWarnings("serial")
-public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
+public class LoginScreen extends JPanel implements ActionEvents, Style {
 	private JTextField	   userLoginNameField;
 	private JPasswordField userLoginPasswordField;
 
 	public LoginScreen() {
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				(FONT_DEFINITIONS.getFont("TitledBorder")), Color.DARK_GRAY));
+				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
 
 		userLoginNameField = new JTextField("");
 		userLoginNameField.setColumns(8);
 		userLoginPasswordField = new JPasswordField("");
 		userLoginPasswordField.setColumns(8);
 
-		addSomeComponent(loginpanel, new SwingLabel("Username: ", COLORS.getColor(Color.BLACK)), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new SwingLabel("Username: ", COLOR.getaColor(COLOR.ANTIQUE_WHITE), COLOR.getaColor(COLOR.GHOST_WHITE),
+				Style.Fonts.LABEL.getFont()), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 1, 2, 1, 8, 32, -8);
+		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 0, 3, 4, 1, 64, 2);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
 	}

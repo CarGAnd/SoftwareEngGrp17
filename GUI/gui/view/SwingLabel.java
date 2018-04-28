@@ -5,10 +5,10 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
-import gui.interfaces.StyleConfigurations;
+import gui.interfaces.Style;
 
 @SuppressWarnings("serial")
-public class SwingLabel extends JLabel implements StyleConfigurations {
+public class SwingLabel extends JLabel implements Style {
 	@SuppressWarnings("hiding")
 	public float CENTER_ALIGNMENT = 0;
 
