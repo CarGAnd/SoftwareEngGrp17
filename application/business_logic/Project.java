@@ -7,7 +7,7 @@ import java.util.Date;
 import business_logic.Management.userType;
 
 public class Project {
-	ArrayList<Activity> Activities;
+	ArrayList<Activity> activities;
 	String projectName = "";
 	private String projectID = "";
 	
@@ -28,7 +28,7 @@ public class Project {
 		this.endDate = endDate;
 		this.estimatedTimeUsage = estimatedTimeUsage;
 
-		Activities = new ArrayList<Activity>();
+		activities = new ArrayList<Activity>();
 	}
 	public void setProjectName(String projectname, Management management) throws Exception {
 		if(!this.projectState.equals("Completed")) {
@@ -129,6 +129,20 @@ public class Project {
 	}
 	public String getProjectLeader() {
 		return projectLeaderID;
+	}
+	
+	public Activity addActivity(Activity a) {
+		activities.add(a);
+		return a;
+	}
+	
+	public Activity getActivityByID(String ID) {
+		for(int i = 0; i < activities.size(); i++) {
+			if(activities.get(i).getActivityID().equals(ID)) {
+				return activities.get(i);
+			}
+		}
+		return null;
 	}
 	
 }

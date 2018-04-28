@@ -62,7 +62,7 @@ public class CreateProjectSteps {
 			
 		management.createProject("name", arg1, startDate, endDate, estimatedTime);
 		}
-		assertTrue(management.getListOfProjects().contains(management.getProjectByID("ID1234")));
+		assertTrue(management.getListOfProjects().contains(management.getProjectByID(arg1)));
 	}
 
 	@Given("^the user ID \"([^\"]*)\" matches project leader ID$")

@@ -13,19 +13,16 @@ public class Activity {
 	private String description;
 	private Date startDate;
 	private Date endDate;
-	private String projectLeaderID;
 	private ArrayList<Employee> listOfEmployees;
 	private String projectID;
 	
-	public Activity(Project project, Date dueDate, int estimatedTime, String description) {
+	public Activity(String ID, Date dueDate, int estimatedTime, String description) {
 		this.name = "";
-		this.activityID = "";
+		this.activityID = ID;
 		this.endDate = dueDate;
 		this.description = description;
 		this.estimatedTime = estimatedTime;
-		this.projectLeaderID = project.getProjectLeaderID();
-		this.projectID = project.getProjectID();
-		this.activityStatus = "";		
+		this.activityStatus = "";	
 	}
 
 	public void addEmployeeToActivity(Employee emp) {
@@ -97,13 +94,6 @@ public class Activity {
 		this.endDate = endDate;
 	}
 
-	public String getProjectLeaderID() {
-		return projectLeaderID;
-	}
-
-	public void setProjectLeaderID(String projectLeaderID) {
-	}
-
 	public ArrayList<Employee> getListOfEmployees() {
 		return listOfEmployees;
 	}
@@ -115,6 +105,4 @@ public class Activity {
 	public void setProjectID(String projectID) {
 		this.projectID = projectID;
 	}
-	
-
 }
