@@ -17,6 +17,12 @@ import gui.interfaces.StyleConfigurations;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
+/**
+ * This class creates a Login screen panel.
+ * 
+ * @author Tobias
+ * @version 1.00, 28 Apr 2018
+ */
 @SuppressWarnings("serial")
 public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
 	private JTextField	   userLoginNameField;
@@ -25,7 +31,7 @@ public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurat
 	public LoginScreen() {
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				new Font("Lucida", 0, 11), Color.DARK_GRAY));
+				new Font(FontList.getFont(1).getFontName(), 0, 11), Color.DARK_GRAY));
 
 		userLoginNameField = new JTextField("");
 		userLoginNameField.setColumns(8);
@@ -36,12 +42,22 @@ public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurat
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 1, 2,
-				1, 8, 32, -8);
+		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 1, 2, 1, 8, 32, -8);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
 	}
 
+	/**
+	 * @since version 1.00
+	 * @param thisPanel
+	 * @param thisComponent
+	 * @param gridx
+	 * @param gridy
+	 * @param gridWidth
+	 * @param gridHeight
+	 * @param padx
+	 * @param pady
+	 */
 	public void addSomeComponent(JPanel thisPanel, JComponent thisComponent, int gridx, int gridy, int gridWidth, int gridHeight, int padx,
 			int pady) {
 		GridBagConstraints cs = new GridBagConstraints();

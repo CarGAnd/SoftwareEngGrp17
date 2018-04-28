@@ -12,8 +12,18 @@ public class SwingButton extends JButton implements StyleConfigurations {
 	public final float CENTER_ALIGNMENT	= 0;
 	public JButton	   jButton;
 
-	/*
+	/**
 	 * StyleConfigurations has two seperate class entities which contain datastructures for color and fonts.
+	 * 
+	 * @author Tobias
+	 * @version 1.00, 28 Apr 2018
+	 * @param label
+	 *            Label for the button.
+	 * @param actionListener
+	 *            Actionlistener to attach.
+	 * @param buttonStyle
+	 *            Visual style for the button.
+	 * @since version 1.00
 	 */
 	public SwingButton(String label, ActionListener actionListener, String buttonStyle) {
 		super();

@@ -9,7 +9,12 @@ import gui.interfaces.StyleConfigurations;
 
 @SuppressWarnings("serial")
 public class SwingMenu extends JMenuBar implements StyleConfigurations{
+	/**
+	 * @author Tobias
+	 * @version 0.1
+	 */
 	public SwingMenu() {
+		super();
 		JMenu itemFile = new JMenu("File", true);
 		itemFile.add("Exit");
 		this.add(itemFile);

@@ -17,6 +17,10 @@ import gui.interfaces.StyleConfigurations;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
 
+/**
+ * @author Tobias
+ *
+ */
 @SuppressWarnings("serial")
 public class UserInterface extends JPanel implements ActionEvents, StyleConfigurations {
 
