@@ -1,8 +1,8 @@
 package gui.view;
 
 import java.awt.Color;
+import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import gui.interfaces.StyleConfigurations;
@@ -11,11 +11,12 @@ import gui.interfaces.StyleConfigurations;
 public class SwingLabel extends JLabel implements StyleConfigurations {
 	@SuppressWarnings("hiding")
 	public float CENTER_ALIGNMENT = 0;
-	public JButton jButton;
 
-	public SwingLabel(String label, Color color) {
-		super(label);
+	public SwingLabel(String labeltext, Color foregroundColor, Color backgroundColor, Font font) {
+		super(labeltext);
 		this.setAlignmentX(EAST);
-		this.setBackground(color);
+		this.setForeground(foregroundColor);
+		this.setBackground(backgroundColor);
+		this.setFont(font);
 	}
 }

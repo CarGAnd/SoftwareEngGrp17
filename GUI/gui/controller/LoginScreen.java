@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -15,52 +16,75 @@ import javax.swing.JTextField;
 import gui.interfaces.StyleConfigurations;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
+import gui.view.SwingLabel;
 
+/**
+ * This class creates a Login screen panel.
+ * 
+ * @author Tobias
+ * @version 1.00, 28 Apr 2018
+ */
 @SuppressWarnings("serial")
 public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
+	private JTextField	   userLoginNameField;
+	private JPasswordField userLoginPasswordField;
+
 	public LoginScreen() {
-		
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				new Font("Lucida", 0, 11), Color.DARK_GRAY));
+				(FONT_DEFINITIONS.getFont("TitledBorder")), Color.DARK_GRAY));
 
-		GridBagConstraints cs = new GridBagConstraints();
-
-		JLabel userLoginNameLabel = new JLabel("Username: ");
-		JTextField userLoginNameField = new JTextField("");
+		userLoginNameField = new JTextField("");
 		userLoginNameField.setColumns(8);
-
-		JLabel userLoginPasswordLabel = new JLabel("Password: ");
-		JPasswordField userLoginPasswordField = new JPasswordField("");
+		userLoginPasswordField = new JPasswordField("");
 		userLoginPasswordField.setColumns(8);
 
-		SwingButton loginBtn = new SwingButton("Login", new TryLoginWhenClicked(), new ButtonStyle(new String("LoginScreen")));
-
-		cs.gridx = 0;
-		cs.gridy = 0;
-		cs.gridwidth = 1;
-		loginpanel.add(userLoginNameLabel, cs);
-		cs.gridx = 1;
-		cs.gridy = 0;
-		cs.gridwidth = 2;
-		loginpanel.add(userLoginNameField, cs);
-		cs.gridx = 0;
-		cs.gridy = 1;
-		cs.gridwidth = 1;
-		loginpanel.add(userLoginPasswordLabel, cs);
-		cs.gridx = 1;
-		cs.gridy = 1;
-		cs.gridwidth = 2;
-		loginpanel.add(userLoginPasswordField, cs);
-		cs.gridx = 0;
-		cs.gridy = 3;
-		cs.gridwidth = 8;
-		cs.ipadx = 32;
-		cs.ipady = -8; //TODO: Try to unset when GUI runs properly.
-
-		loginpanel.add(loginBtn, cs);
+		addSomeComponent(loginpanel, new SwingLabel("Username: ", COLORS.getColor(Color.BLACK)), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 1, 2, 1, 8, 32, -8);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
+	}
+
+	/**
+	 * @since version 1.00
+	 * @param thisPanel
+	 * @param thisComponent
+	 * @param gridx
+	 * @param gridy
+	 * @param gridWidth
+	 * @param gridHeight
+	 * @param padx
+	 * @param pady
+	 */
+	public void addSomeComponent(JPanel thisPanel, JComponent thisComponent, int gridx, int gridy, int gridWidth, int gridHeight, int padx,
+			int pady) {
+		GridBagConstraints cs = new GridBagConstraints();
+		cs.gridx = gridx;
+		cs.gridy = gridy;
+		cs.gridwidth = gridWidth;
+		cs.gridheight = gridHeight;
+		cs.ipadx = padx;
+		cs.ipady = pady;
+		thisPanel.add(thisComponent, cs);
+	}
+
+	public JTextField getUserLoginNameField() {
+		return userLoginNameField;
+	}
+
+	public JPasswordField getUserLoginPasswordField() {
+		return userLoginPasswordField;
+	}
+
+	public void setUserLoginNameField(JTextField userLoginNameField) {
+		this.userLoginNameField = userLoginNameField;
+	}
+
+	public void setUserLoginPasswordField(JPasswordField userLoginPasswordField) {
+		this.userLoginPasswordField = userLoginPasswordField;
 	}
 
 }
