@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
 import gui.controller.LoginScreen;
+import gui.interfaces.StyleConfigurations;
+import gui.interfaces.StyleConfigurations.Fonts;
 
 public class FrameController {
 
@@ -27,6 +29,7 @@ public class FrameController {
 	private JPanel			  uiCard, loginScreenCard, allCards, infopanels;
 	private LoginScreen		  loginscreen;
 	private UserInterface	  ui;
+	private Fonts fonts;
 	private static Clock	  clock;
 	private static FrameController controller;
 
@@ -48,22 +51,20 @@ public class FrameController {
 				cl.show(controller.allCards, "1");
 				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1	, 1, 1, 1,Color.BLACK));
 				frame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
-				
 			}
 		});
-
 		clock.run();
-
 	}
 
 	public FrameController() {
 		GridBagConstraints cs = new GridBagConstraints();
 		GridBagLayout gb = new GridBagLayout();
-
+		
 		ui = new UserInterface();
 		clock = new Clock();
 		loginscreen = new LoginScreen();
 		uiCard = new JPanel();
+		
 		uiCard.setBackground(Color.RED);
 		uiCard.setLayout(new FlowLayout());
 		uiCard.add(ui, BorderLayout.CENTER);

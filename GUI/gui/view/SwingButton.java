@@ -8,8 +8,6 @@ import gui.interfaces.StyleConfigurations;
 
 @SuppressWarnings("serial")
 public class SwingButton extends JButton implements StyleConfigurations {
-	@SuppressWarnings("hiding")
-	public final float CENTER_ALIGNMENT	= 0;
 	public JButton	   jButton;
 
 	/**
@@ -31,15 +29,13 @@ public class SwingButton extends JButton implements StyleConfigurations {
 		this.setText(label);
 		this.setBorderPainted(false);
 		this.setAlignmentX(CENTER_ALIGNMENT);
-		this.setBackground(ColorList.getColor("Snow"));
-		this.setFont(FontList.getFont(0));
+		this.setBackground(COLORS.getColor("Snow"));
+		this.setFont(FONT_DEFINITIONS.getFont("SwingButton"));
 		if (label.equals("LoginScreen")) {
-			this.setBackground(ColorList.getColor("Snow"));
-			this.setFont(FontList.getFont(0));
+			this.setBackground(COLORS.getColor("Snow"));
 		}
 		else if (label.equals("UI")) {
-			this.setBackground(ColorList.getColor("Snow"));
-			this.setFont(FontList.getFont(0));
+			this.setBackground(COLORS.getColor("Snow"));
 		}
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import gui.interfaces.StyleConfigurations;
 import gui.model.ActionEvents;
 import gui.view.SwingButton;
+import gui.view.SwingLabel;
 
 /**
  * This class creates a Login screen panel.
@@ -31,14 +32,14 @@ public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurat
 	public LoginScreen() {
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				new Font(FontList.getFont(1).getFontName(), 0, 11), Color.DARK_GRAY));
+				(FONT_DEFINITIONS.getFont("TitledBorder")), Color.DARK_GRAY));
 
 		userLoginNameField = new JTextField("");
 		userLoginNameField.setColumns(8);
 		userLoginPasswordField = new JPasswordField("");
 		userLoginPasswordField.setColumns(8);
 
-		addSomeComponent(loginpanel, new JLabel("Username: "), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new SwingLabel("Username: ", COLORS.getColor(Color.BLACK)), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
