@@ -10,7 +10,6 @@ import gui.interfaces.Style;
 
 @SuppressWarnings("serial")
 public class SwingButton extends JButton implements Style {
-	public JButton jButton;
 
 	/**
 	 * Style has two seperate class entities which contain datastructures for color and fonts.
@@ -27,16 +26,16 @@ public class SwingButton extends JButton implements Style {
 	 */
 	public SwingButton(String label, ActionListener actionListener, String buttonStyle) {
 		super();
-		jButton = new JButton();
 		this.setText(label);
 		this.setBorderPainted(false);
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.setFont(Style.Fonts.BUTTON.getFont());
+		this.setBorderPainted(true);
+		this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
+		this.addActionListener(actionListener);
 		if (buttonStyle.toLowerCase().equals("LoginScreen".toLowerCase())) {
 			this.setBackground(COLOR.ANTIQUE_WHITE);
-			this.setBorderPainted(true);
-			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-			//this.setSize(200, 000);
+
 		}
 		else if (buttonStyle.toLowerCase().equals("UI".toLowerCase())) {
 			this.setBackground(COLOR.ANTIQUE_WHITE);

@@ -18,7 +18,8 @@ public class Clock implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			FrameController.setClockUpdate(gmtFormat());
+			//FrameController controller = FrameController;
+			//controller.setClockUpdate(gmtFormat());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

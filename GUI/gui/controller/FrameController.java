@@ -3,7 +3,7 @@ package gui.controller;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,55 +14,60 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
 
 import gui.controller.LoginScreen;
 
 public class FrameController {
 
-	private JLabel				   motdLabel = new JLabel("");
-	private static JLabel		   timeLabel = new JLabel("");
+	private JLabel			  motdLabel	= new JLabel("");
+	private JLabel			  timeLabel	= new JLabel("");
 
-	protected JFrame			   frame;
-	protected FrameController	   appGUI;
-	private JPanel				   uiCard, loginScreenCard, allCards, infopanels;
-	private LoginScreen			   loginscreen;
-	private UserInterface		   ui;
-	private CardLayout			   cl;
-	private static Clock		   clock;
-	private static FrameController controller;
+	protected JFrame		  frame;
+	protected FrameController appGUI;
+	private JPanel			  uiCard, loginScreenCard, allCards, infopanels;
+	private LoginScreen		  loginscreen;
+	private UserInterface	  ui;
+	private CardLayout		  cardlayout;
+	private static Clock	  clock;
+	private static FrameController	  controller;
 
 	public static FrameController getController() {
 		return controller;
 	}
-
+	public JPanel getAllCards() {
+		return allCards;
+	}
 	public static void main(String[] args) {
-		controller = new FrameController();
-		java.awt.EventQueue.invokeLater(new Runnable() {
+		controller =new FrameController();
+		JFrame frame = new JFrame();
+		Runnable r = new Runnable() {
 			public void run() {
-				JFrame frame = new JFrame();
-				initJFrame(frame, 200, 200, 1200, 800, "SoftwareHuset's Calendar Application");
+				frame.setTitle("SoftwareHuset's Calendar Application");
+				frame.setBounds(200, 200, 1200, 800);
+				frame.setAlwaysOnTop(false);
+				frame.setDefaultCloseOperation(JFrame.ICONIFIED);
+				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setUndecorated(true);
 				frame.setVisible(true);
 				frame.getContentPane().add(controller.infopanels, BorderLayout.NORTH);
 				frame.getContentPane().add(controller.allCards);
-				controller.cl = (CardLayout) (controller.allCards.getLayout());
-				controller.cl.show(controller.allCards, "1");
+				controller.cardlayout = (CardLayout) (controller.allCards.getLayout());
+				controller.cardlayout.show(controller.allCards, "1");
 				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				frame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
 			}
-		});
+		};
+		EventQueue.invokeLater(r);
 		clock.run();
 	}
 
-	public JPanel getAllCards() {
-		return allCards;
-	}
+	
 
 	public void setAllCards(JPanel allCards) {
 		this.allCards = allCards;
 	}
 
-	@SuppressWarnings("static-access")
 	public FrameController() {
 		GridBagConstraints cs = new GridBagConstraints();
 		GridBagLayout gb = new GridBagLayout();
@@ -102,7 +107,7 @@ public class FrameController {
 		return loginscreen;
 	}
 
-	private static void initJFrame(JFrame frame, int x, int y, int dx, int dy, String titleOfApplication) {
+	private void initJFrame(JFrame frame, int x, int y, int dx, int dy, String titleOfApplication) {
 		frame.setTitle(titleOfApplication);
 		frame.setBounds(x, y, dx, dy);
 		frame.setAlwaysOnTop(false);
@@ -119,16 +124,21 @@ public class FrameController {
 		return timeLabel;
 	}
 
-	public static void setClockUpdate(String gmtFormat) {
+	public void setClockUpdate(String gmtFormat) {
 		timeLabel.setText(gmtFormat);
 	}
 
-	public CardLayout getCl() {
-		return cl;
+	public CardLayout getCardLayout() {
+		return cardlayout;
 	}
 
-	public void setCl(CardLayout cl) {
-		this.cl = cl;
+	public void setCardlayout(CardLayout cl) {
+		this.cardlayout = cl;
+	}
+
+	public void show(JPanel allCards2, String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -29,6 +29,7 @@ public class LoginScreen extends JPanel implements ActionEvents, Style {
 	private JPasswordField userLoginPasswordField;
 
 	public LoginScreen() {
+		super();
 		JPanel loginpanel = new JPanel(new GridBagLayout());
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
 				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
@@ -43,7 +44,7 @@ public class LoginScreen extends JPanel implements ActionEvents, Style {
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 0, 3, 4, 1, 64, 2);
+		addSomeComponent(loginpanel, new SwingButton("Login", new LoginAttempt(), "LoginScreen"), 0, 3, 4, 1, 64, 2);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
 	}
