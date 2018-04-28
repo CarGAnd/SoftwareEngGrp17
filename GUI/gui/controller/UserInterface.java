@@ -20,13 +20,13 @@ import gui.view.SwingButton;
 @SuppressWarnings("serial")
 public class UserInterface extends JPanel implements ActionEvents, StyleConfigurations {
 
-	private JTextArea	 queryRetrievalPanel;
-	private JLabel		 promptLabel;
-	private JScrollPane	 queryRetrievalScrollPane;
-	private JButton		 submitLoginButton;
-	private JTextArea	 projectAndActivityPanel;
-	private JTree		 scrollPanelForProjecAndActivities;
-	private JPanel		 innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
+	private JTextArea	queryRetrievalPanel;
+	private JLabel		promptLabel;
+	private JScrollPane	queryRetrievalScrollPane;
+	private JButton		submitLoginButton;
+	private JTextArea	projectAndActivityPanel;
+	private JTree		scrollPanelForProjecAndActivities;
+	private JPanel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
 		super();
@@ -53,7 +53,7 @@ public class UserInterface extends JPanel implements ActionEvents, StyleConfigur
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-		inputPanel.add(new SwingButton("Logout", new Logout(), new ButtonStyle("UI")));
+		inputPanel.add(new SwingButton("Logout", new Logout(), "UI"));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
