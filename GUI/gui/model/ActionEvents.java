@@ -28,24 +28,32 @@ public interface ActionEvents {
 	}
 
 	public class Logout implements ActionListener {
+		private FrameController controller;
+
 		public Logout() {
-			super();
+
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO: Add code which logouts the user.
+			controller = FrameController.getController();
+			controller.getCl().show(controller.getAllCards(), "0");
 		}
 	}
+	
 
 	public class TryLoginWhenClicked implements ActionListener {
+		private LoginScreen loginScreen;
+
 		public TryLoginWhenClicked() {
 			super();
+			FrameController controller = FrameController.getController();
+			controller.getCl().show(controller.getAllCards(), "0");
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			LoginScreen loginScreen = FrameController.getController().getLoginscreen();
+			loginScreen = FrameController.getController().getLoginscreen();
 
 			// TODO: if this.equals(Admin.getPassword()){
 

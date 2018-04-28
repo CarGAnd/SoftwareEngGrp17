@@ -27,6 +27,7 @@ public class FrameController {
 	private JPanel				   uiCard, loginScreenCard, allCards, infopanels;
 	private LoginScreen			   loginscreen;
 	private UserInterface		   ui;
+	private CardLayout			   cl;
 	private static Clock		   clock;
 	private static FrameController controller;
 
@@ -44,13 +45,21 @@ public class FrameController {
 				frame.setVisible(true);
 				frame.getContentPane().add(controller.infopanels, BorderLayout.NORTH);
 				frame.getContentPane().add(controller.allCards);
-				CardLayout cl = (CardLayout) (controller.allCards.getLayout());
-				cl.show(controller.allCards, "1");
+				controller.cl = (CardLayout) (controller.allCards.getLayout());
+				controller.cl.show(controller.allCards, "1");
 				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				frame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
 			}
 		});
 		clock.run();
+	}
+
+	public JPanel getAllCards() {
+		return allCards;
+	}
+
+	public void setAllCards(JPanel allCards) {
+		this.allCards = allCards;
 	}
 
 	@SuppressWarnings("static-access")
@@ -64,7 +73,7 @@ public class FrameController {
 		uiCard = new JPanel();
 
 		uiCard.setBackground(Color.RED);
-		uiCard.setLayout(new FlowLayout());
+		uiCard.setLayout(new BorderLayout());
 		uiCard.add(ui, BorderLayout.CENTER);
 
 		cs.anchor = cs.CENTER;
@@ -112,6 +121,14 @@ public class FrameController {
 
 	public static void setClockUpdate(String gmtFormat) {
 		timeLabel.setText(gmtFormat);
+	}
+
+	public CardLayout getCl() {
+		return cl;
+	}
+
+	public void setCl(CardLayout cl) {
+		this.cl = cl;
 	}
 
 }

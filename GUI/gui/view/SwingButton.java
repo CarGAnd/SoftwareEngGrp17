@@ -36,9 +36,9 @@ public class SwingButton extends JButton implements Style {
 			this.setBackground(COLOR.ANTIQUE_WHITE);
 			this.setBorderPainted(true);
 			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-			this.setSize(200, 200);
+			//this.setSize(200, 000);
 		}
-		else if (label.equals("UI")) {
+		else if (buttonStyle.toLowerCase().equals("UI".toLowerCase())) {
 			this.setBackground(COLOR.ANTIQUE_WHITE);
 		}
 		else {

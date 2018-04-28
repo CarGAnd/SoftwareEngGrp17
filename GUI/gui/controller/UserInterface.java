@@ -1,8 +1,10 @@
 package gui.controller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -44,12 +46,17 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 	}
 
 	private void setAndAttachLayouts() {
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
+				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
+		
+		this.setLayout(new BorderLayout());
 		connectingPanel = new JPanel(new BorderLayout());
 		innerPromptPanel.add(queryRetrievalScrollPane, BorderLayout.CENTER);
 		innerPromptPanel.add(promptLabel, BorderLayout.SOUTH);
 		connectingPanel.add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
 		connectingPanel.add(innerPromptPanel, BorderLayout.CENTER);
 		connectingPanel.add(subPanelempty, BorderLayout.SOUTH);
+		this.add(connectingPanel,BorderLayout.CENTER);
 	}
 
 	private void setInputPanelLayout() {
