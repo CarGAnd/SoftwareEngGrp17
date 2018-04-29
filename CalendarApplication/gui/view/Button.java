@@ -1,6 +1,7 @@
 package gui.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -9,7 +10,7 @@ import javax.swing.JButton;
 import gui.interfaces.Style;
 
 @SuppressWarnings("serial")
-public class SwingButton extends JButton implements Style {
+public class Button extends JButton implements Style {
 
 	/**
 	 * Style has two seperate class entities which contain datastructures for color and fonts.
@@ -24,7 +25,7 @@ public class SwingButton extends JButton implements Style {
 	 *            Visual style for the button.
 	 * @since version 1.00
 	 */
-	public SwingButton(String label, ActionListener actionListener, String buttonStyle) {
+	public Button(String label, ActionListener actionListener, String buttonStyle) {
 		super();
 		this.setText(label);
 		this.setBorderPainted(false);
@@ -33,11 +34,20 @@ public class SwingButton extends JButton implements Style {
 		this.setBorderPainted(true);
 		this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
 		this.addActionListener(actionListener);
-		if (buttonStyle.toLowerCase().equals("LoginScreen".toLowerCase())) {
-			this.setBackground(COLOR.ANTIQUE_WHITE);
+		if (buttonStyle.toLowerCase().equals("Login".toLowerCase())) {
+			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
+			this.setBackground(COLOR.BLUE_DARKCYAN);
+			this.setFont((Fonts.BUTTON.getFont()));
+
+		}
+		if (buttonStyle.toLowerCase().equals("Exit".toLowerCase())) {
+			this.setBorder(BorderFactory.createEmptyBorder());
+			this.setBackground(COLOR.CORAL);
+			this.setForeground(COLOR.GHOST_WHITE);
 
 		}
 		else if (buttonStyle.toLowerCase().equals("UI".toLowerCase())) {
+			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
 			this.setBackground(COLOR.ANTIQUE_WHITE);
 		}
 		else {

@@ -14,9 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
-import javax.swing.SwingUtilities;
-
 import gui.controller.LoginScreen;
+import gui.interfaces.Style;
+import gui.model.Clock;
+import gui.view.UserInterface;
+
 
 public class FrameController {
 
@@ -92,15 +94,16 @@ public class FrameController {
 		infopanels = new JPanel();
 		infopanels.setFont(new Font("Courier", Font.PLAIN, 10));
 		infopanels.setLayout(new GridLayout(3, 1));
-		infopanels.add(new gui.view.SwingMenu(), 0);
+		infopanels.add(new gui.view.MenuBar(), 0);
 		infopanels.add(motdLabel, 1);
-		infopanels.add(getTimeLabel(), 2);
+		JLabel time = getTimeLabel();
+		infopanels.add(time,2);
 
 		allCards = new JPanel(new CardLayout(0, 75));
 		allCards.add(uiCard, "0");
 		allCards.add(loginScreenCard, "1");
 
-		setMOTD("New company policy disallows SSH access to The SoftwareHouse with immediate effect.");
+		setMOTD("IDS picked up a Chinese IP adr. succesfully bruteforcing admins SSH password. Port 22 blocked on all servers temporarily.",Style.COLOR.FIREBRICK_ONE);
 	}
 
 	public LoginScreen getLoginscreen() {
@@ -116,8 +119,10 @@ public class FrameController {
 
 	}
 
-	private void setMOTD(String message) {
+	private void setMOTD(String message,Color importanceLevel) {
 		motdLabel.setText(message);
+		motdLabel.setForeground(importanceLevel);
+		motdLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 	}
 
 	public JLabel getTimeLabel() {

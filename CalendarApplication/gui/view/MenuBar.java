@@ -13,7 +13,7 @@ import gui.interfaces.Style;
 import gui.model.ActionEvents;
 
 @SuppressWarnings("serial")
-public class SwingMenu extends JMenuBar implements Style {
+public class MenuBar extends JMenuBar implements Style {
 	/**
 	 * This class handles the creation of a Menubar
 	 * 
@@ -21,7 +21,7 @@ public class SwingMenu extends JMenuBar implements Style {
 	 * @author Tobias
 	 * @version 0.5
 	 */
-	public SwingMenu() {
+	public MenuBar() {
 		super();
 		this.setFont(Style.Fonts.MENU_BAR.getFont());
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));

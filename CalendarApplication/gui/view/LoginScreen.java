@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,8 +15,8 @@ import javax.swing.JTextField;
 
 import gui.interfaces.Style;
 import gui.model.ActionEvents;
-import gui.view.SwingButton;
-import gui.view.SwingLabel;
+import gui.view.Button;
+import gui.view.Label;
 
 /**
  * This class creates a Login screen panel.
@@ -39,17 +40,21 @@ public class LoginScreen extends JPanel implements ActionEvents, Style {
 		userLoginPasswordField = new JPasswordField("");
 		userLoginPasswordField.setColumns(8);
 
-		addSomeComponent(loginpanel, new SwingLabel("Username: ", COLOR.getaColor(COLOR.ANTIQUE_WHITE), COLOR.getaColor(COLOR.GHOST_WHITE),
-				Style.Fonts.LABEL.getFont()), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Username: ", COLOR.AQUA_MARINE_TWO, COLOR.BROWN_ONE,
+				Fonts.LABEL.getFont()), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
-		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new SwingButton("Login", new LoginAttempt(), "LoginScreen"), 0, 3, 4, 1, 64, 2);
+		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(4), 0	, 1, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 2, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, userLoginPasswordField, 1, 2, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(8), 0	, 3, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new Button("Login", new LoginAttempt(), "Login"), 0, 4, 4, 1, 96, 2);
+		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(8), 0	, 5, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new Button("Exit", new  Exit(), "Exit"), 0, 6, 4, 1, 48, 2);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
 	}
 
-	/**
+	/**Adds a speicifed component with specified GridBagConstraints to the specified JPanel
 	 * @since version 1.00
 	 * @param thisPanel
 	 * @param thisComponent

@@ -8,11 +8,11 @@ import javax.swing.JLabel;
 import gui.interfaces.Style;
 
 @SuppressWarnings("serial")
-public class SwingLabel extends JLabel implements Style {
+public class Label extends JLabel implements Style {
 	@SuppressWarnings("hiding")
 	public float CENTER_ALIGNMENT = 0;
 
-	public SwingLabel(String labeltext, Color foregroundColor, Color backgroundColor, Font font) {
+	public Label(String labeltext, Color foregroundColor, Color backgroundColor, Font font) {
 		super(labeltext);
 		this.setAlignmentX(EAST);
 		this.setForeground(foregroundColor);

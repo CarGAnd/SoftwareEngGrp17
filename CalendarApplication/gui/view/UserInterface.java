@@ -1,10 +1,8 @@
-package gui.controller;
-
+package gui.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,7 +15,9 @@ import javax.swing.ScrollPaneConstants;
 
 import gui.interfaces.Style;
 import gui.model.ActionEvents;
-import gui.view.SwingButton;
+import gui.view.ProjectTree;
+import gui.view.Button;
+import gui.controller.*;
 
 /**
  * @author Tobias
@@ -30,15 +30,15 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 	private JLabel		promptLabel;
 	private JScrollPane	queryRetrievalScrollPane;
 	private JButton		submitLoginButton;
-	private JTextArea	projectAndActivityPanel;
-	private JTree		scrollPanelForProjecAndActivities;
+	private JTextArea	projectPanel;
+	private JTree		projecTree;
 	private JPanel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
 		super();
 		initializeNestedLayouts();
 		initializeMainIOComponents();
-		initializeScrollPane();
+		initializeProjectTextArea();
 
 		userPrompt();
 		setAndAttachLayouts();
@@ -53,7 +53,7 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 		connectingPanel = new JPanel(new BorderLayout());
 		innerPromptPanel.add(queryRetrievalScrollPane, BorderLayout.CENTER);
 		innerPromptPanel.add(promptLabel, BorderLayout.SOUTH);
-		connectingPanel.add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
+		connectingPanel.add(projecTree, BorderLayout.WEST);
 		connectingPanel.add(innerPromptPanel, BorderLayout.CENTER);
 		connectingPanel.add(subPanelempty, BorderLayout.SOUTH);
 		this.add(connectingPanel,BorderLayout.CENTER);
@@ -64,7 +64,7 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-		inputPanel.add(new SwingButton("Logout", new Logout(), "UI"));
+		inputPanel.add(new Button("Logout", new Logout(), "UI"));
 
 		subPanelControlView = new JPanel();
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -74,13 +74,13 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 		subPanelempty.add(subPanelUserInput, 1);
 	}
 
-	private void initializeScrollPane() {
-		projectAndActivityPanel = new JTextArea(5, 28);
-		projectAndActivityPanel.setAutoscrolls(false);
-		projectAndActivityPanel.setLineWrap(false);
-		projectAndActivityPanel.setFont(new Font("Arial", Font.PLAIN, 12));
-		projectAndActivityPanel.setEditable(false);
-		scrollPanelForProjecAndActivities = new JTree();
+	private void initializeProjectTextArea() {
+		projectPanel = new JTextArea(5, 28);
+		projectPanel.setAutoscrolls(false);
+		projectPanel.setLineWrap(false);
+		projectPanel.setFont(new Font("Arial", Font.PLAIN, 12));
+		projectPanel.setEditable(false);
+		projecTree = new ProjectTree();
 	}
 
 	private void userPrompt() {
