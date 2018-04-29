@@ -9,7 +9,7 @@ import java.awt.Font;
  *
  */
 public interface Style {
-	public final Colors COLOR = new Colors();
+	public final Colors	COLOR	  = new Colors();
 
 	/**
 	 * Datastructure for linking a name with a color. Naming convention: MAINCOLOUR_... or MAINCOLOUR_MAINCOLOUR if less than 10'units' between two -not three- colors.
@@ -44,6 +44,7 @@ public interface Style {
 		public final Color CORAL			  = (new Color(255, 127, 80));
 		public final Color FIREBRICK_ONE	  = (new Color(255, 48, 48));
 		public final Color BROWN_ONE		  = (new Color(255, 64, 64));  // RED
+		public final Color TOMATO			  = (new Color(255, 99, 71));
 	}
 
 	/**
@@ -73,4 +74,5 @@ public interface Style {
 			}
 		}
 	}
+
 }

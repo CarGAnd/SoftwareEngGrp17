@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import java.awt.Color;
 
@@ -25,6 +25,7 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 	 */
 	public MenuBar() {
 		super();
+		FrameController.skinComponent(this);
 		this.setFont(Style.Fonts.MENU_BAR.getFont());
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 
@@ -69,6 +70,7 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 		private static final long serialVersionUID = 1L;
 
 		public MenuItem(String label, ActionEvents e) {
+			FrameController.skinComponent(this);
 			this.setFont(Style.Fonts.MENU.getFont());
 			this.setText(label);
 		}
@@ -78,6 +80,7 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 		private static final long serialVersionUID = 1L;
 
 		public Menu(String label, ActionEvents e) {
+			FrameController.skinComponent(this);
 			this.setFont(Style.Fonts.MENU_ITEM.getFont());
 			this.setText(label);
 		}
@@ -87,7 +90,7 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 		private static final long serialVersionUID = 1L;
 
 		public RadioItem(String label, boolean b) {
-			this.setFont(Style.Fonts.MENU_ITEM.getFont());
+			FrameController.skinComponent(this);
 			this.setSelected(b);
 			this.setText(label);
 		}

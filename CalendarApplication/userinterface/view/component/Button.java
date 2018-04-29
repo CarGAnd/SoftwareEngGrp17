@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
+import userinterface.controller.FrameController;
 import userinterface.model.Style;
 
 public class Button extends JButton implements Style {
@@ -25,31 +26,21 @@ public class Button extends JButton implements Style {
 	 */
 	public Button(String label, ActionListener actionListener, String buttonStyle) {
 		super();
+		FrameController.skinComponent(this);
 		this.setText(label);
-		this.setBorderPainted(false);
 		this.setAlignmentX(CENTER_ALIGNMENT);
-		this.setFont(Style.Fonts.BUTTON.getFont());
-		this.setBorderPainted(true);
-		this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
 		this.addActionListener(actionListener);
+		//Special cases
 		if (buttonStyle.toLowerCase().equals("Login".toLowerCase())) {
 			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-			this.setBackground(COLOR.BLUE_DARKCYAN);
-			this.setFont((Fonts.BUTTON.getFont()));
 
 		}
 		if (buttonStyle.toLowerCase().equals("Exit".toLowerCase())) {
 			this.setBorder(BorderFactory.createEmptyBorder());
-			this.setBackground(COLOR.CORAL);
-			this.setForeground(COLOR.GHOST_WHITE);
 
 		}
 		else if (buttonStyle.toLowerCase().equals("UI".toLowerCase())) {
 			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-			this.setBackground(COLOR.ANTIQUE_WHITE);
-		}
-		else {
-			this.setBackground(COLOR.GHOST_WHITE);
 		}
 	}
 }

@@ -1,13 +1,16 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import java.awt.Dimension;
 
 import javax.swing.JTree;
 
+import userinterface.controller.FrameController;
+
 public class ProjectTree extends JTree {
 	private static final long serialVersionUID = 1L;
 
 	public ProjectTree() {
+		FrameController.skinComponent(this);
 		this.setSize(new Dimension(300, 200));
 //		//create the root node
 //        DefaultMutableTreeNode root = new DefaultMutableTreeNode("All workers");

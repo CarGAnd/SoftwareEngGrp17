@@ -15,6 +15,8 @@ import javax.swing.ScrollPaneConstants;
 
 import userinterface.model.ActionEvents;
 import userinterface.model.Style;
+import userinterface.view.component.Button;
+import userinterface.view.component.ProjectTree;
 
 
 /**

@@ -6,6 +6,7 @@ import java.util.Date;
 import business_logic.Management.userType;//TODO: Unused import, remove if not needed.
 
 public class Project {
+	//TODO: a lot of default fields, should be set to: Private, Protected or Public.
 	ArrayList<Activity> Activities;
 	String projectname = "";
 	private String projectID = "";

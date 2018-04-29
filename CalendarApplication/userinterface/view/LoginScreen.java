@@ -2,19 +2,23 @@ package userinterface.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import userinterface.controller.FrameController;
 import userinterface.model.ActionEvents;
 import userinterface.model.Style;
+import userinterface.model.Themes;
+import userinterface.view.component.Button;
+import userinterface.view.component.Label;
 
 /**
  * This class creates a Login screen panel.
@@ -22,10 +26,10 @@ import userinterface.model.Style;
  * @author Tobias
  * @version 1.00, 28 Apr 2018
  */
-public class LoginScreen extends JPanel implements ActionEvents, Style {
+public class LoginScreen extends JPanel implements ActionEvents, Themes {
 	private static final long serialVersionUID = 1L;
-	private JTextField	   userLoginNameField;
-	private JPasswordField userLoginPasswordField;
+	private JTextField		  userLoginNameField;
+	private JPasswordField	  userLoginPasswordField;
 
 	public LoginScreen() {
 		super();
@@ -33,26 +37,27 @@ public class LoginScreen extends JPanel implements ActionEvents, Style {
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
 				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
 
-		userLoginNameField = new JTextField("");
-		userLoginNameField.setColumns(8);
-		userLoginPasswordField = new JPasswordField("");
-		userLoginPasswordField.setColumns(8);
-
-		addSomeComponent(loginpanel, new Label("Username: ", COLOR.AQUA_MARINE_TWO, COLOR.BROWN_ONE,
-				Fonts.LABEL.getFont()), 0, 0, 1, 1, 0, 0);
+		initializeFields();
+		/**
+		 * Dont-Repeat-Yourself (DRY) principle.
+		 */
+		addSomeComponent(loginpanel, new Label("Username: "), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(4), 0	, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 2, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(4), 0, 1, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Password: "), 0, 2, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 2, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(8), 0	, 3, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(8), 0, 3, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new Button("Login", new LoginAttempt(), "Login"), 0, 4, 4, 1, 96, 2);
-		addSomeComponent(loginpanel, (JComponent)Box.createVerticalStrut(8), 0	, 5, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new Button("Exit", new  Exit(), "Exit"), 0, 6, 4, 1, 48, 2);
+		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(8), 0, 5, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new Button("Exit", new Exit(), "Exit"), 0, 6, 4, 1, 48, 2);
 		this.setLayout(new BorderLayout());
 		this.add(loginpanel, BorderLayout.CENTER);
+
 	}
 
-	/**Adds a speicifed component with specified GridBagConstraints to the specified JPanel
+	/**
+	 * Adds a speicifed component with specified GridBagConstraints to the specified JPanel
+	 * 
 	 * @since version 1.00
 	 * @param thisPanel
 	 * @param thisComponent
@@ -73,6 +78,14 @@ public class LoginScreen extends JPanel implements ActionEvents, Style {
 		cs.ipadx = padx;
 		cs.ipady = pady;
 		thisPanel.add(thisComponent, cs);
+
+	}
+
+	private void initializeFields() {
+		userLoginNameField = new JTextField("");
+		userLoginNameField.setColumns(8);
+		userLoginPasswordField = new JPasswordField("");
+		userLoginPasswordField.setColumns(8);
 	}
 
 	public JTextField getUserLoginNameField() {

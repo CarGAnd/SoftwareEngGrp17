@@ -1,5 +1,8 @@
 package userinterface.view;
 
-public class ProjectDescription {
+import javax.swing.JTextPane;
+
+public class ProjectDescription extends JTextPane{
+	private static final long serialVersionUID = 1L;
 
 }

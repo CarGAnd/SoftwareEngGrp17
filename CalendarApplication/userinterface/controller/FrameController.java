@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,32 +18,39 @@ import javax.swing.JRootPane;
 
 import userinterface.model.Clock;
 import userinterface.model.Style;
+import userinterface.model.Themes;
+import userinterface.model.Themes.Theme;
 import userinterface.view.LoginScreen;
-import userinterface.view.MenuBar;
 import userinterface.view.UserInterface;
+import userinterface.view.component.MenuBar;
 
 public class FrameController {
 
-	private JLabel			  motdLabel	= new JLabel("");
-	private JLabel			  timeLabel	= new JLabel("");
+	private JLabel				   motdLabel = new JLabel("");
+	private JLabel				   timeLabel = new JLabel("");
 
-	protected JFrame		  frame;
-	protected FrameController appGUI;
-	private JPanel			  uiCard, loginScreenCard, allCards, infopanels;
-	private LoginScreen		  loginscreen;
-	private UserInterface	  ui;
-	private CardLayout		  cardlayout;
-	private static Clock	  clock;
-	private static FrameController	  controller;
+	protected JFrame			   frame;
+	protected FrameController	   appGUI;
+	private JPanel				   uiCard, loginScreenCard, allCards, infopanels;
+	private LoginScreen			   loginscreen;
+	private UserInterface		   ui;
+	private CardLayout			   cardlayout;
+	private static Clock		   clock;
+	private static FrameController controller;
+	private static Theme theme;
 
 	public static FrameController getController() {
 		return controller;
 	}
+
 	public JPanel getAllCards() {
 		return allCards;
 	}
+	public static void skinComponent(JComponent component) {
+		Themes.skin(Theme.FOREST, component);
+	}
 	public static void main(String[] args) {
-		controller =new FrameController();
+		controller = new FrameController();
 		JFrame frame = new JFrame();
 		Runnable r = new Runnable() {
 			public void run() {
@@ -64,8 +72,6 @@ public class FrameController {
 		EventQueue.invokeLater(r);
 		clock.run();
 	}
-
-	
 
 	public void setAllCards(JPanel allCards) {
 		this.allCards = allCards;
@@ -98,29 +104,32 @@ public class FrameController {
 		infopanels.add(new MenuBar(), 0);
 		infopanels.add(motdLabel, 1);
 		JLabel time = getTimeLabel();
-		infopanels.add(time,2);
+		infopanels.add(time, 2);
 
 		allCards = new JPanel(new CardLayout(0, 75));
 		allCards.add(uiCard, "0");
 		allCards.add(loginScreenCard, "1");
 
-		setMOTD("IDS picked up a Chinese IP adr. succesfully bruteforcing admins SSH password. Port 22 blocked on all servers temporarily.",Style.COLOR.FIREBRICK_ONE);
+		setMOTD("IDS picked up a Chinese IP adr. succesfully bruteforcing admins SSH password. Port 22 blocked on all servers temporarily.",
+				Style.COLOR.FIREBRICK_ONE);
 	}
 
 	public LoginScreen getLoginscreen() {
 		return loginscreen;
 	}
 
-	private void initJFrame(JFrame frame, int x, int y, int dx, int dy, String titleOfApplication) {
-		frame.setTitle(titleOfApplication);
-		frame.setBounds(x, y, dx, dy);
-		frame.setAlwaysOnTop(false);
-		frame.setDefaultCloseOperation(JFrame.ICONIFIED);
-		frame.getContentPane().setLayout(new BorderLayout());
-
+	@SuppressWarnings("unused")//TODO: reimplement.
+	private JFrame initJFrame(int x, int y, int dx, int dy, String titleOfApplication) {
+		JFrame aNewJFrame = new JFrame();
+		aNewJFrame.setTitle(titleOfApplication);
+		aNewJFrame.setBounds(x, y, dx, dy);
+		aNewJFrame.setAlwaysOnTop(false);
+		aNewJFrame.setDefaultCloseOperation(JFrame.ICONIFIED);
+		aNewJFrame.getContentPane().setLayout(new BorderLayout());
+		return aNewJFrame;
 	}
 
-	private void setMOTD(String message,Color importanceLevel) {
+	private void setMOTD(String message, Color importanceLevel) {
 		motdLabel.setText(message);
 		motdLabel.setForeground(importanceLevel);
 		motdLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
