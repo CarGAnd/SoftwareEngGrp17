@@ -44,7 +44,6 @@ public interface Style {
 		public final Color CORAL			  = (new Color(255, 127, 80));
 		public final Color FIREBRICK_ONE	  = (new Color(255, 48, 48));
 		public final Color BROWN_ONE		  = (new Color(255, 64, 64));  // RED
-
 	}
 
 	/**
@@ -73,8 +72,5 @@ public interface Style {
 					throw new AssertionError();
 			}
 		}
-	}
-	public final class THEME1{
-		
 	}
 }
