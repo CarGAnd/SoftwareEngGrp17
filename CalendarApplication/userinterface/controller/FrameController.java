@@ -1,4 +1,4 @@
-package gui.controller;
+package userinterface.controller;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -14,11 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
-import gui.controller.LoginScreen;
-import gui.interfaces.Style;
-import gui.model.Clock;
-import gui.view.UserInterface;
 
+import userinterface.model.Clock;
+import userinterface.model.Style;
+import userinterface.view.LoginScreen;
+import userinterface.view.MenuBar;
+import userinterface.view.UserInterface;
 
 public class FrameController {
 
@@ -83,7 +84,7 @@ public class FrameController {
 		uiCard.setLayout(new BorderLayout());
 		uiCard.add(ui, BorderLayout.CENTER);
 
-		cs.anchor = cs.CENTER;
+		cs.anchor = GridBagConstraints.CENTER;
 		cs.ipadx = 270;
 		cs.ipady = 120;
 		loginScreenCard = new JPanel();
@@ -94,7 +95,7 @@ public class FrameController {
 		infopanels = new JPanel();
 		infopanels.setFont(new Font("Courier", Font.PLAIN, 10));
 		infopanels.setLayout(new GridLayout(3, 1));
-		infopanels.add(new gui.view.MenuBar(), 0);
+		infopanels.add(new MenuBar(), 0);
 		infopanels.add(motdLabel, 1);
 		JLabel time = getTimeLabel();
 		infopanels.add(time,2);
@@ -139,11 +140,6 @@ public class FrameController {
 
 	public void setCardlayout(CardLayout cl) {
 		this.cardlayout = cl;
-	}
-
-	public void show(JPanel allCards2, String string) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

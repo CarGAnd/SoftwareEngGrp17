@@ -1,4 +1,4 @@
-package gui.controller;
+package userinterface.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,10 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import gui.interfaces.Style;
-import gui.model.ActionEvents;
-import gui.view.Button;
-import gui.view.Label;
+import userinterface.model.ActionEvents;
+import userinterface.model.Style;
 
 /**
  * This class creates a Login screen panel.
@@ -24,8 +22,8 @@ import gui.view.Label;
  * @author Tobias
  * @version 1.00, 28 Apr 2018
  */
-@SuppressWarnings("serial")
 public class LoginScreen extends JPanel implements ActionEvents, Style {
+	private static final long serialVersionUID = 1L;
 	private JTextField	   userLoginNameField;
 	private JPasswordField userLoginPasswordField;
 

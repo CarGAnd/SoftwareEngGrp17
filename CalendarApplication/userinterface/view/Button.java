@@ -1,17 +1,15 @@
-package gui.view;
+package userinterface.view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import gui.interfaces.Style;
+import userinterface.model.Style;
 
-@SuppressWarnings("serial")
 public class Button extends JButton implements Style {
-
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Style has two seperate class entities which contain datastructures for color and fonts.
 	 * 

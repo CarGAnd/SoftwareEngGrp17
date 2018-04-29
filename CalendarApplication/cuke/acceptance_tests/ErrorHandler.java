@@ -1,4 +1,4 @@
-package acceptance_tests;
+package cuke.acceptance_tests;
 
 public class ErrorHandler {
 	

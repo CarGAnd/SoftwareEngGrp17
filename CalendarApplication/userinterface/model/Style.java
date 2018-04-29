@@ -1,4 +1,4 @@
-package gui.interfaces;
+package userinterface.model;
 
 import java.awt.Color;
 import java.awt.Font;

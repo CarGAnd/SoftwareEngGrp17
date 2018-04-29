@@ -1,15 +1,10 @@
-package gui.model;
+package userinterface.model;
 
 import java.awt.CardLayout;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
-import gui.controller.FrameController;
-import gui.controller.LoginScreen;
+import userinterface.controller.FrameController;
 
 @SuppressWarnings("unused")
 public interface ActionEvents {

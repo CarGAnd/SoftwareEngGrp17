@@ -1,4 +1,4 @@
-package gui.view;
+package userinterface.view;
 
 public class ProjectDescription {
 

@@ -3,7 +3,7 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.Date;
 
-import business_logic.Management.userType;
+import business_logic.Management.userType;//TODO: Unused import, remove if not needed.
 
 public class Project {
 	ArrayList<Activity> Activities;
@@ -38,7 +38,7 @@ public class Project {
 	}
 
 	public void SetProjectLeader(String employeeID, String adminID, String adminPass, String projectID) {
-		// bliver muligvis nød til at sende en management ind som parameter. Kan ikke se hvordan man ellers skal checke hvem der er logget ind
+		// bliver muligvis nï¿½d til at sende en management ind som parameter. Kan ikke se hvordan man ellers skal checke hvem der er logget ind
 	}
 
 	public String getProjectLeaderID() {

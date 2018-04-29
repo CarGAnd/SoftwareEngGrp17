@@ -1,6 +1,7 @@
-package gui.view;
+package userinterface.view;
 
 import java.awt.Color;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JMenu;
@@ -8,12 +9,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-import gui.controller.FrameController;
-import gui.interfaces.Style;
-import gui.model.ActionEvents;
+import userinterface.controller.FrameController;
+import userinterface.model.ActionEvents;
+import userinterface.model.Style;
 
-@SuppressWarnings("serial")
-public class MenuBar extends JMenuBar implements Style {
+public class MenuBar extends JMenuBar implements Style, ActionEvents {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * This class handles the creation of a Menubar
 	 * 
@@ -64,6 +66,8 @@ public class MenuBar extends JMenuBar implements Style {
 	}
 
 	public class MenuItem extends JMenuItem {
+		private static final long serialVersionUID = 1L;
+
 		public MenuItem(String label, ActionEvents e) {
 			this.setFont(Style.Fonts.MENU.getFont());
 			this.setText(label);
@@ -71,6 +75,8 @@ public class MenuBar extends JMenuBar implements Style {
 	}
 
 	public class Menu extends JMenu {
+		private static final long serialVersionUID = 1L;
+
 		public Menu(String label, ActionEvents e) {
 			this.setFont(Style.Fonts.MENU_ITEM.getFont());
 			this.setText(label);
@@ -78,6 +84,8 @@ public class MenuBar extends JMenuBar implements Style {
 	}
 
 	public class RadioItem extends JRadioButtonMenuItem {
+		private static final long serialVersionUID = 1L;
+
 		public RadioItem(String label, boolean b) {
 			this.setFont(Style.Fonts.MENU_ITEM.getFont());
 			this.setSelected(b);

@@ -1,4 +1,4 @@
-package acceptance_tests;
+package cuke.acceptance_tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +11,7 @@ import business_logic.Management;
 import business_logic.Project;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-
+//TODO: Many unused imports, remove please if not needed.
 public class ActivitySteps {
 	
 	ErrorHandler errorHandler;

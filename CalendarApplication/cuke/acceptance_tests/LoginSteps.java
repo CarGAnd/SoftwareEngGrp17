@@ -1,4 +1,4 @@
-package acceptance_tests;
+package cuke.acceptance_tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,7 +10,7 @@ import business_logic.Management;
 import business_logic.Management.userType;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-
+//TODO: Unused imports.
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;

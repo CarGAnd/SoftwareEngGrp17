@@ -1,5 +1,5 @@
 
-package gui.controller;
+package userinterface.controller;
 
 import java.awt.Component;
 import java.awt.Dimension;

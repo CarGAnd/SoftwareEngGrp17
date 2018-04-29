@@ -1,11 +1,11 @@
-package gui.model;
+package userinterface.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import gui.controller.FrameController;
+import userinterface.controller.FrameController;
 
 //Snippet gmtFormat() by Lars Staalhagen, DTU.
 public class Clock implements Runnable {

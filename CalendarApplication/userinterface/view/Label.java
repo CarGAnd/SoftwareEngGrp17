@@ -1,11 +1,12 @@
-package gui.view;
+package userinterface.view;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
 
-import gui.interfaces.Style;
+import userinterface.model.Style;
+
 
 @SuppressWarnings("serial")
 public class Label extends JLabel implements Style {

@@ -1,27 +1,24 @@
-package gui.view;
+package userinterface.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.interfaces.Style;
-import gui.model.ActionEvents;
-import gui.view.ProjectTree;
-import gui.view.Button;
-import gui.controller.*;
+import userinterface.model.ActionEvents;
+import userinterface.model.Style;
+
 
 /**
  * @author Tobias
- *
  */
 @SuppressWarnings("serial")
 public class UserInterface extends JPanel implements ActionEvents, Style {
@@ -31,7 +28,7 @@ public class UserInterface extends JPanel implements ActionEvents, Style {
 	private JScrollPane	queryRetrievalScrollPane;
 	private JButton		submitLoginButton;
 	private JTextArea	projectPanel;
-	private JTree		projecTree;
+	private ProjectTree		projecTree;
 	private JPanel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
