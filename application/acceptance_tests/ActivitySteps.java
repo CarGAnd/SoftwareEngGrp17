@@ -79,10 +79,20 @@ public class ActivitySteps {
 	public void theActivityStatusIsNot(String arg1) throws Exception {
 	    assertFalse(testActivity.getActivityStatus().equals("finished"));
 	}
+	
+	@Given("^the logged in user's ID does not match the project leader ID$")
+	public void theLoggedInUserSIDDoesNotMatchTheProjectLeaderID() throws Exception {
+	    assertFalse(management.getLoggedInUser().getUserID().equals(testProject.getProjectLeader()));
+	}
 
 	@When("^the user edits the name of the activity to \"([^\"]*)\"$")
 	public void theUserEditsTheNameOfTheActivityTo(String arg1) throws Exception {
-	    testActivity.setName(arg1);
+	    try{
+	    	testActivity.setName(arg1);
+	    }
+	    catch (Exception e) {
+	    	errorHandler.errorMessage = e.getMessage();
+	    }
 	}
 	
 	@When("^the user creates an activity in the project with the description \"([^\"]*)\" and the due date \"([^\"]*)\" and (\\d+) estimated work hours and the ID \"([^\"]*)\"$")
@@ -95,7 +105,12 @@ public class ActivitySteps {
 	
 	@When("^the user changes the status of the activity to \"([^\"]*)\"$")
 	public void theUserChangesTheStatusOfTheActivityTo(String arg1) throws Exception {
-	    testActivity.setActivityStatus(arg1);
+	    try{
+	    	testActivity.setActivityStatus(arg1);
+	    }
+	    catch (Exception e) {
+	    	errorHandler.errorMessage = e.getMessage();
+	    }
 	}
 	
 	@Then("^the activity's name is edited to \"([^\"]*)\"$")

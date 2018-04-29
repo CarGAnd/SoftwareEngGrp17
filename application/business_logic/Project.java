@@ -10,7 +10,6 @@ public class Project {
 	ArrayList<Activity> activities;
 	String projectName = "";
 	private String projectID = "";
-	
 
 	String adminID = "";
 	String adminPass = "";
@@ -19,6 +18,7 @@ public class Project {
 	Date endDate = null;
 	int estimatedTimeUsage;
 	String projectState = "";
+	Management management;
 
 	public Project(String projectname, String projectID, Date startDate, Date endDate, int estimatedTimeUsage) {
 		
@@ -133,6 +133,7 @@ public class Project {
 	
 	public Activity addActivity(Activity a) {
 		activities.add(a);
+		a.setProject(this);
 		return a;
 	}
 	

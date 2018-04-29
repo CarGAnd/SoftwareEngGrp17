@@ -30,14 +30,10 @@ Scenario: Edit an activity
 	When the user edits the name of the activity to "testName"
 	Then the activity's name is edited to "testName"
 	
-#Scenario: Edit a finished activity
-#	And the logged in user's ID matches the project leader ID
-#	And the status of the activity is "finished"
-#	When the user edits the name of the activity
-#	Then the user gets an error message
-#	
-#Scenario: Non-project leader attempts to edit activity
-#	And the logged in user's ID does not match the project leader ID
-#	When the user edits the name of the activity
-#	Then the project leader is notified
-#	And the user gets an error message
+Scenario: Non-project leader attempts to edit activity
+	Given an employee exists with the ID "test2" and the password "password"
+	And an employee with the ID "test2" and the password "password" is logged in
+	And the logged in user's ID does not match the project leader ID
+	And an activity with the ID "test" exists in the project with the ID "project"
+	When the user edits the name of the activity to "testName"
+	Then the user gets the error message "user must be project leader to change project details"
