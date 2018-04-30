@@ -2,18 +2,15 @@ package userinterface.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import userinterface.controller.FrameController;
 import userinterface.model.ActionEvents;
 import userinterface.model.Style;
 import userinterface.model.Themes;
@@ -26,14 +23,14 @@ import userinterface.view.component.Label;
  * @author Tobias
  * @version 1.00, 28 Apr 2018
  */
-public class LoginScreen extends JPanel implements ActionEvents, Themes {
+public class LoginScreen extends Panel implements ActionEvents, Themes {
 	private static final long serialVersionUID = 1L;
 	private JTextField		  userLoginNameField;
 	private JPasswordField	  userLoginPasswordField;
 
 	public LoginScreen() {
-		super();
-		JPanel loginpanel = new JPanel(new GridBagLayout());
+		super(Themes.LOGINSCREEN);
+		Panel loginpanel = new Panel(new GridBagLayout(), Themes.LOGINSCREEN);
 		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
 				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
 
@@ -54,7 +51,6 @@ public class LoginScreen extends JPanel implements ActionEvents, Themes {
 		this.add(loginpanel, BorderLayout.CENTER);
 
 	}
-
 	/**
 	 * Adds a speicifed component with specified GridBagConstraints to the specified JPanel
 	 * 
@@ -68,7 +64,7 @@ public class LoginScreen extends JPanel implements ActionEvents, Themes {
 	 * @param padx
 	 * @param pady
 	 */
-	public void addSomeComponent(JPanel thisPanel, JComponent thisComponent, int gridx, int gridy, int gridWidth, int gridHeight, int padx,
+	public void addSomeComponent(Panel thisPanel, JComponent thisComponent, int gridx, int gridy, int gridWidth, int gridHeight, int padx,
 			int pady) {
 		GridBagConstraints cs = new GridBagConstraints();
 		cs.gridx = gridx;

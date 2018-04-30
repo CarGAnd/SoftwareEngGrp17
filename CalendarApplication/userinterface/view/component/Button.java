@@ -36,6 +36,7 @@ public class Button extends JButton implements Style {
 
 		}
 		if (buttonStyle.toLowerCase().equals("Exit".toLowerCase())) {
+			this.setBackground(Style.COLOR.CORAL);
 			this.setBorder(BorderFactory.createEmptyBorder());
 
 		}

@@ -17,6 +17,7 @@ public interface Style {
 	 * @since version 1.00
 	 */
 	public final class Colors {
+		public final Color WHITE = (Color.WHITE);
 		public final Color SNOW				  = (new Color(255, 250, 250));
 		public final Color GHOST_WHITE		  = (new Color(248, 248, 255));
 		public final Color ANTIQUE_WHITE	  = (new Color(250, 235, 235));

@@ -11,11 +11,16 @@ import java.awt.Rectangle;
 import java.awt.Window;
 
 public class DetectScreenBounds {
-	// https://stackoverflow.com/questions/3081913/center-swing-windows/3081925#3081925
+	/**
+	 * Completely stolen from StackExchange post.
+	 * 
+	 * @see https://stackoverflow.com/questions/3081913/center-swing-windows/3081925#3081925
+	 */
 	public static Rectangle getScreenBounds(Component top) {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gd = ge.getScreenDevices();
 
+		
 		if (top != null) {
 			Rectangle bounds = top.getBounds();
 			int centerX = (int) bounds.getCenterX();

@@ -1,8 +1,7 @@
 package userinterface.view.component;
 
-import java.awt.Dimension;
-
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import userinterface.controller.FrameController;
 
@@ -10,19 +9,21 @@ public class ProjectTree extends JTree {
 	private static final long serialVersionUID = 1L;
 
 	public ProjectTree() {
-		FrameController.skinComponent(this);
-		this.setSize(new Dimension(300, 200));
-//		//create the root node
-//        DefaultMutableTreeNode root = new DefaultMutableTreeNode("All workers");
-//        //create the child nodes
-//        DefaultMutableTreeNode vegetableNode = new DefaultMutableTreeNode("Worker 1");
-//        DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Worker 2");
-//        //add the child nodes to the root node
-//        root.add(vegetableNode);
-//        root.add(fruitNode);
-//         
-//        //create the tree by passing in the root node
-//        this.add(root);
-         
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("all projects");
+		createNodes(root);
+		JTree tree = new JTree(root);
+		FrameController.skinComponent(tree);
+	}
+
+	private void createNodes(DefaultMutableTreeNode top) {
+		DefaultMutableTreeNode category = null;
+		DefaultMutableTreeNode book = null;
+
+		category = new DefaultMutableTreeNode("Books for Java Programmers");
+		top.add(category);
+
+		book = new DefaultMutableTreeNode("d");
+		category.add(book);
+
 	}
 }

@@ -71,17 +71,14 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 
 		public MenuItem(String label, ActionEvents e) {
 			FrameController.skinComponent(this);
-			this.setFont(Style.Fonts.MENU.getFont());
 			this.setText(label);
 		}
 	}
 
 	public class Menu extends JMenu {
 		private static final long serialVersionUID = 1L;
-
 		public Menu(String label, ActionEvents e) {
 			FrameController.skinComponent(this);
-			this.setFont(Style.Fonts.MENU_ITEM.getFont());
 			this.setText(label);
 		}
 	}
