@@ -75,12 +75,12 @@ public class CreateProjectSteps {
 	    }
 	    management.getProjectByID("ID1234").setProjectLeader(arg1, management);
 	    
-	    assertTrue(management.getProjectByID("ID1234").getProjectLeader() == testEmployee.getUserID());
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == testEmployee.getUserID());
 	}
 
 	@Given("^the project state is \"([^\"]*)\"$")
 	public void theProjectStateIs(String arg1) throws Exception {
-	   if(management.getProjectByID("ID1234").getProjectLeader() != management.getLoggedInUserID()) {
+	   if(management.getProjectByID("ID1234").getProjectLeaderID() != management.getLoggedInUserID()) {
 		   management.logUserOut();
 		   management.userLogin("TestUser", "pass");
 	   }
@@ -109,7 +109,7 @@ public class CreateProjectSteps {
 	public void theUserIDDoesNotMatchTheProjectLeaderID(String arg1) throws Exception {
 		testEmployee = new Employee(arg1,"newpass");
 		management.addUser(testEmployee);
-		if(management.getProjectByID("ID1234").getProjectLeader() == management.getLoggedInUserID()) {
+		if(management.getProjectByID("ID1234").getProjectLeaderID() == management.getLoggedInUserID()) {
 			management.logUserOut();
 			management.userLogin(arg1, "newpass");
 		}
@@ -127,4 +127,20 @@ public class CreateProjectSteps {
 
 	}
 
+	@Given("^the project does not have a leader$")
+	public void theProjectDoesNotHaveALeader() throws Exception {
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == "");
+	}
+
+	@When("^the admin designates an employee to be project leader$")
+	public void theAdminDesignatesAnEmployeeToBeProjectLeader() throws Exception {
+	    testEmployee = new Employee("testID", "testPass");
+	    management.addUser(testEmployee);
+	    management.getProjectByID("ID1234").setProjectLeader("testID", management);
+	}
+
+	@Then("^the employee becomes project leader for the project$")
+	public void theEmployeeBecomesProjectLeaderForTheProject() throws Exception {
+	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == "testID");
+	}
 }

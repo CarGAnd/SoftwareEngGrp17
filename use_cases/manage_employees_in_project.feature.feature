@@ -44,8 +44,3 @@ Scenario: Add employee to activity
 #	When the user removes the employee to the activity
 #	Then the user gets an error message
 #
-#Scenario: Admin sets project leader
-#	Given a project exists with an ID number
-#	And the project does not have a leader
-#	When the admin selects a project leader from the list of employees
-#	Then the projects leader is set to that employees ID number
