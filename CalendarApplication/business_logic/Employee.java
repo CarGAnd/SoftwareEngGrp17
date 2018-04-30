@@ -18,6 +18,12 @@ public class Employee extends User {
 	public void addActivityToEmployee(Activity act) {
 		memberOfActivities.add(act);
 	}
+	
+	public void removeActivityFromEmployee(Activity act) {
+		if(memberOfActivities.contains(act)) {
+			memberOfActivities.remove(act);
+		}
+	}
 
 	public ArrayList<Project> getLeaderOfProjects() {
 		return leaderOfProjects;
