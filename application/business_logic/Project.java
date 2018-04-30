@@ -32,7 +32,6 @@ public class Project {
 	}
 	public void setProjectName(String projectname, Management management) throws Exception {
 		if(!this.projectState.equals("Completed")) {
-			System.out.println(this.projectState);
 			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
 				this.projectName = projectname;
 			}

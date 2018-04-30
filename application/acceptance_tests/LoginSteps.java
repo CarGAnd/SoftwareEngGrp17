@@ -56,8 +56,9 @@ public class LoginSteps {
 	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void anEmployeeExistsWithTheIDAndThePassword(String arg1, String arg2) throws Exception {
 	    if(management.getUserByID(arg1) == null) {
-	    	testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
+	    	errorHandler.testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
 	    }
+	    assertTrue(management.getUserByID(arg1) != null);
 	    assertTrue(management.getEmployees().size() > 0);
 	}
 	

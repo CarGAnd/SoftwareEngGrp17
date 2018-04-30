@@ -24,6 +24,13 @@ public class Activity {
 		this.description = description;
 		this.estimatedTime = estimatedTime;
 		this.activityStatus = "";	
+		listOfEmployees = new ArrayList<Employee>();
+		
+	}
+	
+	public Activity(Project pro, String ID, Date dueDate, int estimatedTime, String description) {
+		this(ID,dueDate,estimatedTime,description);
+		pro.addActivity(this);
 	}
 
 	public void addEmployeeToActivity(Employee emp) {

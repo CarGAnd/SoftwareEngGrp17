@@ -11,10 +11,19 @@ public class Employee extends User {
 	
 	public Employee(String employeeID, String employeePass) {
 		super(employeeID, employeePass, userType.Employee);
-		
+		leaderOfProjects = new ArrayList<Project>();
+		memberOfActivities = new ArrayList<Activity>();	
 	}
 	
 	public void addActivityToEmployee(Activity act) {
 		memberOfActivities.add(act);
+	}
+
+	public ArrayList<Project> getLeaderOfProjects() {
+		return leaderOfProjects;
+	}
+
+	public ArrayList<Activity> getMemberOfActivities() {
+		return memberOfActivities;
 	}
 }
