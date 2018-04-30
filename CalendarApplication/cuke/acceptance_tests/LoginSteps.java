@@ -14,7 +14,6 @@ import cucumber.api.java.en.*;
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee;
 	Admin testAdmin;
 	Management management;
 	
@@ -56,7 +55,7 @@ public class LoginSteps {
 	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void anEmployeeExistsWithTheIDAndThePassword(String arg1, String arg2) throws Exception {
 	    if(management.getUserByID(arg1) == null) {
-	    	testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
+	    	errorHandler.testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
 	    }
 	    assertTrue(management.getEmployees().size() > 0);
 	}
@@ -115,12 +114,12 @@ public class LoginSteps {
 	
 	@Then("^the employee is not logged in$")
 	public void theEmployeeIsNotLoggedIn() throws Exception {
-	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testEmployee.getUserID()));
+	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(errorHandler.testEmployee.getUserID()));
 	}
 	
 	@Then("^the employee is logged in$")
 	public void theEmployeeIsLoggedIn() throws Exception {
 	    assertTrue(management.employeeIsLoggedIn());
-	    assertTrue(management.getLoggedInUserID().equals(testEmployee.getUserID()));
+	    assertTrue(management.getLoggedInUserID().equals(errorHandler.testEmployee.getUserID()));
 	}	
 }

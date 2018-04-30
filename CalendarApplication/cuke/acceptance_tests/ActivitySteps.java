@@ -18,11 +18,8 @@ import cucumber.api.java.en.*;
 public class ActivitySteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee;
 	Admin testAdmin;
 	Management management;
-	Activity testActivity;
-	Project testProject;
 	
 	public ActivitySteps(ErrorHandler errorHandler, Management management) {
 		this.errorHandler = errorHandler;
@@ -41,7 +38,7 @@ public class ActivitySteps {
 		Date startDate = DateFormatter.parse("05/11/2020");
 		Date endDate = DateFormatter.parse("10/11/2020");
 			
-		testProject = management.createProject("name", arg1, startDate, endDate, estimatedTime);
+		errorHandler.testProject = management.createProject("name", arg1, startDate, endDate, estimatedTime);
 		}
 		assertTrue(management.getListOfProjects().contains(management.getProjectByID(arg1)));
 		
@@ -49,8 +46,8 @@ public class ActivitySteps {
 	
 	@Given("^the projects leader has the ID \"([^\"]*)\"$")
 	public void theProjectsLeaderHasTheID(String arg1) throws Exception {
-		testProject.setProjectLeader(arg1, management);
-		assertTrue(testProject.getProjectLeaderID().equals(arg1));
+		errorHandler.testProject.setProjectLeader(arg1);
+		assertTrue(errorHandler.testProject.getProjectLeaderID().equals(arg1));
 	}
 	
 	@Given("^an employee with the ID \"([^\"]*)\" is logged in$")
@@ -61,34 +58,34 @@ public class ActivitySteps {
 	
 	@Given("^the logged in user's ID matches the project leader ID$")
 	public void theLoggedInUserSIDMatchesTheProjectLeaderID() throws Exception {
-	    assertTrue(testProject.getProjectLeaderID().equals(management.getLoggedInUser().getUserID()));
+	    assertTrue(errorHandler.testProject.getProjectLeaderID().equals(management.getLoggedInUserID()));
 	}
 	
 	@Given("^an activity with the ID \"([^\"]*)\" exists in the project with the ID \"([^\"]*)\"$")
 	public void anActivityWithTheIDExistsInTheProjectWithTheID(String arg1, String arg2) throws Exception {
-	    testProject = management.getProjectByID(arg2);
-	    if(testProject.getActivityByID(arg1) == null) {
+		errorHandler.testProject = management.getProjectByID(arg2);
+	    if(errorHandler.testProject.getActivityByID(arg1) == null) {
 	    	SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date endDate = DateFormatter.parse("10/11/2020");
-	    	testActivity = new Activity(arg1, endDate, 40, "description");
-	    	testProject.addActivity(testActivity);
+			errorHandler.testActivity = new Activity(arg1, endDate, 40, "description");
+			errorHandler.testProject.addActivity(errorHandler.testActivity);
 	    }
 	}
 	
 	@Given("^the activity status is not \"([^\"]*)\"$")
 	public void theActivityStatusIsNot(String arg1) throws Exception {
-	    assertFalse(testActivity.getActivityStatus().equals("finished"));
+	    assertFalse(errorHandler.testActivity.getActivityStatus().equals("finished"));
 	}
 	
 	@Given("^the logged in user's ID does not match the project leader ID$")
 	public void theLoggedInUserSIDDoesNotMatchTheProjectLeaderID() throws Exception {
-	    assertFalse(management.getLoggedInUser().getUserID().equals(testProject.getProjectLeaderID()));
+	    assertFalse(management.getLoggedInUser().getUserID().equals(errorHandler.testProject.getProjectLeaderID()));
 	}
 
 	@When("^the user edits the name of the activity to \"([^\"]*)\"$")
 	public void theUserEditsTheNameOfTheActivityTo(String arg1) throws Exception {
 	    try{
-	    	testActivity.setName(arg1);
+	    	errorHandler.testActivity.setName(arg1);
 	    }
 	    catch (Exception e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -99,14 +96,14 @@ public class ActivitySteps {
 	public void theUserCreatesAnActivityInTheProjectWithTheDescriptionAndTheDueDateAndEstimatedWorkHoursAndTheID(String arg1, String arg2, int arg3, String arg4) throws Exception {
 		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date endDate = DateFormatter.parse(arg2);
-	    testActivity = new Activity(arg4, endDate, arg3, arg1);
-	    testProject.addActivity(testActivity);  
+		errorHandler.testActivity = new Activity(arg4, endDate, arg3, arg1);
+		errorHandler.testProject.addActivity(errorHandler.testActivity);  
 	}
 	
 	@When("^the user changes the status of the activity to \"([^\"]*)\"$")
 	public void theUserChangesTheStatusOfTheActivityTo(String arg1) throws Exception {
 	    try{
-	    	testActivity.setActivityStatus(arg1);
+	    	errorHandler.testActivity.setActivityStatus(arg1);
 	    }
 	    catch (Exception e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -115,19 +112,19 @@ public class ActivitySteps {
 	
 	@Then("^the activity's name is edited to \"([^\"]*)\"$")
 	public void theActivitySNameIsEditedTo(String arg1) throws Exception {
-	    assertTrue(testActivity.getName().equals(arg1));
+	    assertTrue(errorHandler.testActivity.getName().equals(arg1));
 	}
 	
 	@Then("^the activity status is changed to \"([^\"]*)\"$")
 	public void theActivityStatusIsChangedTo(String arg1) throws Exception {
-	    assertTrue(testActivity.getActivityStatus().equals(arg1));
+	    assertTrue(errorHandler.testActivity.getActivityStatus().equals(arg1));
 	}
 	
 	@Then("^an activity is created in the project with the description \"([^\"]*)\" and the due date \"([^\"]*)\" and (\\d+) estimated work hours and the Id \"([^\"]*)\"$")
 	public void anActivityIsCreatedInTheProjectWithTheDescriptionAndTheDueDateAndEstimatedWorkHoursAndTheId(String arg1, String arg2, int arg3, String arg4) throws Exception {
 		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date endDate = DateFormatter.parse(arg2);
-		Activity a = testProject.getActivityByID(arg4);
+		Activity a = errorHandler.testProject.getActivityByID(arg4);
 	    assertTrue(a.getDescription().equals(arg1));
 	    assertTrue(a.getEndDate().equals(endDate));
 	    assertTrue(a.getEstimatedTime() == arg3);
