@@ -6,21 +6,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import business_logic.Admin;
 import business_logic.Management;
 import business_logic.User;
 import userinterface.controller.FrameController;
 import userinterface.view.LoginScreen;
 
-@SuppressWarnings("unused")
+/**
+ * Handles all events.
+ * 
+ * @author Tobias
+ * @version 1.05
+ *
+ */
 public interface ActionEvents {
 	public class Exit implements ActionListener {
 		public Exit() {
-			super();
-			// frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-			/*
-			 * class WindowCatcher extends WindowAdapter{ public void windowClosing( WindowEvent evt ){ evt.getWindow().dispose(); System.exit(0) ; } }
-			 */
 		}
 
 		@Override
@@ -42,7 +42,8 @@ public interface ActionEvents {
 			LoginScreen loginscreen = FrameController.getController().getLoginscreen();
 			Management management = FrameController.getController().getManagement();
 			if (loginscreen.getUserLoginNameField().getText().isEmpty() && loginscreen.getUserLoginPasswordField().getText().isEmpty()) {
-				JOptionPane.showMessageDialog(loginscreen, "Empty userID and password.", "Missing credentials!", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(loginscreen, "Empty userID and password.", "Missing credentials!",
+						JOptionPane.WARNING_MESSAGE);
 			}
 			else if (loginscreen.getUserLoginNameField().getText().isEmpty()
 					&& !loginscreen.getUserLoginPasswordField().getText().isEmpty()) {
@@ -68,9 +69,16 @@ public interface ActionEvents {
 		}
 	}
 
-	static void showCard(String card) {
+	/**
+	 * Sets the card to be showed by the controller
+	 * 
+	 * @since 1.00
+	 * @see FrameController
+	 * @param String
+	 */
+	static void showCard(String cardToBeShown) {
 		FrameController controller = FrameController.getController();
 		CardLayout cards = (CardLayout) (controller.getAllCards().getLayout());
-		cards.show(controller.getAllCards(), card);
+		cards.show(controller.getAllCards(), cardToBeShown);
 	}
 }

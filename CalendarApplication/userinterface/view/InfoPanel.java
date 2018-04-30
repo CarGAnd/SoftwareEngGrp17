@@ -3,16 +3,25 @@ package userinterface.view;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-
 import userinterface.model.Clock;
 import userinterface.model.Themes;
 import userinterface.view.component.Label;
 import userinterface.view.component.MenuBar;
 
+/**
+ * Infopanel which displays a relevant message to its users and has a clock with date.
+ * 
+ * @author Tobias
+ * @version 1.00
+ * @see Clock, MessageOfTheDay
+ * 
+ *
+ */
 public class InfoPanel extends Panel {
 
 	private static final long serialVersionUID = 1L;
-	private Clock clock = new Clock();
+	private Clock			  clock			   = new Clock();
+
 	public InfoPanel() {
 		super(Themes.INFOPANEL);
 		new Runnable() {

@@ -1,47 +1,41 @@
 package userinterface.view.component;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import userinterface.controller.FrameController;
-import userinterface.model.Style;
+import userinterface.model.ColorList;
 
-public class Button extends JButton implements Style {
+public class Button extends JButton implements ColorList {
 	private static final long serialVersionUID = 1L;
+	private String			  buttonStyle;
+
 	/**
-	 * Style has two seperate class entities which contain datastructures for color and fonts.
+	 * Custom Button which is skinnable by setting buttonStyle to valid style.
 	 * 
 	 * @author Tobias
-	 * @version 1.00, 28 Apr 2018
+	 * @version 1.05, 30 Apr 2018
 	 * @param label
-	 *            Label for the button.
+	 *            for the button.
 	 * @param actionListener
-	 *            Actionlistener to attach.
+	 *            to attach.
 	 * @param buttonStyle
-	 *            Visual style for the button.
-	 * @since version 1.00
+	 *            for the button.
+	 * @since version 1.00, 28 Apr 2018
+	 * @see Themes
 	 */
 	public Button(String label, ActionListener actionListener, String buttonStyle) {
 		super();
-		FrameController.skinComponent(this);
 		this.setText(label);
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.addActionListener(actionListener);
-		//Special cases
-		if (buttonStyle.toLowerCase().equals("Login".toLowerCase())) {
-			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-
-		}
-		if (buttonStyle.toLowerCase().equals("Exit".toLowerCase())) {
-			this.setBackground(Style.COLOR.CORAL);
-			this.setBorder(BorderFactory.createEmptyBorder());
-
-		}
-		else if (buttonStyle.toLowerCase().equals("UI".toLowerCase())) {
-			this.setBorder(BorderFactory.createEtchedBorder(1, Style.COLOR.GHOST_WHITE, Color.BLACK));
-		}
+		this.buttonStyle = buttonStyle;
+		FrameController.skinComponent(this);
 	}
+
+	public String getButtonStyle() {
+		return buttonStyle;
+	}
+
 }

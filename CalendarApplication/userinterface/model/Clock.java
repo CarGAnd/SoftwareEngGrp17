@@ -9,6 +9,9 @@ import java.util.TimeZone;
 public class Clock implements Runnable {
 	/**
 	 * Snippet gmtFormat() by Lars Staalhagen, DTU.
+	 * 
+	 * @author Tobias
+	 * @version 1.00
 	 * @return a formatted time String.
 	 */
 	public String gmtFormat() {

@@ -23,6 +23,13 @@ import userinterface.view.LoginScreen;
 import userinterface.view.Panel;
 import userinterface.view.UserInterface;
 
+/**
+ * Instantiates a JFrame, ties all panels together and controls the theme.
+ * 
+ * @author Tobias
+ * @version 1.10
+ *
+ */
 public class FrameController {
 	protected JFrame			   frame;
 	protected FrameController	   appGUI;
@@ -32,7 +39,7 @@ public class FrameController {
 	private LoginScreen			   loginscreen;
 	private UserInterface		   ui;
 	private CardLayout			   cardlayout;
-	private Management management;
+	private Management			   management;
 
 	private static FrameController controller;
 	private static Theme		   theme = Theme.FOREST;
@@ -43,14 +50,14 @@ public class FrameController {
 		GridBagLayout gb = new GridBagLayout();
 		ui = new UserInterface();
 		loginscreen = new LoginScreen();
-		uiCard = new Panel(Themes.DO_NOT_SKIN);
+		uiCard = new Panel(Themes.NONE);
 		infopanel = new InfoPanel();
 		uiCard.setLayout(new BorderLayout());
 		uiCard.add(ui, BorderLayout.CENTER);
 
 		initLoginScreen(cs, gb);
 
-		allCards = new Panel(new CardLayout(0, 0), Themes.DO_NOT_SKIN);
+		allCards = new Panel(new CardLayout(0, 0), Themes.STANDARD);
 		allCards.add(uiCard, "0");
 		allCards.add(loginScreenCard, "1");
 
@@ -68,7 +75,9 @@ public class FrameController {
 			public void run() {
 
 				/**
-				 * Following taken from @see DetectScreenBounds which is a class/snippet that was found at StackExchange, link can be found in referenced class.
+				 * Used to center the JFrame and set Dimensions according to screen resolution.
+				 * Taken from @see DetectScreenBounds which is a class/snippet that was found at StackExchange, link can be found in referenced class.
+				 * 
 				 */
 				{
 					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -100,7 +109,7 @@ public class FrameController {
 
 	private void initLoginScreen(GridBagConstraints cs, GridBagLayout gb) {
 		cs.anchor = GridBagConstraints.CENTER;
-		cs.ipadx = 270+1;
+		cs.ipadx = 270 + 1;
 		cs.ipady = 120;
 		loginScreenCard = new Panel(Themes.LOGINSCREEN_CARD);
 		loginScreenCard.setLayout(gb);

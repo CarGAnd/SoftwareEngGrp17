@@ -1,8 +1,5 @@
 package userinterface.view.component;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -11,24 +8,20 @@ import javax.swing.JRadioButtonMenuItem;
 
 import userinterface.controller.FrameController;
 import userinterface.model.ActionEvents;
-import userinterface.model.Style;
+import userinterface.model.ColorList;
 
-public class MenuBar extends JMenuBar implements Style, ActionEvents {
+public class MenuBar extends JMenuBar implements ColorList, ActionEvents {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * This class handles the creation of a Menubar
+	 * This class handles the creation of a Menubar and its subitems.
 	 * 
-	 * @see FrameController
 	 * @author Tobias
 	 * @version 0.5
 	 */
 	public MenuBar() {
 		super();
 		FrameController.skinComponent(this);
-		this.setFont(Style.Fonts.MENU_BAR.getFont());
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
-
 		addFileMenu();
 		addAccessMenu();
 		addHelpMenu();
@@ -85,10 +78,9 @@ public class MenuBar extends JMenuBar implements Style, ActionEvents {
 
 	public class RadioItem extends JRadioButtonMenuItem {
 		private static final long serialVersionUID = 1L;
-
-		public RadioItem(String label, boolean b) {
+		public RadioItem(String label, boolean enabled) {
 			FrameController.skinComponent(this);
-			this.setSelected(b);
+			this.setSelected(enabled);
 			this.setText(label);
 		}
 	}

@@ -13,6 +13,7 @@ import java.awt.Window;
 public class DetectScreenBounds {
 	/**
 	 * Completely stolen from StackExchange post.
+	 * Centers the screen
 	 * 
 	 * @see https://stackoverflow.com/questions/3081913/center-swing-windows/3081925#3081925
 	 */

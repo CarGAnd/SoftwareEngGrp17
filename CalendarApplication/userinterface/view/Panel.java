@@ -4,39 +4,31 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 import userinterface.controller.FrameController;
-import userinterface.model.Style;
-import userinterface.model.Themes;
 
+/**
+ * Creates a custom themed JPanel which takes a LayoutMngr and themeable type as argument.
+ * @author Tobias
+ * @version 1.00
+ *
+ */
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 1L;
+	private String typeOfPanel;
 
-	public Panel(LayoutManager layout, String whichPanel) {
+	public Panel(LayoutManager layout, String typeOfPanel) {
 		super();
 		this.setLayout(layout);
-		addSkin(whichPanel);
+		this.typeOfPanel = typeOfPanel;
+		FrameController.skinComponent(this);
 	}
 
-	public Panel(String whichPanel) {
+	public Panel(String typeOfPanel) {
 		super();
-		addSkin(whichPanel);
+		this.typeOfPanel = typeOfPanel;
+		FrameController.skinComponent(this);
 	}
 
-private void addSkin(String panel) {
-	switch (panel ) {
-		case Themes.DO_NOT_SKIN:
-			break;
-		case Themes.LOGINSCREEN:
-			FrameController.skinComponent(this);
-			break;
-		case Themes.LOGINSCREEN_CARD:
-			break;
-		case Themes.INFOPANEL:
-			this.setBackground(Style.COLOR.GHOST_WHITE);
-			break;	
-		default:
-			break;
+	public String getTypeOfPanel() {
+		return typeOfPanel;
 	}
-	
-}
-
 }

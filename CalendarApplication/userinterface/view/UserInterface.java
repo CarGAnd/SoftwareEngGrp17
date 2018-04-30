@@ -1,6 +1,5 @@
 package userinterface.view;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,17 +11,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import userinterface.controller.FrameController;
 import userinterface.model.ActionEvents;
-import userinterface.model.Style;
+import userinterface.model.ColorList;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.ProjectTree;
 
 
 /**
+ * Object for the main UI screen, once logged in. Integrated by FrameController.
+ * 
  * @author Tobias
+ * @version 0.9
  */
-public class UserInterface extends Panel implements ActionEvents, Style {
+public class UserInterface extends Panel implements ActionEvents, ColorList {
 
 	private static final long serialVersionUID = 1L;
 	private JTextArea	queryRetrievalPanel;
@@ -34,7 +37,7 @@ public class UserInterface extends Panel implements ActionEvents, Style {
 	private Panel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
-		super(Themes.DO_NOT_SKIN);
+		super(Themes.STANDARD);
 		initializeNestedLayouts();
 		initializeMainIOComponents();
 		initializeProjectTextArea();
@@ -45,27 +48,25 @@ public class UserInterface extends Panel implements ActionEvents, Style {
 	}
 
 	private void setAndAttachLayouts() {
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
-		
 		this.setLayout(new BorderLayout());
-		connectingPanel = new Panel(new BorderLayout(),Themes.DO_NOT_SKIN);
+		connectingPanel = new Panel(new BorderLayout(),Themes.STANDARD);
 		innerPromptPanel.add(queryRetrievalScrollPane, BorderLayout.CENTER);
 		innerPromptPanel.add(promptLabel, BorderLayout.SOUTH);
 		connectingPanel.add(projecTree, BorderLayout.WEST);
 		connectingPanel.add(innerPromptPanel, BorderLayout.CENTER);
 		connectingPanel.add(subPanelempty, BorderLayout.SOUTH);
 		this.add(connectingPanel,BorderLayout.CENTER);
+		FrameController.skinComponent(this);
 	}
 
 	private void setInputPanelLayout() {
 
-		inputPanel = new Panel(Themes.DO_NOT_SKIN);
+		inputPanel = new Panel(Themes.STANDARD);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
 		inputPanel.add(new Button("Logout", new Logout(), "UI"));
 
-		subPanelControlView = new Panel(Themes.DO_NOT_SKIN);
+		subPanelControlView = new Panel(Themes.STANDARD);
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
 		subPanelUserInput.add(inputPanel);
@@ -100,14 +101,14 @@ public class UserInterface extends Panel implements ActionEvents, Style {
 	}
 
 	private void initializeNestedLayouts() {
-		innerPromptPanel = new Panel(Themes.DO_NOT_SKIN);
-		subPanelempty = new Panel(Themes.DO_NOT_SKIN);
+		innerPromptPanel = new Panel(Themes.STANDARD);
+		subPanelempty = new Panel(Themes.STANDARD);
 		innerPromptPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		subPanelempty = new Panel(Themes.DO_NOT_SKIN);
+		subPanelempty = new Panel(Themes.STANDARD);
 		subPanelempty.setBorder(BorderFactory.createEtchedBorder());
 		innerPromptPanel.setLayout(new BorderLayout());
 		subPanelempty.setLayout(new GridLayout(3, 1));
-		subPanelUserInput = new Panel(Themes.DO_NOT_SKIN);
+		subPanelUserInput = new Panel(Themes.STANDARD);
 	}
 
 	public void setProjectOrActivityMessage(String setTextPane) {

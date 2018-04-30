@@ -1,24 +1,21 @@
 package userinterface.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import userinterface.model.ActionEvents;
-import userinterface.model.Style;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
 
 /**
- * This class creates a Login screen panel.
+ * This class creates a Login screen panel for a user to enter his/her credentials.
  * 
  * @author Tobias
  * @version 1.00, 28 Apr 2018
@@ -31,8 +28,6 @@ public class LoginScreen extends Panel implements ActionEvents, Themes {
 	public LoginScreen() {
 		super(Themes.LOGINSCREEN);
 		Panel loginpanel = new Panel(new GridBagLayout(), Themes.LOGINSCREEN);
-		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
 
 		initializeFields();
 		/**

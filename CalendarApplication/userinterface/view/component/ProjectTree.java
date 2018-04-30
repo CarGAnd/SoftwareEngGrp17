@@ -5,6 +5,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import userinterface.controller.FrameController;
 
+/**
+ * ProjectTree shows projects for the user/worker.
+ * @author Tobias
+ * @version 0.2
+ *
+ */
 public class ProjectTree extends JTree {
 	private static final long serialVersionUID = 1L;
 

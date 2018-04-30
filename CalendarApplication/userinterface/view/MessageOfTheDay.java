@@ -2,10 +2,17 @@ package userinterface.view;
 
 import java.awt.Color;
 
-import userinterface.model.Style;
+import userinterface.model.ColorList;
 import userinterface.view.component.Label;
 
-public class MessageOfTheDay extends Label implements Style {
+/**
+ * Sets a message which has an enum-switch that sets a relevance-color; relevance can be either Regular, Warning or Alert.
+ * 
+ * @author Tobias
+ * @version 1.00
+ * @see InfoPanel
+ */
+public class MessageOfTheDay extends Label implements ColorList {
 	private static String	  text			   = "IDS picked up a Chinese IP adr. succesfully bruteforcing admins SSH password. Port 22 blocked on all servers temporarily.";
 	private static final long serialVersionUID = 1L;
 
@@ -19,9 +26,9 @@ public class MessageOfTheDay extends Label implements Style {
 			case REGULAR:
 				return Color.BLACK;
 			case WARNING:
-				return Style.COLOR.CADMIUM_ORANGE;
+				return ColorList.COLOR.CADMIUM_ORANGE;
 			case ALERT:
-				return Style.COLOR.FIREBRICK_ONE;
+				return ColorList.COLOR.FIREBRICK_ONE;
 			default:
 				break;
 		}
