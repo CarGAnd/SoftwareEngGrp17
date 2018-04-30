@@ -1,52 +1,90 @@
 package gui.controller;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import gui.interfaces.StyleConfigurations;
+import gui.model.ActionEvents;
+import gui.view.SwingButton;
+import gui.view.SwingLabel;
+
+/**
+ * This class creates a Login screen panel.
+ * 
+ * @author Tobias
+ * @version 1.00, 28 Apr 2018
+ */
 @SuppressWarnings("serial")
-public class LoginScreen extends JFrame implements Runnable {
+public class LoginScreen extends JPanel implements ActionEvents, StyleConfigurations {
+	private JTextField	   userLoginNameField;
+	private JPasswordField userLoginPasswordField;
 
 	public LoginScreen() {
-		this.setTitle("SoftwareHuset's Calendar Application");
-		this.setBounds(200, 200, 400, 400);
-		this.setAlwaysOnTop(false);
-		this.setDefaultCloseOperation(Frame.ICONIFIED);
-		this.getContentPane().setLayout(new BorderLayout());// Top Layout manager
-		//new JPanel().setLayout(new FlowLayout());
-		JLabel userLoginNameLabel = new JLabel("Username: ");
-		userLoginNameLabel.setAlignmentX(CENTER_ALIGNMENT);
-		JTextField userLoginNameField = new JTextField("");
-		userLoginNameField.setAlignmentX(CENTER_ALIGNMENT);
-		userLoginNameField.setColumns(6);
-		;
-		JLabel userLoginPasswordLabel = new JLabel("Password: ");
-		userLoginPasswordLabel.setAlignmentX(CENTER_ALIGNMENT);
-		JPasswordField userLoginPasswordField = new JPasswordField("");
-		userLoginPasswordField.setAlignmentX(CENTER_ALIGNMENT);
-		userLoginPasswordField.setColumns(6);
-		;
-		this.setLayout(new BoxLayout(getContentPane(),1));
-		this.add(userLoginNameLabel);
-		this.add(userLoginNameField);
-		this.add(userLoginPasswordLabel);
-		this.add(userLoginPasswordField);
+		JPanel loginpanel = new JPanel(new GridBagLayout());
+		loginpanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
+				(FONT_DEFINITIONS.getFont("TitledBorder")), Color.DARK_GRAY));
 
-		
+		userLoginNameField = new JTextField("");
+		userLoginNameField.setColumns(8);
+		userLoginPasswordField = new JPasswordField("");
+		userLoginPasswordField.setColumns(8);
+
+		//addSomeComponent(loginpanel, new SwingLabel("Username: ", COLORS.getColor(Color.BLACK)), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new JLabel("Password: "), 0, 1, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, userLoginPasswordField, 1, 1, 2, 1, 0, 0);
+		addSomeComponent(loginpanel, new SwingButton("Login", new TryLoginWhenClicked(), "LoginScreen"), 1, 2, 1, 8, 32, -8);
+		this.setLayout(new BorderLayout());
+		this.add(loginpanel, BorderLayout.CENTER);
 	}
-	public static void main(String[] args) {
-		LoginScreen gooey = new LoginScreen();
-		gooey.run();
+
+	/**
+	 * @since version 1.00
+	 * @param thisPanel
+	 * @param thisComponent
+	 * @param gridx
+	 * @param gridy
+	 * @param gridWidth
+	 * @param gridHeight
+	 * @param padx
+	 * @param pady
+	 */
+	public void addSomeComponent(JPanel thisPanel, JComponent thisComponent, int gridx, int gridy, int gridWidth, int gridHeight, int padx,
+			int pady) {
+		GridBagConstraints cs = new GridBagConstraints();
+		cs.gridx = gridx;
+		cs.gridy = gridy;
+		cs.gridwidth = gridWidth;
+		cs.gridheight = gridHeight;
+		cs.ipadx = padx;
+		cs.ipady = pady;
+		thisPanel.add(thisComponent, cs);
 	}
-	@Override
-	public void run() {
-		this.setVisible(true);
-		
+
+	public JTextField getUserLoginNameField() {
+		return userLoginNameField;
 	}
+
+	public JPasswordField getUserLoginPasswordField() {
+		return userLoginPasswordField;
+	}
+
+	public void setUserLoginNameField(JTextField userLoginNameField) {
+		this.userLoginNameField = userLoginNameField;
+	}
+
+	public void setUserLoginPasswordField(JPasswordField userLoginPasswordField) {
+		this.userLoginPasswordField = userLoginPasswordField;
+	}
+
 }

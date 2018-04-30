@@ -39,7 +39,10 @@ public class LoginSteps {
 	
 	@Given("^an employee with the ID \"([^\"]*)\" and the password \"([^\"]*)\" is logged in$")
 	public void anEmployeeWithTheIDAndThePasswordIsLoggedIn(String arg1, String arg2) throws Exception {
-	    management.userLogin(arg1, arg2);
+		if(management.userIsLoggedIn()) {
+			management.logUserOut();
+		}
+	    management.userLogin(arg1, arg2);//TODO: Code smell - this should be Id and password. Same for remainder part of this class.
 	}
 	
 	@Given("^an adminstrator exists$")

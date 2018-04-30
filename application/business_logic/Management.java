@@ -73,6 +73,7 @@ public class Management {
 	
 	public Project addProject(Project pro) {
 		listOfProjects.add(pro);
+		pro.management = this;
 		return pro;
 	}
 	
