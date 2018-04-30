@@ -13,6 +13,7 @@ import userinterface.model.ActionEvents;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
+import userinterface.view.component.Panel;
 
 /**
  * This class creates a Login screen panel for a user to enter his/her credentials.
@@ -20,7 +21,7 @@ import userinterface.view.component.Label;
  * @author Tobias
  * @version 1.00, 28 Apr 2018
  */
-public class LoginScreen extends Panel implements ActionEvents, Themes {
+public class LoginScreen extends Panel implements ActionEvents {
 	private static final long serialVersionUID = 1L;
 	private JTextField		  userLoginNameField;
 	private JPasswordField	  userLoginPasswordField;

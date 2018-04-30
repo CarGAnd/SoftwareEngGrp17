@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import java.awt.Font;
 

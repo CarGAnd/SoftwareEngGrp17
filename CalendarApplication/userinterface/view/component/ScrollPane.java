@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;

@@ -5,9 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import userinterface.controller.FrameController;
-import userinterface.model.ColorList;
 
-public class Button extends JButton implements ColorList {
+public class Button extends JButton {
 	private static final long serialVersionUID = 1L;
 	private String			  buttonStyle;
 

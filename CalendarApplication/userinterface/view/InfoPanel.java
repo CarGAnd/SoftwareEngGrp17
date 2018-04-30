@@ -7,6 +7,7 @@ import userinterface.model.Clock;
 import userinterface.model.Themes;
 import userinterface.view.component.Label;
 import userinterface.view.component.MenuBar;
+import userinterface.view.component.Panel;
 
 /**
  * Infopanel which displays a relevant message to its users and has a clock with date.

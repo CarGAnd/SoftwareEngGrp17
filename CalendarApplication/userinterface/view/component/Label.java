@@ -4,8 +4,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import userinterface.controller.FrameController;
-import userinterface.model.ColorList;
-import userinterface.model.Themes;
 
 
 /**Custom label which has a default skin.
@@ -13,7 +11,7 @@ import userinterface.model.Themes;
  * @version 0.1
  *
  */
-public class Label extends JLabel implements ColorList, Themes {
+public class Label extends JLabel {
 	public final static int ETCHED = 0;
 	public static final int USE_SKIN_BORDER = 1;
 	private static final long serialVersionUID = 1L;

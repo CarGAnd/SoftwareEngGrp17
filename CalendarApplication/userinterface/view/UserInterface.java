@@ -10,7 +10,10 @@ import userinterface.model.ColorList;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
+import userinterface.view.component.Panel;
 import userinterface.view.component.ProjectTree;
+import userinterface.view.component.ScrollPane;
+import userinterface.view.component.TextArea;
 
 /**
  * Object for the main UI screen, once logged in. Integrated by FrameController.
@@ -18,7 +21,7 @@ import userinterface.view.component.ProjectTree;
  * @author Tobias
  * @version 1.0
  */
-public class UserInterface extends Panel implements ActionEvents, ColorList {
+public class UserInterface extends Panel implements ActionEvents {
 
 	private static final long serialVersionUID = 1L;
 	private TextArea		  projectDescription;
