@@ -1,4 +1,4 @@
-package acceptance_tests;
+package cuke.acceptance_tests;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;

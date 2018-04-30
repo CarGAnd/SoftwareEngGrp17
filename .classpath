@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="lib" path="lib/maven-surefire-plugin-2.12.4.jar"/>
-	<classpathentry kind="src" path="application"/>
-	<classpathentry kind="src" path="GUI"/>
+	<classpathentry excluding="application/" kind="src" path="CalendarApplication"/>
 	<classpathentry kind="lib" path="lib/cucumber-core-2.3.1.jar" sourcepath="/Users/huba/.m2/repository/io/cucumber/cucumber-core/2.3.1/cucumber-core-2.3.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/cucumber-html-0.2.6.jar"/>
 	<classpathentry kind="lib" path="lib/cucumber-java-2.3.1.jar"/>
@@ -16,7 +15,11 @@
 	<classpathentry kind="lib" path="lib/byte-buddy-agent-1.7.9.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-core-2.13.0.jar" sourcepath="/Users/huba/.m2/repository/org/mockito/mockito-core/2.13.0/mockito-core-2.13.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/objenesis-2.6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

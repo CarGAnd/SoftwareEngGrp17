@@ -1,4 +1,4 @@
-package acceptance_tests;
+package cuke.acceptance_tests;
 
 import business_logic.Activity;
 import business_logic.Employee;
