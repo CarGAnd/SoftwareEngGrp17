@@ -73,7 +73,7 @@ public class CreateProjectSteps {
 	    	management.logUserOut();
 	    	management.userLogin("Admin", "adminadmin");
 	    }
-	    management.getProjectByID("ID1234").setProjectLeader(arg1, management);
+	    management.getProjectByID("ID1234").setProjectLeader(arg1);
 	    
 	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == testEmployee.getUserID());
 	}
@@ -84,7 +84,7 @@ public class CreateProjectSteps {
 		   management.logUserOut();
 		   management.userLogin("TestUser", "pass");
 	   }
-	   management.getProjectByID("ID1234").setProjectState(arg1, management);
+	   management.getProjectByID("ID1234").setProjectState(arg1);
 	   
 	   assertTrue(management.getProjectByID("ID1234").getProjectState() == arg1);
 	}
@@ -92,7 +92,7 @@ public class CreateProjectSteps {
 	@When("^the user sets the project name to \"([^\"]*)\"$")
 	public void theUserSetsTheProjectNameTo(String arg1) throws Exception {
 		try {
-			management.getProjectByID("ID1234").setProjectName(arg1, management);
+			management.getProjectByID("ID1234").setProjectName(arg1);
 		} catch (OperationNotAllowedException e) {
 			
 			errorHandler.errorMessage= e.getMessage();
@@ -114,7 +114,7 @@ public class CreateProjectSteps {
 			management.userLogin(arg1, "newpass");
 		}
 		try {
-		management.getProjectByID("ID1234").setProjectName("BadName", management);
+		management.getProjectByID("ID1234").setProjectName("BadName");
 		}
 		catch(OperationNotAllowedException e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -136,7 +136,7 @@ public class CreateProjectSteps {
 	public void theAdminDesignatesAnEmployeeToBeProjectLeader() throws Exception {
 	    testEmployee = new Employee("testID", "testPass");
 	    management.addUser(testEmployee);
-	    management.getProjectByID("ID1234").setProjectLeader("testID", management);
+	    management.getProjectByID("ID1234").setProjectLeader("testID");
 	}
 
 	@Then("^the employee becomes project leader for the project$")

@@ -28,84 +28,46 @@ public class Project {
 		this.endDate = endDate;
 		this.estimatedTimeUsage = estimatedTimeUsage;
 
+		
 		activities = new ArrayList<Activity>();
 	}
-	public void setProjectName(String projectname, Management management) throws Exception {
-		if(!this.projectState.equals("Completed")) {
-			System.out.println(this.projectState);
-			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
-				this.projectName = projectname;
-			}
-			else {
-				throw new OperationNotAllowedException("User is not project leader");
-			}
-		}
-		else {
-			throw new OperationNotAllowedException("Completed projects cannot be altered");
+	public void setProjectName(String projectname) throws Exception {
+		if(userLoggedInHasRights()) {
+			this.projectName = projectname;
 		}
 	}
-	public void setProjectStartDate(String StartDate, Management management) throws Exception {
-		if(!this.projectState.equals("Completed")) {
-			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-				this.startDate = formatter.parse(StartDate);
-			}
-			else {
-				throw new OperationNotAllowedException("User is not project leader");
-			}
-		}
-		else {
-			throw new OperationNotAllowedException("Completed projects cannot be altered");
+	
+	public void setProjectStartDate(String StartDate) throws Exception {
+		if(userLoggedInHasRights()) {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			this.startDate = formatter.parse(StartDate);
 		}
 	}
-	public void setProjectEndDate(String endDate, Management management) throws Exception {
-		if(!this.projectState.equals("Completed")) {
-			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-				this.endDate = formatter.parse(endDate);
-			}
-			else {
-				throw new OperationNotAllowedException("User is not project leader");
-			}
-		}
-		else {
-			throw new OperationNotAllowedException("Completed projects cannot be altered");
+	public void setProjectEndDate(String endDate) throws Exception {
+		if(userLoggedInHasRights()) {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			this.endDate = formatter.parse(endDate);
 		}
 	}
-	public void setEstimatedTimeUsed(String time, Management management) throws Exception {
-		if(!this.projectState.equals("Completed")) {
-			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
-				this.estimatedTimeUsage = Integer.parseInt(time);
-			}
-			else {
-				throw new OperationNotAllowedException("User is not project leader");
-			}
-		}
-		else {
-			throw new OperationNotAllowedException("Completed projects cannot be altered");
+	public void setEstimatedTimeUsed(String time) throws Exception {
+		if(userLoggedInHasRights()) {
+			this.estimatedTimeUsage = Integer.parseInt(time);
 		}
 	}
-	public void setProjectState(String state, Management management) throws Exception {
-		if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getProjectByID(this.projectID).projectLeaderID == management.getLoggedInUserID()) {
+	public void setProjectState(String state) throws Exception {
+		if(userLoggedInHasRights()) {
 			this.projectState = state;
 		}
-		else {
-			throw new OperationNotAllowedException("User is not project leader");
-			}
-		}
-	public void setProjectLeader(String EmployeeID, Management management) throws Exception {
-		if(!this.projectState.equals("Completed")) {
-			if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getLoggedInUser().hasAdminPermissions()){
-				this.projectLeaderID = EmployeeID; 
-			}
-			else {
-				throw new OperationNotAllowedException("User does not have Admin Privilige");
-			}
+	}
+	public void setProjectLeader(String EmployeeID) throws Exception {
+		if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getLoggedInUser().hasAdminPermissions()){
+			this.projectLeaderID = EmployeeID; 
 		}
 		else {
-			throw new OperationNotAllowedException("Completed projects cannot be altered");
+			throw new OperationNotAllowedException("User does not have Admin Privilige");
 		}
 	}
+
 	public String getProjectName() {
 		return projectName;
 	}
@@ -145,5 +107,13 @@ public class Project {
 		}
 		return null;
 	}
+	private boolean userLoggedInHasRights() throws OperationNotAllowedException {
+		if(management.userIsLoggedIn() && this.projectLeaderID == management.getLoggedInUserID()) {
+			return true;
+		}
+		else {
+			throw new OperationNotAllowedException("User is not project leader");
+		}
 	
+	}
 }
