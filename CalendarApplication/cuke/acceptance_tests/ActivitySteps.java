@@ -49,7 +49,7 @@ public class ActivitySteps {
 	
 	@Given("^the projects leader has the ID \"([^\"]*)\"$")
 	public void theProjectsLeaderHasTheID(String arg1) throws Exception {
-		testProject.setProjectLeader(arg1, management);
+		testProject.setProjectLeader(arg1);
 		assertTrue(testProject.getProjectLeaderID().equals(arg1));
 	}
 	
