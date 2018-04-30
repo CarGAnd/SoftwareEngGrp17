@@ -4,7 +4,13 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
+import business_logic.Admin;
+import business_logic.Management;
+import business_logic.User;
 import userinterface.controller.FrameController;
+import userinterface.view.LoginScreen;
 
 @SuppressWarnings("unused")
 public interface ActionEvents {
@@ -33,19 +39,31 @@ public interface ActionEvents {
 	public class LoginAttempt implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			showCard("0");
+			LoginScreen loginscreen = FrameController.getController().getLoginscreen();
+			Management management = FrameController.getController().getManagement();
+			if (loginscreen.getUserLoginNameField().getText().isEmpty() && loginscreen.getUserLoginPasswordField().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(loginscreen, "Empty userID and password.", "Missing credentials!", JOptionPane.WARNING_MESSAGE);
+			}
+			else if (loginscreen.getUserLoginNameField().getText().isEmpty()
+					&& !loginscreen.getUserLoginPasswordField().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(loginscreen, "Empty userID.", "Missing user ID!", JOptionPane.WARNING_MESSAGE);
+			}
+			else if (!loginscreen.getUserLoginNameField().getText().isEmpty()
+					&& loginscreen.getUserLoginPasswordField().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(loginscreen, "Empty password.", "Missing password.", JOptionPane.WARNING_MESSAGE);
+			}
+			else {
+				for (User e1 : management.getUsers()) {
+					String user = loginscreen.getUserLoginNameField().getText();
+					String password = loginscreen.getUserLoginPasswordField().getText();
+					if (e1.getUserID().equals(user) && e1.getPassword().equals(password)) {
+						showCard("0");
+					}
+					else
+						System.out.println("Username and password do not match.");
 
-			// TODO: if this.equals(Admin.getPassword()){
-			// }
-			// if (loginScreen.getUserLoginNameField().toString().isEmpty() && loginScreen.getUserLoginPasswordField().toString().isEmpty()) {
-			// JOptionPane.showMessageDialog(null, "Your warning String: I can't do that John", "Window Title", JOptionPane.ERROR_MESSAGE);
-			// } else if (!UI.gui.getUserLoginName().isEmpty() && UI.gui.getUserLoginPassword().isEmpty()) {
-			// UI.gui.setPromptLabel("Password missing.");
-			// } else if (UI.gui.getUserLoginName().isEmpty() && !UI.gui.getUserLoginPassword().isEmpty()) {
-			// UI.gui.setPromptLabel("Username missing or not found.");
-			// } else {
-			// UI.gui.setPromptLabel("Attempting login");
-			// }
+				}
+			}
 
 		}
 	}

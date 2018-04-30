@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 
+import business_logic.Management;
 import userinterface.model.Themes;
 import userinterface.model.Themes.Theme;
 import userinterface.view.InfoPanel;
@@ -31,11 +32,13 @@ public class FrameController {
 	private LoginScreen			   loginscreen;
 	private UserInterface		   ui;
 	private CardLayout			   cardlayout;
+	private Management management;
 
 	private static FrameController controller;
 	private static Theme		   theme = Theme.FOREST;
 
 	public FrameController() {
+		management = new Management();
 		GridBagConstraints cs = new GridBagConstraints();
 		GridBagLayout gb = new GridBagLayout();
 		ui = new UserInterface();
@@ -51,6 +54,10 @@ public class FrameController {
 		allCards.add(uiCard, "0");
 		allCards.add(loginScreenCard, "1");
 
+	}
+
+	public Management getManagement() {
+		return management;
 	}
 
 	public static void main(String[] args) {
