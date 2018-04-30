@@ -13,7 +13,7 @@ public class Button extends JButton implements ColorList {
 
 	/**
 	 * Custom Button which is skinnable by setting buttonStyle to valid style.
-	 * 
+	 * ...
 	 * @author Tobias
 	 * @version 1.05, 30 Apr 2018
 	 * @param label
