@@ -32,7 +32,7 @@ public class Activity {
 	}
 	
 	private boolean loggedInUserHasPermission() {
-		return project.management.userIsLoggedIn() && project.management.getLoggedInUserID().equals(project.getProjectLeader());
+		return project.management.userIsLoggedIn() && project.management.getLoggedInUserID().equals(project.getProjectLeaderID());
 	}
 	
 	public Project getProject() {

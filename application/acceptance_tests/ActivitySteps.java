@@ -50,7 +50,7 @@ public class ActivitySteps {
 	@Given("^the projects leader has the ID \"([^\"]*)\"$")
 	public void theProjectsLeaderHasTheID(String arg1) throws Exception {
 		testProject.setProjectLeader(arg1, management);
-		assertTrue(testProject.getProjectLeader().equals(arg1));
+		assertTrue(testProject.getProjectLeaderID().equals(arg1));
 	}
 	
 	@Given("^an employee with the ID \"([^\"]*)\" is logged in$")
@@ -61,7 +61,7 @@ public class ActivitySteps {
 	
 	@Given("^the logged in user's ID matches the project leader ID$")
 	public void theLoggedInUserSIDMatchesTheProjectLeaderID() throws Exception {
-	    assertTrue(testProject.getProjectLeader().equals(management.getLoggedInUser().getUserID()));
+	    assertTrue(testProject.getProjectLeaderID().equals(management.getLoggedInUser().getUserID()));
 	}
 	
 	@Given("^an activity with the ID \"([^\"]*)\" exists in the project with the ID \"([^\"]*)\"$")
@@ -82,7 +82,7 @@ public class ActivitySteps {
 	
 	@Given("^the logged in user's ID does not match the project leader ID$")
 	public void theLoggedInUserSIDDoesNotMatchTheProjectLeaderID() throws Exception {
-	    assertFalse(management.getLoggedInUser().getUserID().equals(testProject.getProjectLeader()));
+	    assertFalse(management.getLoggedInUser().getUserID().equals(testProject.getProjectLeaderID()));
 	}
 
 	@When("^the user edits the name of the activity to \"([^\"]*)\"$")
