@@ -2,12 +2,11 @@ Feature: xxx
 	Description: xxx
 	Actor: xxx
 	
-#Scenario: Register sick
-#	Given an employee wishes to register his absence due to illness
-#	And the employee is logged in with his ID
-#	When the employee registers his absence
-#	Then his absence is registered within the system
-#
+Scenario: Register sick
+	Given a user is logged in with his ID
+	When the user registers his absence
+	Then his absence is registered within the system
+
 #Scenario: No longer sick (got better)
 #	Given an employee has registered sick
 #	And the employee is logged in with his ID
