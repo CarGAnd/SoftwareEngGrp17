@@ -1,22 +1,15 @@
-Feature: xxx
-	Description: xxx
-	Actor: xxx
+Feature: Request assistance from employees'
+	Description: An employee requests assistance to a task from another employee.
+	Actor: user
 	
-#Scenario: Request assistance from available employee
-#	Given an employee requires assistance
-#	And the employee is working on an activity
-#	And the requested employee is available
-#	And the requested employee does not have 20 activities
-#	Then the requested employee is assigned to the activity
-#
-#Scenario: Request assistance from busy employee
-#	Given an employee requires assistance
-#	And the employee is working on an activity
-#	And the requested employee is busy
-#	Then the user is asked to request for a different employee if possible
-#
-#Scenario: Request assistance from absent employee
-#	Given an employee requires assistance
-#	And the employee is working on an activity
-#	And the requested employee is absent
-#	Then the user is asked to request for a different employee
+Scenario: Request assistance from available employee
+	Given the user with ID "Tester" is working on an activity with ID "ID1234"
+	And there is an available employee
+	When the user with ID "Tester" requests assistance
+	Then the available employee is assigned to the activity
+
+Scenario: Request assistance from absent employee
+	Given the user with ID "Tester" is working on an activity with ID "ID1234"
+	And there is no available employees
+	When the user with ID "Tester" requests assistance
+	Then the user recieves the error message "There are no available employees" 
