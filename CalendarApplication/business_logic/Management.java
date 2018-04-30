@@ -30,13 +30,13 @@ public class Management {
 	}
 	
 	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception {
-		if(userIsLoggedIn() && getLoggedInUser().hasAdminPermissions()) {
+		if(adminIsLoggedIn()) {
 			Project project = new Project(name,ID,startDate,endDate,estimatedTime); //TODO: change the constructor
 			this.addProject(project);
 			return project;
 		}
 		else {
-			throw new Exception("Insufficient permissions"); //TODO: use proper exception
+			throw new OperationNotAllowedException("Insufficient permissions"); //TODO: use proper exception
 		}
 	}
 	
@@ -60,9 +60,12 @@ public class Management {
 		setLoggedInUser(null);
 	}
 	
-	public User addUser(User emp) {
-		if(!users.contains(emp)) {
+	public User addUser(User emp) throws OperationNotAllowedException {
+		if(getUserByID(emp.getUserID()) == null) {
 			users.add(emp);			
+		}
+		else {
+			throw new OperationNotAllowedException("another user with that ID already exists");
 		}
 		return emp;
 	}
@@ -79,6 +82,7 @@ public class Management {
 	
 	public Project removeProject(Project pro) {
 		listOfProjects.remove(pro);
+		pro.management = null;
 		return pro;
 	}
 	
