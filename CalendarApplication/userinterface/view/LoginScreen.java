@@ -33,10 +33,10 @@ public class LoginScreen extends Panel implements ActionEvents, Themes {
 		/**
 		 * Dont-Repeat-Yourself (DRY) principle.
 		 */
-		addSomeComponent(loginpanel, new Label("Username: "), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Username: ",Label.USE_SKIN_BORDER), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(4), 0, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new Label("Password: "), 0, 2, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Password: ",Label.USE_SKIN_BORDER), 0, 2, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 2, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(8), 0, 3, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new Button("Login", new LoginAttempt(), "Login"), 0, 4, 4, 1, 96, 2);

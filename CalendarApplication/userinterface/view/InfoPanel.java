@@ -30,7 +30,7 @@ public class InfoPanel extends Panel {
 				clock.run();
 			}
 		};
-		Label time = new Label("");
+		Label time = new Label("",Label.USE_SKIN_BORDER);
 		time.setText(clock.gmtFormat());
 
 		this.setFont(new Font("Courier", Font.PLAIN, 10));
