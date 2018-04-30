@@ -14,7 +14,6 @@ import cucumber.api.java.en.*;
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
-	Employee testEmployee;
 	Admin testAdmin;
 	Management management;
 	
@@ -116,12 +115,12 @@ public class LoginSteps {
 	
 	@Then("^the employee is not logged in$")
 	public void theEmployeeIsNotLoggedIn() throws Exception {
-	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testEmployee.getUserID()));
+	    assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(errorHandler.testEmployee.getUserID()));
 	}
 	
 	@Then("^the employee is logged in$")
 	public void theEmployeeIsLoggedIn() throws Exception {
 	    assertTrue(management.employeeIsLoggedIn());
-	    assertTrue(management.getLoggedInUserID().equals(testEmployee.getUserID()));
+	    assertTrue(management.getLoggedInUserID().equals(errorHandler.testEmployee.getUserID()));
 	}	
 }
