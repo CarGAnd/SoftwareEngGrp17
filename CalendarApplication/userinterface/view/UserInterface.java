@@ -1,42 +1,43 @@
-package gui.controller;
-
+package userinterface.view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import gui.interfaces.StyleConfigurations;
-import gui.model.ActionEvents;
-import gui.view.SwingButton;
+import userinterface.model.ActionEvents;
+import userinterface.model.Style;
+import userinterface.model.Themes;
+import userinterface.view.component.Button;
+import userinterface.view.component.ProjectTree;
+
 
 /**
  * @author Tobias
- *
  */
-@SuppressWarnings("serial")
-public class UserInterface extends JPanel implements ActionEvents, StyleConfigurations {
+public class UserInterface extends Panel implements ActionEvents, Style {
 
+	private static final long serialVersionUID = 1L;
 	private JTextArea	queryRetrievalPanel;
 	private JLabel		promptLabel;
 	private JScrollPane	queryRetrievalScrollPane;
 	private JButton		submitLoginButton;
-	private JTextArea	projectAndActivityPanel;
-	private JTree		scrollPanelForProjecAndActivities;
-	private JPanel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
+	private JTextArea	projectPanel;
+	private ProjectTree		projecTree;
+	private Panel		innerPromptPanel, subPanelempty, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
 	public UserInterface() {
-		super();
+		super(Themes.DO_NOT_SKIN);
 		initializeNestedLayouts();
 		initializeMainIOComponents();
-		initializeScrollPane();
+		initializeProjectTextArea();
 
 		userPrompt();
 		setAndAttachLayouts();
@@ -44,22 +45,27 @@ public class UserInterface extends JPanel implements ActionEvents, StyleConfigur
 	}
 
 	private void setAndAttachLayouts() {
-		connectingPanel = new JPanel(new BorderLayout());
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
+				(Style.Fonts.TITLED_BORDER.getFont()), Color.DARK_GRAY));
+		
+		this.setLayout(new BorderLayout());
+		connectingPanel = new Panel(new BorderLayout(),Themes.DO_NOT_SKIN);
 		innerPromptPanel.add(queryRetrievalScrollPane, BorderLayout.CENTER);
 		innerPromptPanel.add(promptLabel, BorderLayout.SOUTH);
-		connectingPanel.add(scrollPanelForProjecAndActivities, BorderLayout.WEST);
+		connectingPanel.add(projecTree, BorderLayout.WEST);
 		connectingPanel.add(innerPromptPanel, BorderLayout.CENTER);
 		connectingPanel.add(subPanelempty, BorderLayout.SOUTH);
+		this.add(connectingPanel,BorderLayout.CENTER);
 	}
 
 	private void setInputPanelLayout() {
 
-		inputPanel = new JPanel();
+		inputPanel = new Panel(Themes.DO_NOT_SKIN);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-		inputPanel.add(new SwingButton("Logout", new Logout(), "UI"));
+		inputPanel.add(new Button("Logout", new Logout(), "UI"));
 
-		subPanelControlView = new JPanel();
+		subPanelControlView = new Panel(Themes.DO_NOT_SKIN);
 		subPanelControlView.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
 		subPanelUserInput.add(inputPanel);
@@ -67,13 +73,13 @@ public class UserInterface extends JPanel implements ActionEvents, StyleConfigur
 		subPanelempty.add(subPanelUserInput, 1);
 	}
 
-	private void initializeScrollPane() {
-		projectAndActivityPanel = new JTextArea(5, 28);
-		projectAndActivityPanel.setAutoscrolls(false);
-		projectAndActivityPanel.setLineWrap(false);
-		projectAndActivityPanel.setFont(new Font("Arial", Font.PLAIN, 12));
-		projectAndActivityPanel.setEditable(false);
-		scrollPanelForProjecAndActivities = new JTree();
+	private void initializeProjectTextArea() {
+		projectPanel = new JTextArea(5, 28);
+		projectPanel.setAutoscrolls(false);
+		projectPanel.setLineWrap(false);
+		projectPanel.setFont(new Font("Arial", Font.PLAIN, 12));
+		projectPanel.setEditable(false);
+		projecTree = new ProjectTree();
 	}
 
 	private void userPrompt() {
@@ -94,14 +100,14 @@ public class UserInterface extends JPanel implements ActionEvents, StyleConfigur
 	}
 
 	private void initializeNestedLayouts() {
-		innerPromptPanel = new JPanel();
-		subPanelempty = new JPanel();
+		innerPromptPanel = new Panel(Themes.DO_NOT_SKIN);
+		subPanelempty = new Panel(Themes.DO_NOT_SKIN);
 		innerPromptPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		subPanelempty = new JPanel();
+		subPanelempty = new Panel(Themes.DO_NOT_SKIN);
 		subPanelempty.setBorder(BorderFactory.createEtchedBorder());
 		innerPromptPanel.setLayout(new BorderLayout());
 		subPanelempty.setLayout(new GridLayout(3, 1));
-		subPanelUserInput = new JPanel();
+		subPanelUserInput = new Panel(Themes.DO_NOT_SKIN);
 	}
 
 	public void setProjectOrActivityMessage(String setTextPane) {

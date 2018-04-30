@@ -1,13 +1,16 @@
-package gui.controller;
+package userinterface.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-//Snippet gmtFormat() by Lars Staalhagen, DTU.
-public class Clock implements Runnable {
 
+public class Clock implements Runnable {
+	/**
+	 * Snippet gmtFormat() by Lars Staalhagen, DTU.
+	 * @return a formatted time String.
+	 */
 	public String gmtFormat() {
 		SimpleDateFormat gmtFmt = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
 		gmtFmt.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -18,11 +21,11 @@ public class Clock implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			FrameController.setClockUpdate(gmtFormat());
+			gmtFormat();
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				System.out.println("Fail");
+				System.out.println("Clock failed!!");
 				e.printStackTrace();
 			}
 		}
