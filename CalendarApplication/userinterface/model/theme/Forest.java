@@ -22,6 +22,7 @@ import userinterface.view.component.MenuBar.MenuItem;
 
 /**
  * A forest theme which skins various JComponents
+ * 
  * @author Tobias
  * @version 0.5
  * @see ColorList, Themes
@@ -64,18 +65,20 @@ public interface Forest {
 				panel.setBackground(COLOR.GHOST_WHITE);
 			}
 			else if (panel.getTypeOfPanel().equals(Themes.LOGINSCREEN)) {
-				panel.setBackground(COLOR.ANTIQUE_WHITE);
+				panel.setFont(new Font("Lucida", 0, 24));
+				panel.setBackground(COLOR.AQUA_MARINE_TWO);
 				panel.setForeground(COLOR.BISQUE);
-				panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-						panel.getFont(), COLOR.BLUE_DARKCYAN));
+				panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 3,
+						panel.getFont(), COLOR.FIREBRICK_ONE));
 			}
 			else if (panel.getTypeOfPanel().equals(Themes.LOGINSCREEN_CARD)) {
-				panel.setBackground(COLOR.BISQUE);
-				
+				panel.setBackground(COLOR.KHAKI);
+
 			}
 			else if (panel.getTypeOfPanel().equals(Themes.INFOPANEL)) {
 				panel.setBackground(COLOR.WHITE);
 				panel.setForeground(COLOR.BLACK);
+				panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, COLOR.BLACK));
 			}
 
 			return panel;

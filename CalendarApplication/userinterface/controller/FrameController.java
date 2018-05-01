@@ -9,6 +9,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -16,8 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 
 import business_logic.Management;
-import business_logic.User;
-import business_logic.Management.userType;
 import userinterface.model.Themes;
 import userinterface.model.Themes.Theme;
 import userinterface.view.InfoPanel;
@@ -34,47 +33,30 @@ import userinterface.view.component.ProjectTree;
  *
  */
 public class FrameController {
-	protected JFrame			   frame;
-	protected FrameController	   appGUI;
-	private Panel				   uiCard, loginScreenCard, allCards;
+	private Panel				   uiCard, loginscreenCard, allCards;
 
-	private InfoPanel			   infopanel;
-	private LoginScreen			   loginscreen;
-	private UserInterface		   ui;
+	private InfoPanel			   infoObj;
+	private LoginScreen			   loginsreenObj;
+	private UserInterface		   uiObj;
 	private CardLayout			   cardlayout;
-	private Management			   management;
-	private ProjectTree projectTree;
-	private static Rectangle	   rr;
+	private Management			   managementObj;
+	private ProjectTree			   projecttreeObj;
+	private static Rectangle	   screenDimension;
 
 	private static FrameController controller;
 	private static Theme		   theme = Theme.FOREST;
 
-	public FrameController() {
-		management = new Management();
-		projectTree = new ProjectTree();
-		GridBagConstraints cs = new GridBagConstraints();
-		GridBagLayout gb = new GridBagLayout();
-		ui = new UserInterface(this.getManagement());
-		loginscreen = new LoginScreen();
-		uiCard = new Panel(Themes.NONE);
-		infopanel = new InfoPanel();
-		uiCard.setLayout(new BorderLayout());
-		uiCard.add(ui, BorderLayout.CENTER);
+	private static JFrame		   frame;
 
-		initLoginScreen(cs, gb);
+	/**
+	 * Constructor initializes the CardLayout. The FrameController object also has a method @see initObjectsAndAttachThemToCardLayout() which is first called later since some of the
+	 * other objects instantiated here couples with FrameController, and we would otherwise encounter nullpointer exceptions.
+	 */
+	public FrameController() {
 
 		allCards = new Panel(new CardLayout(0, 0), Themes.STANDARD);
-		allCards.add(uiCard, "0");
-		allCards.add(loginScreenCard, "1");
-
-	}
-
-	public ProjectTree getProjectTree() {
-		return projectTree;
-	}
-
-	public void setProjectTree(ProjectTree projectTree) {
-		this.projectTree = projectTree;
+		uiCard = new Panel(new BorderLayout(), Themes.NONE);
+		loginscreenCard = new Panel(new GridBagLayout(), Themes.LOGINSCREEN_CARD);
 	}
 
 	public static void main(String[] args) {
@@ -87,33 +69,46 @@ public class FrameController {
 		GraphicsDevice[] gd = ge.getScreenDevices();
 		for (GraphicsDevice device : gd) {
 			GraphicsConfiguration gc = device.getDefaultConfiguration();
-			rr = gc.getBounds();
+			screenDimension = gc.getBounds();
 		}
 		controller = new FrameController();
+
 		DetectScreenBounds screenSize = new DetectScreenBounds();
-		JFrame frame = controller.initJFrame(rr.width / 3, rr.height / 2, "SoftwareHuset's Calendar Application");
+		frame = controller.initJFrame(screenDimension.width / 3, screenDimension.height / 2, "SoftwareHuset's Calendar Application");
 		screenSize.centerWindowOnScreen(frame);
+		controller.initObjectsAndAttachThemToCardLayout();
+
+		/*
+		 * Anonymous inner class which sets the two panels of JFrames Root contentpane. As such, attaches the CardLayout-LayoutMngr.
+		 */
 		Runnable r = new Runnable() {
 			public void run() {
-				frame.getContentPane().add(controller.infopanel, BorderLayout.NORTH);
+				frame.getContentPane().add(controller.infoObj, BorderLayout.NORTH);
 				frame.getContentPane().add(controller.allCards);
 				controller.cardlayout = (CardLayout) (controller.allCards.getLayout());
 				controller.cardlayout.show(controller.allCards, "0");
-				frame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				frame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
 				frame.setVisible(true);
 			}
 		};
 		EventQueue.invokeLater(r);
 	}
 
-	private void initLoginScreen(GridBagConstraints cs, GridBagLayout gb) {
-		cs.anchor = GridBagConstraints.CENTER;
-		cs.ipadx = 270 + 1;
-		cs.ipady = 120;
-		loginScreenCard = new Panel(Themes.LOGINSCREEN_CARD);
-		loginScreenCard.setLayout(gb);
-		loginScreenCard.add(loginscreen, cs);
+	private void initObjectsAndAttachThemToCardLayout() {
+		managementObj = new Management();
+		projecttreeObj = new ProjectTree();
+		uiObj = new UserInterface(this.getManagement());
+		loginsreenObj = new LoginScreen();
+		infoObj = new InfoPanel();
+
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.ipadx = FrameController.frame.getWidth() / 4;
+		constraints.ipady = FrameController.frame.getHeight() / 6;
+		loginscreenCard.add(loginsreenObj, constraints);
+		uiCard.add(uiObj, BorderLayout.CENTER);
+		allCards.add(uiCard, "0");
+		allCards.add(loginscreenCard, "1");
+
 	}
 
 	private JFrame initJFrame(int dx, int dy, String titleOfApplication) {
@@ -124,15 +119,17 @@ public class FrameController {
 		aNewJFrame.setUndecorated(true);
 		aNewJFrame.setDefaultCloseOperation(JFrame.ICONIFIED);
 		aNewJFrame.getContentPane().setLayout(new BorderLayout());
+		aNewJFrame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		aNewJFrame.getRootPane().setWindowDecorationStyle(JRootPane.COLOR_CHOOSER_DIALOG);
 		return aNewJFrame;
 	}
 
 	public Management getManagement() {
-		return management;
+		return managementObj;
 	}
 
 	public LoginScreen getLoginscreen() {
-		return loginscreen;
+		return loginsreenObj;
 	}
 
 	public void setAllCards(Panel allCards) {
@@ -168,7 +165,14 @@ public class FrameController {
 	}
 
 	public InfoPanel getInfoPanel() {
-		return infopanel;
+		return infoObj;
 	}
 
+	public ProjectTree getProjectTree() {
+		return projecttreeObj;
+	}
+
+	public void setProjecttreeObj(ProjectTree projectTree) {
+		this.projecttreeObj = projectTree;
+	}
 }

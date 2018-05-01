@@ -13,45 +13,40 @@ import userinterface.controller.FrameController;
  * ProjectTree shows projects for the user/worker.
  * 
  * @author Tobias
- * @version 0.3
+ * @version 0.4
  *
  */
 public class ProjectTree extends JPanel {
 	private static final long	   serialVersionUID	= 1L;
 	private DefaultMutableTreeNode usersProjectList;
 
-
-
 	public ProjectTree() {
 		try {
-			updateProjectTree(FrameController.getController().getManagement().getLoggedInUser());			
+			updateProjectTree(FrameController.getController().getManagement().getLoggedInUser());
 		} catch (Exception e) {
 
-		}finally {
-			updateProjectTree(new User("Dummy", "dummy", userType.Employee));
+		} finally {
+			updateProjectTree(new User(null, null, null));
 		}
 
 	}
 
 	public void updateProjectTree(User user) {
-		if (user!=null) {
-			if (user.getTypeOfUser()== Management.userType.Admin) {
+		if (user != null) {
+			if (user.getTypeOfUser() == Management.userType.Admin) {
 				usersProjectList = new DefaultMutableTreeNode(user.getUserID());
-				DefaultMutableTreeNode project = new DefaultMutableTreeNode("Project one");
-				DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Project two");
-				usersProjectList.add(project);
-				usersProjectList.add(fruitNode);
+				DefaultMutableTreeNode users = new DefaultMutableTreeNode("All users");
+				DefaultMutableTreeNode projects = new DefaultMutableTreeNode("All projects");
+				usersProjectList.add(users);
+				usersProjectList.add(projects);
 
 			}
 			else if (user.getTypeOfUser() == userType.Employee) {
-				usersProjectList = new DefaultMutableTreeNode("Admin");
-				// create the child nodes
-				DefaultMutableTreeNode project = new DefaultMutableTreeNode("Worker one");
-				DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Worker two");
-
-				// add the child nodes to the root node
-				usersProjectList.add(project);
-				usersProjectList.add(fruitNode);
+				usersProjectList = new DefaultMutableTreeNode(user.getTypeOfUser().toString() + ": " + user.getUserID());
+				DefaultMutableTreeNode ownProjects = new DefaultMutableTreeNode("");
+				DefaultMutableTreeNode allProjects = new DefaultMutableTreeNode("Worker two");
+				usersProjectList.add(ownProjects);
+				usersProjectList.add(allProjects);
 
 			}
 			else {

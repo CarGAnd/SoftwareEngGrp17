@@ -11,7 +11,6 @@ import business_logic.Management;
 import business_logic.User;
 import userinterface.controller.FrameController;
 import userinterface.view.LoginScreen;
-import userinterface.view.component.ProjectTree;
 
 /**
  * Handles all events.
@@ -34,6 +33,8 @@ public interface ActionEvents {
 	public class Logout implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			FrameController.getController().getManagement().logUserOut();
+			FrameController.getController().getProjectTree().updateProjectTree(new User(null, null, null));
 			showCard("1");
 		}
 	}
@@ -57,24 +58,23 @@ public interface ActionEvents {
 				JOptionPane.showMessageDialog(loginscreen, "Empty password.", "Missing password.", JOptionPane.WARNING_MESSAGE);
 			}
 			else {
+				String user = loginscreen.getUserLoginNameField().getText();
+				loginscreen.getUserLoginNameField().setText("");
+				String password = loginscreen.getUserLoginPasswordField().getText();
+				loginscreen.getUserLoginPasswordField().setText("");
 				for (User userObj : management.getUsers()) {
-					String user = loginscreen.getUserLoginNameField().getText();
-					String password = loginscreen.getUserLoginPasswordField().getText();
 					if (userObj.getUserID().equals(user) && userObj.getPassword().equals(password)) {
 						try {
 							management.userLogin(userObj.getUserID(), userObj.getPassword());
+							FrameController.getController().getProjectTree().updateProjectTree(userObj);
+							showCard("0");
 						} catch (FailedLoginException loginException) {
+							System.out.println(loginException.getMessage());
 							loginException.printStackTrace();
 						}
-						FrameController.getController().getProjectTree().updateProjectTree(userObj);
-						showCard("0");
 					}
-					else
-						System.out.println("Username and password do not match.");
-
 				}
 			}
-
 		}
 	}
 
