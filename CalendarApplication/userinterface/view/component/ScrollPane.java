@@ -34,4 +34,5 @@ public class ScrollPane extends JScrollPane {
 		}
 		this.add(txtArea);
 	}
+
 }

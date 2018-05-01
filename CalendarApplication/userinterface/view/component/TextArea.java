@@ -19,6 +19,7 @@ public TextArea(int i, int j) {
 	this.setLineWrap(true);
 	this.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 	this.setEditable(false);
+	
 	FrameController.skinComponent(this);
 }
 }

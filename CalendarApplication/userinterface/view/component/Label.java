@@ -13,7 +13,7 @@ import userinterface.controller.FrameController;
  */
 public class Label extends JLabel {
 	public final static int ETCHED = 0;
-	public static final int USE_SKIN_BORDER = 1;
+	public static final int USE_SKINBORDER = 1;
 	private static final long serialVersionUID = 1L;
 
 	public Label(String labeltext, int border) {
@@ -24,7 +24,7 @@ public class Label extends JLabel {
 			case ETCHED:
 				this.setBorder(BorderFactory.createEtchedBorder());
 				break;
-			case USE_SKIN_BORDER:
+			case USE_SKINBORDER:
 				break;
 			default:
 				break;

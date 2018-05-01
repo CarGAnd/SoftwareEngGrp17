@@ -15,7 +15,7 @@ public interface Themes extends Forest {
 	public static final String LOGINSCREEN_CARD	= "loginscreencard";
 	public static final String INFOPANEL		= "infopanel";
 	public static final String NONE 			= "none";
-	Colors					   COLOR			= new Colors();
+	public static final Colors					   COLOR			= new Colors();
 
 	public enum Theme {
 		FOREST, VOLCANO, AQUA, SKY;

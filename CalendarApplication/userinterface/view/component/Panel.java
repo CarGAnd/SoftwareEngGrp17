@@ -28,6 +28,11 @@ public class Panel extends JPanel {
 		FrameController.skinComponent(this);
 	}
 
+	public Panel() {
+		super();
+		FrameController.skinComponent(this);
+	}
+
 	public String getTypeOfPanel() {
 		return typeOfPanel;
 	}

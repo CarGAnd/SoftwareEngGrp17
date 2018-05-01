@@ -16,7 +16,6 @@ import userinterface.view.component.Panel;
  * @version 1.00
  * @see Clock, MessageOfTheDay
  * 
- *
  */
 public class InfoPanel extends Panel {
 
@@ -31,7 +30,7 @@ public class InfoPanel extends Panel {
 				clock.run();
 			}
 		};
-		Label time = new Label("",Label.USE_SKIN_BORDER);
+		Label time = new Label("", Label.USE_SKINBORDER);
 		time.setText(clock.gmtFormat());
 
 		this.setFont(new Font("Courier", Font.PLAIN, 10));

@@ -3,8 +3,11 @@ package userinterface.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Desktop.Action;
 
 import javax.swing.BorderFactory;
+
+import business_logic.Management;
 import userinterface.model.ActionEvents;
 import userinterface.model.ColorList;
 import userinterface.model.Themes;
@@ -30,26 +33,27 @@ public class UserInterface extends Panel implements ActionEvents {
 	private ProjectTree		  viewProjectsTree;
 	private Panel			  centeredSouthPanelPrompt, southPanel, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
 
-	public UserInterface() {
+	public UserInterface(Management management) {
 		super(new BorderLayout(), Themes.NONE);
-		instantiateComponents();
+		instantiateComponents(management);
 		nestEverything();
 	}
 	
 	/**
 	 * Create component and panels, and set the panels layoutmanagers.
+	 * @param management 
 	 */
-	private void instantiateComponents() {
+	private void instantiateComponents(Management management) {
 		connectingPanel = new Panel(new BorderLayout(), Themes.NONE);
 		centeredSouthPanelPrompt = new Panel(Themes.STANDARD);
 		southPanel = new Panel(new GridLayout(3, 1), Themes.STANDARD);
 		southPanel.setBorder(BorderFactory.createEtchedBorder());
 		centeredSouthPanelPrompt.setLayout(new BorderLayout());
 		subPanelUserInput = new Panel(Themes.STANDARD);
-		viewProjectsTree = new ProjectTree();
 		projectDescription = new TextArea(400, 200);// rows and columns locks the textarea from auto-rezizing on input.
 		queryRetrievalScrollPane = new ScrollPane(projectDescription, ScrollPane.VERT_SCROLL_ALWAYS);
 		promptLabel = new Label(" ",Label.ETCHED);
+		viewProjectsTree = new ProjectTree();
 	}
 
 	/**

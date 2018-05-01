@@ -67,7 +67,7 @@ public interface Forest {
 				panel.setBackground(COLOR.ANTIQUE_WHITE);
 				panel.setForeground(COLOR.BISQUE);
 				panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "SoftwareHuset A/S", 0, 0,
-						panel.getFont(), COLOR.DARK_KHAKI));
+						panel.getFont(), COLOR.BLUE_DARKCYAN));
 			}
 			else if (panel.getTypeOfPanel().equals(Themes.LOGINSCREEN_CARD)) {
 				panel.setBackground(COLOR.BISQUE);
@@ -109,7 +109,7 @@ public interface Forest {
 			menu.setFont(new Font("Monospace", Font.CENTER_BASELINE, 20));
 			menu.setForeground(Color.BLACK);
 			menu.setBackground(Color.WHITE);
-			menu.setBorder(BorderFactory.createDashedBorder(COLOR.BROWN_ONE, 25, 6));
+			menu.setBorder(BorderFactory.createDashedBorder(COLOR.BROWN_ONE, 2, 6));
 			return menu;
 		}
 		else if (component instanceof Menu) {
@@ -143,6 +143,14 @@ public interface Forest {
 			passfield.setBackground(COLOR.AQUA_MARINE_TWO);
 			passfield.setBorder(BorderFactory.createEmptyBorder());
 			return passfield;
+		}
+		else if (component instanceof ProjectTree) {
+			ProjectTree tree = (ProjectTree) component;
+			tree.setFont(new Font("Lucida", Font.CENTER_BASELINE, 11));
+			tree.setForeground(COLOR.BISQUE);
+			tree.setBackground(COLOR.AQUA_MARINE_TWO);
+			tree.setBorder(BorderFactory.createDashedBorder(COLOR.BLACK, 18, 4));
+			return tree;
 		}
 		else {
 			try {

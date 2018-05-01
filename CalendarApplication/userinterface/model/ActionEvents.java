@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import business_logic.FailedLoginException;
 import business_logic.Management;
 import business_logic.User;
 import userinterface.controller.FrameController;
 import userinterface.view.LoginScreen;
+import userinterface.view.component.ProjectTree;
 
 /**
  * Handles all events.
@@ -54,10 +56,16 @@ public interface ActionEvents {
 				JOptionPane.showMessageDialog(loginscreen, "Empty password.", "Missing password.", JOptionPane.WARNING_MESSAGE);
 			}
 			else {
-				for (User e1 : management.getUsers()) {
+				for (User userObj : management.getUsers()) {
 					String user = loginscreen.getUserLoginNameField().getText();
 					String password = loginscreen.getUserLoginPasswordField().getText();
-					if (e1.getUserID().equals(user) && e1.getPassword().equals(password)) {
+					if (userObj.getUserID().equals(user) && userObj.getPassword().equals(password)) {
+						try {
+							management.userLogin(userObj.getUserID(), userObj.getPassword());
+						} catch (FailedLoginException loginException) {
+							loginException.printStackTrace();
+						}
+						FrameController.getController().getProjectTree().updateProjectTree(userObj);
 						showCard("0");
 					}
 					else
