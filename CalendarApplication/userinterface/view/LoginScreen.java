@@ -13,6 +13,7 @@ import userinterface.model.ActionEvents;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
+import userinterface.view.component.Panel;
 
 /**
  * This class creates a Login screen panel for a user to enter his/her credentials.
@@ -20,7 +21,7 @@ import userinterface.view.component.Label;
  * @author Tobias
  * @version 1.00, 28 Apr 2018
  */
-public class LoginScreen extends Panel implements ActionEvents, Themes {
+public class LoginScreen extends Panel implements ActionEvents {
 	private static final long serialVersionUID = 1L;
 	private JTextField		  userLoginNameField;
 	private JPasswordField	  userLoginPasswordField;
@@ -33,10 +34,10 @@ public class LoginScreen extends Panel implements ActionEvents, Themes {
 		/**
 		 * Dont-Repeat-Yourself (DRY) principle.
 		 */
-		addSomeComponent(loginpanel, new Label("Username: "), 0, 0, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Username: ",Label.USE_SKIN_BORDER), 0, 0, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginNameField, 1, 0, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(4), 0, 1, 2, 1, 0, 0);
-		addSomeComponent(loginpanel, new Label("Password: "), 0, 2, 1, 1, 0, 0);
+		addSomeComponent(loginpanel, new Label("Password: ",Label.USE_SKIN_BORDER), 0, 2, 1, 1, 0, 0);
 		addSomeComponent(loginpanel, userLoginPasswordField, 1, 2, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, (JComponent) Box.createVerticalStrut(8), 0, 3, 2, 1, 0, 0);
 		addSomeComponent(loginpanel, new Button("Login", new LoginAttempt(), "Login"), 0, 4, 4, 1, 96, 2);

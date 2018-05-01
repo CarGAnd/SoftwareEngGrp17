@@ -20,8 +20,8 @@ import userinterface.model.Themes;
 import userinterface.model.Themes.Theme;
 import userinterface.view.InfoPanel;
 import userinterface.view.LoginScreen;
-import userinterface.view.Panel;
 import userinterface.view.UserInterface;
+import userinterface.view.component.Panel;
 
 /**
  * Instantiates a JFrame, ties all panels together and controls the theme.

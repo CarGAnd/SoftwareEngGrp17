@@ -11,12 +11,12 @@ import javax.swing.JTextField;
 import userinterface.model.ColorList;
 import userinterface.model.Themes;
 import userinterface.model.ColorList.Colors;
-import userinterface.view.Panel;
-import userinterface.view.ProjectDescription;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
 import userinterface.view.component.MenuBar;
+import userinterface.view.component.Panel;
 import userinterface.view.component.ProjectTree;
+import userinterface.view.component.TextPane;
 import userinterface.view.component.MenuBar.Menu;
 import userinterface.view.component.MenuBar.MenuItem;
 
@@ -96,8 +96,8 @@ public interface Forest {
 			tree.setBorder(BorderFactory.createEmptyBorder());
 			return tree;
 		}
-		else if (component instanceof ProjectDescription) {
-			ProjectDescription projdcrptn = (ProjectDescription) component;
+		else if (component instanceof TextPane) {
+			TextPane projdcrptn = (TextPane) component;
 			projdcrptn.setFont(new Font("Lucida", Font.CENTER_BASELINE, 11));
 			projdcrptn.setForeground(COLOR.BISQUE);
 			projdcrptn.setBackground(COLOR.AQUA_MARINE_TWO);

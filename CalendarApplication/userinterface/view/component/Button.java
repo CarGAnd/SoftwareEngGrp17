@@ -5,15 +5,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import userinterface.controller.FrameController;
-import userinterface.model.ColorList;
 
-public class Button extends JButton implements ColorList {
+public class Button extends JButton {
 	private static final long serialVersionUID = 1L;
 	private String			  buttonStyle;
 
 	/**
 	 * Custom Button which is skinnable by setting buttonStyle to valid style.
-	 * ...
+	 * 
 	 * @author Tobias
 	 * @version 1.05, 30 Apr 2018
 	 * @param label

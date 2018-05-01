@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.view.component;
 
 import javax.swing.JTextPane;
 
@@ -7,7 +7,7 @@ import javax.swing.JTextPane;
  * @version 0.01
  *
  */
-public class ProjectDescription extends JTextPane{
+public class TextPane extends JTextPane{
 	private static final long serialVersionUID = 1L;
 
 }
