@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import business_logic.Management.userType;
-
 public class Project {
 	ArrayList<Activity> activities;
 	String projectName = "";

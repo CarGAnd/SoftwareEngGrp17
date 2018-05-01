@@ -3,13 +3,10 @@ package userinterface.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Desktop.Action;
-
 import javax.swing.BorderFactory;
 
 import business_logic.Management;
 import userinterface.model.ActionEvents;
-import userinterface.model.ColorList;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;

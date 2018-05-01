@@ -39,6 +39,7 @@ public interface ActionEvents {
 	}
 
 	public class LoginAttempt implements ActionListener {
+		@SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LoginScreen loginscreen = FrameController.getController().getLoginscreen();

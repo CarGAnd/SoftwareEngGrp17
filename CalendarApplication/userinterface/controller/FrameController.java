@@ -44,14 +44,12 @@ public class FrameController {
 	private CardLayout			   cardlayout;
 	private Management			   management;
 	private ProjectTree projectTree;
-	private User user;
 	private static Rectangle	   rr;
 
 	private static FrameController controller;
 	private static Theme		   theme = Theme.FOREST;
 
 	public FrameController() {
-		user = new User("test","test",userType.Employee);
 		management = new Management();
 		projectTree = new ProjectTree();
 		GridBagConstraints cs = new GridBagConstraints();
