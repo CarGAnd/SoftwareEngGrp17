@@ -4,6 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import userinterface.controller.FrameController;
+import userinterface.model.Listeners.HoverComponentListener;
 
 
 /**Custom label which has a default skin.
@@ -17,6 +18,21 @@ public class Label extends JLabel {
 	private static final long serialVersionUID = 1L;
 
 	public Label(String labeltext, int border) {
+		super(labeltext);
+		this.setAlignmentX(EAST);
+		FrameController.skinComponent(this);
+		switch (border) {
+			case ETCHED:
+				this.setBorder(BorderFactory.createEtchedBorder());
+				break;
+			case USE_SKINBORDER:
+				break;
+			default:
+				break;
+		}
+	}
+
+	public Label(String labeltext, int border, HoverComponentListener hoverComponentListener) {
 		super(labeltext);
 		this.setAlignmentX(EAST);
 		FrameController.skinComponent(this);

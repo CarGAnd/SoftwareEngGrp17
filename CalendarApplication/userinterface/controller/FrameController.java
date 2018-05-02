@@ -9,7 +9,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -48,6 +47,10 @@ public class FrameController {
 
 	private static JFrame		   frame;
 
+	public static JFrame getFrame() {
+		return frame;
+	}
+
 	/**
 	 * Constructor initializes the CardLayout. The FrameController object also has a method @see initObjectsAndAttachThemToCardLayout() which is first called later since some of the
 	 * other objects instantiated here couples with FrameController, and we would otherwise encounter nullpointer exceptions.
@@ -60,7 +63,7 @@ public class FrameController {
 	}
 
 	public static void main(String[] args) {
-		/**
+		/*
 		 * Used to center the JFrame and set Dimensions according to screen resolution. Taken from @see DetectScreenBounds which is a class/snippet that was found at StackExchange, link
 		 * can be found in referenced class.
 		 * 
@@ -96,7 +99,7 @@ public class FrameController {
 	private void initObjectsAndAttachThemToCardLayout() {
 		managementObj = new Management();
 		projecttreeObj = new ProjectTree();
-		uiObj = new UserInterface(this.getManagement());
+		uiObj = new UserInterface();
 		loginsreenObj = new LoginScreen();
 		infoObj = new InfoPanel();
 

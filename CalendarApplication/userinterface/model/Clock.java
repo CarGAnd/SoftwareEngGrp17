@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-
 public class Clock implements Runnable {
 	/**
 	 * Snippet gmtFormat() by Lars Staalhagen, DTU.
@@ -28,8 +27,8 @@ public class Clock implements Runnable {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				System.out.println("Clock failed!!");
-				e.printStackTrace();
+				System.out.println("Clock failed!!" + e.getMessage());
+
 			}
 		}
 

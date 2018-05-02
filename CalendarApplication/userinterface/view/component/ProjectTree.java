@@ -1,5 +1,6 @@
 package userinterface.view.component;
 
+import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -21,12 +22,15 @@ public class ProjectTree extends JPanel {
 	private DefaultMutableTreeNode usersProjectList;
 
 	public ProjectTree() {
+		this.add(Box.createHorizontalStrut(175), null);
 		try {
 			updateProjectTree(FrameController.getController().getManagement().getLoggedInUser());
+			System.out.println("Created project tree.");
 		} catch (Exception e) {
-
-		} finally {
 			updateProjectTree(new User(null, null, null));
+			System.out.println("Caught an exception...");
+		} finally {
+			
 		}
 
 	}
@@ -34,6 +38,7 @@ public class ProjectTree extends JPanel {
 	public void updateProjectTree(User user) {
 		if (user != null) {
 			if (user.getTypeOfUser() == Management.userType.Admin) {
+				System.out.println("Admin logged in");
 				usersProjectList = new DefaultMutableTreeNode(user.getUserID());
 				DefaultMutableTreeNode users = new DefaultMutableTreeNode("All users");
 				DefaultMutableTreeNode projects = new DefaultMutableTreeNode("All projects");
@@ -42,6 +47,7 @@ public class ProjectTree extends JPanel {
 
 			}
 			else if (user.getTypeOfUser() == userType.Employee) {
+				System.out.println("Employee logged in");
 				usersProjectList = new DefaultMutableTreeNode(user.getTypeOfUser().toString() + ": " + user.getUserID());
 				DefaultMutableTreeNode ownProjects = new DefaultMutableTreeNode("");
 				DefaultMutableTreeNode allProjects = new DefaultMutableTreeNode("Worker two");

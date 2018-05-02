@@ -1,7 +1,5 @@
 package userinterface.view.component;
 
-import java.awt.Font;
-
 import javax.swing.JTextArea;
 
 import userinterface.controller.FrameController;
@@ -17,7 +15,6 @@ public TextArea(int i, int j) {
 	super(i,j);
 	this.setAutoscrolls(true);
 	this.setLineWrap(true);
-	this.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 	this.setEditable(false);
 	
 	FrameController.skinComponent(this);

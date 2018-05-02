@@ -3,9 +3,7 @@ package userinterface.model;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
-
 import business_logic.FailedLoginException;
 import business_logic.Management;
 import business_logic.User;
@@ -21,11 +19,9 @@ import userinterface.view.LoginScreen;
  */
 public interface ActionEvents {
 	public class Exit implements ActionListener {
-		public Exit() {
-		}
-
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			FrameController.getFrame().dispose();
 			System.exit(0);
 		}
 	}
@@ -36,6 +32,29 @@ public interface ActionEvents {
 			FrameController.getController().getManagement().logUserOut();
 			FrameController.getController().getProjectTree().updateProjectTree(new User(null, null, null));
 			showCard("1");
+		}
+	}
+
+	public class SwitchAccount implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (FrameController.getController().getManagement().adminIsLoggedIn()) {
+				String user = JOptionPane.showInputDialog(FrameController.getFrame(), "Switch to UID: ", "Switch accounts",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				for (User userObj : FrameController.getController().getManagement().getUsers()) {
+					if (userObj.getUserID().equals(user)) {
+						try {
+							FrameController.getController().getManagement().userLogin(userObj.getUserID(), userObj.getPassword());
+							FrameController.getController().getManagement().logUserOut();
+							FrameController.getController().getProjectTree().updateProjectTree(userObj);
+							showCard("0");
+						} catch (FailedLoginException loginException) {
+							System.out.println(loginException.getMessage());
+							loginException.printStackTrace();
+						}
+					}
+				}
+			}
 		}
 	}
 
