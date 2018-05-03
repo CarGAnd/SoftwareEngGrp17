@@ -9,10 +9,6 @@ public class Management {
 	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	private ArrayList<User> users = new ArrayList<User>();
 	
-	public static void main(String[] args) {
-		
-	}
-	
 	public Management() {
 		users.add(new Admin());
 	}

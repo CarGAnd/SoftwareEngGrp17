@@ -17,7 +17,7 @@ public class MessageOfTheDay extends Label implements ColorList {
 	private static final long serialVersionUID = 1L;
 
 	public MessageOfTheDay() {
-		super(text,Label.USE_SKIN_BORDER);
+		super(text,Label.USE_SKINBORDER);
 		this.setForeground(levelOfImportance(status.ALERT));
 	}
 

@@ -7,6 +7,7 @@ import userinterface.model.theme.Forest;
 public interface Themes extends Forest {
 	/**
 	 * Switches on an enum to retrieve the theme.
+	 * 
 	 * @author Tobias
 	 * @version 1.00
 	 */
@@ -14,8 +15,9 @@ public interface Themes extends Forest {
 	public static final String LOGINSCREEN		= "loginscreen";
 	public static final String LOGINSCREEN_CARD	= "loginscreencard";
 	public static final String INFOPANEL		= "infopanel";
-	public static final String NONE 			= "none";
-	Colors					   COLOR			= new Colors();
+	public static final String NONE				= "none";
+	public static final Colors COLOR			= new Colors();
+	public static final String PROMPT			= "prompt";
 
 	public enum Theme {
 		FOREST, VOLCANO, AQUA, SKY;
@@ -25,14 +27,11 @@ public interface Themes extends Forest {
 		switch (themeChoice) {
 			case FOREST:
 				return Forest.skin(componentToBeSkinned);
-			//TODO: Implement the following themes
-			/**case VOLCANO:
-			return Volcano.skin(componentToBeSkinned);
-			case AQUA:
-		 	return Aqua.skin(componentToBeSkinned);
-			case SKY:
-			return Sky.skin(componentToBeSkinned);
-			*/
+			// case VOLCANO:
+			// return Volcano.skin(componentToBeSkinned);
+			/**
+			 * case AQUA: return Aqua.skin(componentToBeSkinned); case SKY: return Sky.skin(componentToBeSkinned);
+			 */
 			default:
 				throw new AssertionError("Theme not recognized.");
 

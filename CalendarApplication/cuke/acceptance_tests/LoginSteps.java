@@ -7,8 +7,6 @@ import business_logic.Admin;
 import business_logic.Employee;
 import business_logic.FailedLoginException;
 import business_logic.Management;
-import business_logic.Management.userType;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 
 public class LoginSteps {

@@ -1,18 +1,21 @@
 package userinterface.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JScrollPane;
+
 import userinterface.model.ActionEvents;
-import userinterface.model.ColorList;
+import userinterface.model.Listeners;
 import userinterface.model.Themes;
 import userinterface.view.component.Button;
 import userinterface.view.component.Label;
 import userinterface.view.component.Panel;
 import userinterface.view.component.ProjectTree;
-import userinterface.view.component.ScrollPane;
 import userinterface.view.component.TextArea;
 
 /**
@@ -25,49 +28,67 @@ public class UserInterface extends Panel implements ActionEvents {
 
 	private static final long serialVersionUID = 1L;
 	private TextArea		  projectDescription;
-	private Label			  promptLabel;
-	private ScrollPane		  queryRetrievalScrollPane;
-	private ProjectTree		  viewProjectsTree;
-	private Panel			  centeredSouthPanelPrompt, southPanel, subPanelControlView, inputPanel, subPanelUserInput, connectingPanel;
+	private static Label	  promptLabel;
+	private JScrollPane		  scrollPaneHoldingProjectDescription;
+	private ProjectTree		  projectsTree;
+	private Panel			  center, southGridbagLayout, southGridBagLayoutPanelTwo, southGridBagLayoutPanelOne, panelInput,
+			mainPanelBorderLayout;
+	private Panel centerSouth;
 
 	public UserInterface() {
 		super(new BorderLayout(), Themes.NONE);
-		instantiateComponents();
-		nestEverything();
+		createComponents();
+		attachAndNestLayoutManagers();
 	}
-	
+
 	/**
-	 * Create component and panels, and set the panels layoutmanagers.
+	 * Create component and panels, and set the panels layoutmanagers. Orientation is as follows: m(main), n(north), s(south), w(west), e(east) or c(centered). A nested component/panel
+	 * is written f.e. as c_n for north inside a centered panel, or s_e for east placement inside a southern panel.
+	 * 
+	 * @param management
 	 */
-	private void instantiateComponents() {
-		connectingPanel = new Panel(new BorderLayout(), Themes.NONE);
-		centeredSouthPanelPrompt = new Panel(Themes.STANDARD);
-		southPanel = new Panel(new GridLayout(3, 1), Themes.STANDARD);
-		southPanel.setBorder(BorderFactory.createEtchedBorder());
-		centeredSouthPanelPrompt.setLayout(new BorderLayout());
-		subPanelUserInput = new Panel(Themes.STANDARD);
-		viewProjectsTree = new ProjectTree();
-		projectDescription = new TextArea(400, 200);// rows and columns locks the textarea from auto-rezizing on input.
-		queryRetrievalScrollPane = new ScrollPane(projectDescription, ScrollPane.VERT_SCROLL_ALWAYS);
-		promptLabel = new Label(" ",Label.ETCHED);
+	private void createComponents() {
+		mainPanelBorderLayout = new Panel(new BorderLayout(), Themes.NONE);
+		southGridbagLayout = new Panel(new GridLayout(3, 1), Themes.STANDARD);
+		southGridBagLayoutPanelOne = new Panel(new FlowLayout(FlowLayout.RIGHT), Themes.STANDARD);
+		southGridBagLayoutPanelTwo = new Panel(new FlowLayout(FlowLayout.RIGHT), Themes.STANDARD);
+		center = new Panel(new BorderLayout(), Themes.STANDARD);
+		centerSouth = new Panel(new FlowLayout(FlowLayout.CENTER),Themes.STANDARD);
+	//	centerSouth.add(Box.(100, 101, 102));
+		panelInput = new Panel(Themes.STANDARD);
+		promptLabel = new Label(" ", Label.ETCHED, new Listeners.HoverComponentListener());
+		projectsTree = new ProjectTree();
+		projectDescription = new TextArea(400, 200);/* rows and columns locks the textarea from auto-rezizing on input. */
+		scrollPaneHoldingProjectDescription = new JScrollPane(projectDescription);
+		scrollPaneHoldingProjectDescription.setViewportBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 	}
 
 	/**
 	 * Nest it all in the required order(!).
 	 */
-	private void nestEverything() {
-		centeredSouthPanelPrompt.add(queryRetrievalScrollPane, BorderLayout.CENTER);
-		centeredSouthPanelPrompt.add(promptLabel, BorderLayout.SOUTH);
-		connectingPanel.add(viewProjectsTree, BorderLayout.WEST);
-		connectingPanel.add(centeredSouthPanelPrompt, BorderLayout.CENTER);
-		connectingPanel.add(southPanel, BorderLayout.SOUTH);
-		this.add(connectingPanel, BorderLayout.CENTER);
-		inputPanel = new Panel(new FlowLayout(FlowLayout.RIGHT), Themes.STANDARD);
-		inputPanel.add(new Button("Logout", new Logout(), "UI"));
-		subPanelControlView = new Panel(new FlowLayout(FlowLayout.RIGHT),Themes.STANDARD);
-		subPanelUserInput.add(inputPanel);
-		southPanel.add(subPanelControlView, 0);
-		southPanel.add(subPanelUserInput, 1);
+	private void attachAndNestLayoutManagers() {
+		center.add(scrollPaneHoldingProjectDescription, BorderLayout.CENTER);
+		
+		center.add(centerSouth, BorderLayout.SOUTH);
+		
+		mainPanelBorderLayout.add(projectsTree, BorderLayout.WEST);
+		
+		mainPanelBorderLayout.add(center, BorderLayout.CENTER);
+		mainPanelBorderLayout.add(southGridbagLayout, BorderLayout.SOUTH);
+		this.add(mainPanelBorderLayout, BorderLayout.CENTER);
+		southGridBagLayoutPanelOne.add(new Button("Logout", new Logout(), "UI"));
+		centerSouth.add(new Button("Require Assistance", null, "UI"));
+		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
+		centerSouth.add(new Button("Switch Account (temp)", new SwitchAccount(), "UI"));
+		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
+		centerSouth.add(new Button("Open Calendar View", new SwitchAccount(), "UI"));
+		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
+		centerSouth.add(new Button("Edit or Register Time Worked", new SwitchAccount(), "UI"));
+		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
+		centerSouth.add(new Button("Assess Project Status or Employee'", new SwitchAccount(), "UI"));
+		panelInput.add(southGridBagLayoutPanelOne);
+		southGridbagLayout.add(southGridBagLayoutPanelTwo, 0);
+		southGridbagLayout.add(panelInput, 1);
 	}
 
 	public void setProjectOrActivityMessage(String setTextPane) {
@@ -78,7 +99,7 @@ public class UserInterface extends Panel implements ActionEvents {
 		return promptLabel.getText();
 	}
 
-	public void setPromptLabel(String string) {
+	public static void setPromptLabel(String string) {
 		promptLabel.setText(string);
 	}
 
