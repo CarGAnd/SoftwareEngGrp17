@@ -96,7 +96,7 @@ public class Project {
 	public Activity addActivity(Activity a) {
 		activities.add(a);
 		a.setProject(this);
-		return a;
+		return a;	
 	}
 	
 	public Activity getActivityByID(String ID) {
@@ -107,8 +107,9 @@ public class Project {
 		}
 		return null;
 	}
+	
 	private boolean userLoggedInHasRights() throws OperationNotAllowedException {
-		if(management.userIsLoggedIn() && this.projectLeaderID == management.getLoggedInUserID()) {
+		if(management.userIsLoggedIn() && this.projectLeaderID.equals(management.getLoggedInUserID())) {
 			return true;
 		}
 		else {

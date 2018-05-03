@@ -27,7 +27,7 @@ public class Activity {
 		listOfEmployees = new ArrayList<Employee>();
 	}
 	
-	public Activity(Project pro, String ID, Date dueDate, int estimatedTime, String description) {
+	public Activity(Project pro, String ID, Date dueDate, int estimatedTime, String description) throws OperationNotAllowedException {
 		this(ID, dueDate, estimatedTime, description);
 		project.addActivity(this);
 	}
