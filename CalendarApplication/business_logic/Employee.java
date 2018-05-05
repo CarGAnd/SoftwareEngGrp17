@@ -32,4 +32,8 @@ public class Employee extends User {
 	public ArrayList<Activity> getMemberOfActivities() {
 		return memberOfActivities;
 	}
+	
+	public boolean isBusy() {
+		return memberOfActivities.size() >= 20;
+	}
 }

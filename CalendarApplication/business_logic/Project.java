@@ -59,7 +59,13 @@ public class Project {
 	}
 	public void setProjectLeader(String EmployeeID) throws Exception {
 		if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getLoggedInUser().hasAdminPermissions()){
+			if(projectLeaderID != null){
+				Employee user = (Employee) (management.getUserByID(projectLeaderID));
+				user.leaderOfProjects.remove(this);
+			}
 			this.projectLeaderID = EmployeeID; 
+			Employee user = (Employee) (management.getUserByID(EmployeeID));
+			user.leaderOfProjects.add(this);
 		}
 		else {
 			throw new OperationNotAllowedException("User does not have Admin Privilige");

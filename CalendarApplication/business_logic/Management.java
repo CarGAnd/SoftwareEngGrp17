@@ -58,7 +58,12 @@ public class Management {
 	
 	public User addUser(User emp) throws OperationNotAllowedException {
 		if(getUserByID(emp.getUserID()) == null) {
-			users.add(emp);			
+			if(adminIsLoggedIn()) {
+				users.add(emp);							
+			}
+			else {
+				throw new OperationNotAllowedException("Only an admin can add users");
+			}
 		}
 		else {
 			throw new OperationNotAllowedException("another user with that ID already exists");
@@ -66,8 +71,13 @@ public class Management {
 		return emp;
 	}
 	
-	public void removeUser(User user) {
-		users.remove(user);
+	public void removeUser(User user) throws OperationNotAllowedException {
+		if(adminIsLoggedIn()) {
+			users.remove(user);			
+		}
+		else {
+			throw new OperationNotAllowedException("Only an admin can remove users");
+		}
 	}
 	
 	public Project addProject(Project pro) throws OperationNotAllowedException {
