@@ -7,6 +7,7 @@ import business_logic.Admin;
 import business_logic.Employee;
 import business_logic.FailedLoginException;
 import business_logic.Management;
+import business_logic.User;
 import cucumber.api.java.en.*;
 
 public class LoginSteps {
@@ -53,7 +54,14 @@ public class LoginSteps {
 	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
 	public void anEmployeeExistsWithTheIDAndThePassword(String ID, String password) throws Exception {
 	    if(management.getUserByID(ID) == null) {
+	    	User user = management.getLoggedInUser();
+	    	management.logUserOut();
+	    	management.userLogin("admin", "adminadmin");
 	    	errorHandler.testEmployee = (Employee) management.addUser(new Employee(ID, password));
+	    	management.logUserOut();
+	    	if(user != null) {
+	    		management.userLogin(user.getUserID(), user.getPassword());
+	    	}   	
 	    }
 	    assertTrue(management.getEmployees().size() > 0);
 	}
