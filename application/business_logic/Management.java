@@ -1,5 +1,6 @@
 package business_logic;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ public class Management {
 	private User loggedInUser;
 	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	private ArrayList<User> users = new ArrayList<User>();
+
 	
 	public static void main(String[] args) {
 		
@@ -170,4 +172,5 @@ public class Management {
 	private void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
+	
 }
