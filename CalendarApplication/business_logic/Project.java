@@ -59,7 +59,13 @@ public class Project {
 	}
 	public void setProjectLeader(String EmployeeID) throws Exception {
 		if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getLoggedInUser().hasAdminPermissions()){
+			if(projectLeaderID != null){
+				Employee user = (Employee) (management.getUserByID(projectLeaderID));
+				user.leaderOfProjects.remove(this);
+			}
 			this.projectLeaderID = EmployeeID; 
+			Employee user = (Employee) (management.getUserByID(EmployeeID));
+			user.leaderOfProjects.add(this);
 		}
 		else {
 			throw new OperationNotAllowedException("User does not have Admin Privilige");
@@ -94,7 +100,7 @@ public class Project {
 	public Activity addActivity(Activity a) {
 		activities.add(a);
 		a.setProject(this);
-		return a;
+		return a;	
 	}
 	
 	public Activity getActivityByID(String ID) {
@@ -105,8 +111,9 @@ public class Project {
 		}
 		return null;
 	}
+	
 	private boolean userLoggedInHasRights() throws OperationNotAllowedException {
-		if(management.userIsLoggedIn() && this.projectLeaderID == management.getLoggedInUserID()) {
+		if(management.userIsLoggedIn() && this.projectLeaderID.equals(management.getLoggedInUserID())) {
 			return true;
 		}
 		else {

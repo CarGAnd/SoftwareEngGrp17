@@ -25,14 +25,14 @@ public class Management {
 		return userIsLoggedIn() && loggedInUser.getTypeOfUser() == userType.Employee;
 	}
 	
-	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception {
+	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 		if(adminIsLoggedIn()) {
-			Project project = new Project(name,ID,startDate,endDate,estimatedTime); //TODO: change the constructor
+			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
 			this.addProject(project);
 			return project;
 		}
 		else {
-			throw new OperationNotAllowedException("Insufficient permissions"); //TODO: use proper exception
+			throw new OperationNotAllowedException("Insufficient permissions");
 		}
 	}
 	
@@ -58,7 +58,12 @@ public class Management {
 	
 	public User addUser(User emp) throws OperationNotAllowedException {
 		if(getUserByID(emp.getUserID()) == null) {
-			users.add(emp);			
+			if(adminIsLoggedIn()) {
+				users.add(emp);							
+			}
+			else {
+				throw new OperationNotAllowedException("Only an admin can add users");
+			}
 		}
 		else {
 			throw new OperationNotAllowedException("another user with that ID already exists");
@@ -66,14 +71,24 @@ public class Management {
 		return emp;
 	}
 	
-	public void removeUser(User user) {
-		users.remove(user);
+	public void removeUser(User user) throws OperationNotAllowedException {
+		if(adminIsLoggedIn()) {
+			users.remove(user);			
+		}
+		else {
+			throw new OperationNotAllowedException("Only an admin can remove users");
+		}
 	}
 	
-	public Project addProject(Project pro) {
-		listOfProjects.add(pro);
-		pro.management = this;
-		return pro;
+	public Project addProject(Project pro) throws OperationNotAllowedException {
+		if(getProjectByID(pro.getProjectID()) == null) {
+			listOfProjects.add(pro);
+			pro.management = this;
+			return pro;
+		}
+		else {
+			throw new OperationNotAllowedException("another project with that ID already exists");
+		}	
 	}
 	
 	public Project removeProject(Project pro) {
@@ -109,7 +124,7 @@ public class Management {
 		}
 	}
 	
-	public User getUserByID(String ID) {
+	public User getUserByID(String ID) { // returns the user if it exists. Otherwise returns null
 		for(int i = 0; i < users.size(); i++) {
 			if(users.get(i).getUserID().equals(ID)) {
 				return users.get(i);
@@ -118,7 +133,7 @@ public class Management {
 		return null;
 	}
 	
-	public Project getProjectByID(String ID) {
+	public Project getProjectByID(String ID) { // returns the project if it exists. Otherwise returns null
 		for(int i = 0; i < listOfProjects.size(); i++) {
 			if(listOfProjects.get(i).getProjectID().equals(ID)) {
 				return listOfProjects.get(i);

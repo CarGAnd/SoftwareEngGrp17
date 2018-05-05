@@ -35,11 +35,11 @@ public class LoginSteps {
 	}
 	
 	@Given("^an employee with the ID \"([^\"]*)\" and the password \"([^\"]*)\" is logged in$")
-	public void anEmployeeWithTheIDAndThePasswordIsLoggedIn(String arg1, String arg2) throws Exception {
+	public void anEmployeeWithTheIDAndThePasswordIsLoggedIn(String ID, String password) throws Exception {
 		if(management.userIsLoggedIn()) {
 			management.logUserOut();
 		}
-	    management.userLogin(arg1, arg2);//TODO: Code smell - this should be Id and password. Same for remainder part of this class.
+	    management.userLogin(ID, password);//TODO: Code smell - this should be Id and password. Same for remainder part of this class.
 	}
 	
 	@Given("^an adminstrator exists$")
@@ -51,9 +51,9 @@ public class LoginSteps {
 	}
 	
 	@Given("^an employee exists with the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
-	public void anEmployeeExistsWithTheIDAndThePassword(String arg1, String arg2) throws Exception {
-	    if(management.getUserByID(arg1) == null) {
-	    	errorHandler.testEmployee = (Employee) management.addUser(new Employee(arg1, arg2));
+	public void anEmployeeExistsWithTheIDAndThePassword(String ID, String password) throws Exception {
+	    if(management.getUserByID(ID) == null) {
+	    	errorHandler.testEmployee = (Employee) management.addUser(new Employee(ID, password));
 	    }
 	    assertTrue(management.getEmployees().size() > 0);
 	}
@@ -65,9 +65,9 @@ public class LoginSteps {
 	}
 
 	@When("^the adminstrator enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
-	public void theAdminstratorEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
+	public void theAdminstratorEntersThePasswordAndTheID(String ID, String password) throws Exception {
 		try {
-			management.userLogin(arg1, arg2);
+			management.userLogin(ID, password);
 		}
 		catch(FailedLoginException e) {
 			errorHandler.errorMessage = e.getMessage();
@@ -80,9 +80,9 @@ public class LoginSteps {
 	}
 	
 	@When("^the employee enters the ID \"([^\"]*)\" and the password \"([^\"]*)\"$")
-	public void theEmployeeEntersThePasswordAndTheID(String arg1, String arg2) throws Exception {
+	public void theEmployeeEntersThePasswordAndTheID(String ID, String password) throws Exception {
 	    try {
-	    	management.userLogin(arg1, arg2);
+	    	management.userLogin(ID, password);
 	    }
 	    catch(FailedLoginException e) {
 	    	errorHandler.errorMessage = e.getMessage();
@@ -101,8 +101,8 @@ public class LoginSteps {
 	}
 	
 	@Then("^i get the error message \"([^\"]*)\"$")
-	public void iGetTheErrorMessage(String arg1) throws Exception {
-	    assertTrue(errorHandler.errorMessage.equals(arg1));
+	public void iGetTheErrorMessage(String error) throws Exception {
+	    assertTrue(errorHandler.errorMessage.equals(error));
 	}
 	
 	@Then("^the user is no longer logged in$")

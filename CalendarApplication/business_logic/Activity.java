@@ -27,14 +27,29 @@ public class Activity {
 		listOfEmployees = new ArrayList<Employee>();
 	}
 	
-	public Activity(Project pro, String ID, Date dueDate, int estimatedTime, String description) {
+	public Activity(Project pro, String ID, Date dueDate, int estimatedTime, String description) throws OperationNotAllowedException {
 		this(ID, dueDate, estimatedTime, description);
 		project.addActivity(this);
 	}
 
-	public void addEmployeeToActivity(Employee emp) {
-		listOfEmployees.add(emp);
-		emp.addActivityToEmployee(this);
+	public void addEmployeeToActivity(Employee emp) throws OperationNotPossibleException {
+		if(!listOfEmployees.contains(emp)) {
+			listOfEmployees.add(emp);
+			emp.addActivityToEmployee(this);
+		}
+		else {
+			throw new OperationNotPossibleException("the employee is already assigned to this activity");
+		}
+	}
+	
+	public void removeEmployeeFromActivity(Employee emp) throws OperationNotPossibleException {
+		if(listOfEmployees.contains(emp)) {
+			listOfEmployees.remove(emp);
+			emp.removeActivityFromEmployee(this);
+		}
+		else {
+			throw new OperationNotPossibleException("the employee is not assigned to this activity");
+		}
 	}
 	
 	private boolean loggedInUserHasPermission() {
