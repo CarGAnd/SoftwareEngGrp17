@@ -6,16 +6,16 @@ import java.util.Date;
 
 public class Project {
 	ArrayList<Activity> activities;
-	String projectName = "";
-	private String projectID = "";
+	String projectName;
+	private String projectID;
 
-	String adminID = "";
-	String adminPass = "";
+	String adminID;
+	String adminPass;
 	String projectLeaderID = "";
-	Date startDate = null;
-	Date endDate = null;
+	Date startDate;
+	Date endDate;
 	int estimatedTimeUsage;
-	String projectState = "";
+	String projectState;
 	Management management;
 
 	public Project(String projectname, String projectID, Date startDate, Date endDate, int estimatedTimeUsage) {
@@ -59,7 +59,7 @@ public class Project {
 	}
 	public void setProjectLeader(String EmployeeID) throws Exception {
 		if(management.getListOfProjects().contains(this) && management.userIsLoggedIn() && management.getLoggedInUser().hasAdminPermissions()){
-			if(projectLeaderID != null){
+			if(!projectLeaderID.equals("")){
 				Employee user = (Employee) (management.getUserByID(projectLeaderID));
 				user.leaderOfProjects.remove(this);
 			}

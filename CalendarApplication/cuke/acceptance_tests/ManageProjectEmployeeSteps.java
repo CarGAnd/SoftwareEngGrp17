@@ -21,9 +21,9 @@ public class ManageProjectEmployeeSteps {
 		this.management = management;
 	}
 	
-	@Given("^the employee with the ID \"([^\"]*)\" does not have more than (\\d+) activities$")
-	public void theEmployeeWithTheIDDoesNotHaveMoreThanActivities(String arg1, int arg2) throws Exception {
-	    assertTrue(((Employee) management.getUserByID(arg1)).getMemberOfActivities().size() < 20);
+	@Given("^the employee with the ID \"([^\"]*)\" is not busy$")
+	public void theEmployeeWithTheIDIsNotBusy(String arg1) throws Exception {
+	    assertFalse(((Employee) management.getUserByID(arg1)).isBusy());
 	}
 	
 	@Given("^the employee is assigned to the activity$")
