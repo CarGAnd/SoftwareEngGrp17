@@ -31,11 +31,26 @@ public class Activity {
 		this(ID, dueDate, estimatedTime, description);
 		project.addActivity(this);
 	}
+	
+	public Activity() { // used to add arbitrary activities to employees for tests
+		listOfEmployees = new ArrayList<Employee>();
+	}
 
 	public void addEmployeeToActivity(Employee emp) throws OperationNotAllowedException {
 		if(!listOfEmployees.contains(emp)) {
-			listOfEmployees.add(emp);
-			emp.addActivityToEmployee(this);
+			if(!emp.isBusy() && !emp.getUserCalendar().isAbsent(startDate == null ? new Date(): startDate)) {
+				listOfEmployees.add(emp);
+				emp.addActivityToEmployee(this);	
+			}
+			else {
+				if(emp.isBusy()) {
+					throw new OperationNotAllowedException("the employee is busy and cannot be added to the activity");
+				}
+				else if(emp.getUserCalendar().isAbsent(startDate == null ? new Date(): startDate)) {
+					throw new OperationNotAllowedException("the employee is absent and cannot be added to the activity");
+				}
+			}
+			
 		}
 		else {
 			throw new OperationNotAllowedException("the employee is already assigned to this activity");

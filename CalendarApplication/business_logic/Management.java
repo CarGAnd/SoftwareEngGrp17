@@ -111,17 +111,6 @@ public class Management {
 				return null;			
 			}
 		}
-		
-		public int toInteger() { 
-			switch(this) {
-			case Admin:
-				return 10;
-			case Employee:
-				return 1;
-			default:
-				return 0;			
-			}
-		}
 	}
 	
 	public User getUserByID(String ID) { // returns the user if it exists. Otherwise returns null

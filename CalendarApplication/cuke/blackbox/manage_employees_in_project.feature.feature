@@ -15,7 +15,7 @@ Feature: add and remove employees to and from activities
 #	And the employee is not absent during the period of the activity
 #	When the user adds the employee to the activity
 #	Then the employee is added to the activity
-#	
+
 #Scenario: Remove employee from activity
 #	Given an employee with the ID "test" and the password "password" is logged in
 #	And the logged in user's ID matches the project leader ID
@@ -36,11 +36,5 @@ Feature: add and remove employees to and from activities
 #	And the employee is absent
 #	When the user adds the employee to the activity
 #	Then the user gets the error message "the employee is absent and cannot be added to the activity"
-#	
-Scenario: Remove a employee not assigned to activity
-	Given an employee with the ID "test" and the password "password" is logged in
-	And the logged in user's ID matches the project leader ID
-	And the employee is not assigned to the activity
-	When the user removes the employee from the activity
-	Then the user gets the error message "the employee is not assigned to this activity"
+
 
