@@ -27,7 +27,7 @@ Feature: Admin login
 #	When the employee enters the ID "test" and the password "wrong password"
 #	Then the employee is not logged in
 #	And the user gets the error message "incorrect ID or password"
-#	
+	
 #Scenario: User wants to log out
 #	Given a user exists
 #	And a user is logged in
