@@ -108,11 +108,6 @@ public class LoginSteps {
 		assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testAdmin.getUserID()));
 	}
 	
-	@Then("^i get the error message \"([^\"]*)\"$")
-	public void iGetTheErrorMessage(String error) throws Exception {
-	    assertTrue(errorHandler.errorMessage.equals(error));
-	}
-	
 	@Then("^the user is no longer logged in$")
 	public void theUserIsNoLongerLoggedIn() throws Exception {
 	    assertFalse(management.userIsLoggedIn());

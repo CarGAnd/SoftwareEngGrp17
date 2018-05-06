@@ -18,8 +18,6 @@ import business_logic.User;
 
 public class TimeSteps {
 	Management management;
-	User user;
-	Absence testAbsence;
 	ErrorHandler errorHandler;
 	
 	public TimeSteps(Management management, ErrorHandler errorHandler) {
@@ -27,41 +25,31 @@ public class TimeSteps {
 		this.management = management;
 	}
 
-	
-
-
-	@Given("^the user is logged in with ID \"([^\"]*)\"$")
-	public void theUserIsLoggedInWithID(String ID) throws Exception {
-		user = new Employee(ID,"password");
-		management.addUser(user);
-		if(!management.userIsLoggedIn()) {
-			management.userLogin(ID, "password");
-		}
-		if(management.getLoggedInUserID() != ID) {
-			management.logUserOut();
-			management.userLogin(ID, "password");
-		}
-		assertTrue(management.getLoggedInUserID().equals(ID));
-	}
-
-	@When("^the user registers his absence from \"([^\"]*)\" to \"([^\"]*)\"$")
+	@When("^the employee registers his absence from \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void theUserRegistersHisAbsenceFromTo(String absenceStart, String absenceEnd) throws Exception {
 		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date start = DateFormatter.parse(absenceStart);
 		Date end = DateFormatter.parse(absenceEnd);
-		testAbsence = new Absence(start,end);
-		user.registerAbsence(testAbsence);
+		errorHandler.testAbsence = new Absence(start,end);
+		errorHandler.testEmployee.registerAbsence(errorHandler.testAbsence);
 	}
 
-	
 	@Then("^his absence is registered within the system$")
 	public void hisAbsenceIsRegisteredWithinTheSystem() throws Exception {
-		assertTrue(user.getAbsence().contains(testAbsence));
+		assertTrue(errorHandler.testEmployee.getAbsence().contains(errorHandler.testAbsence));
 	}
 
-	@Given("^a user has registered absence$")
+	@Given("^the employee has registered absence$")
 	public void aUserHasRegisteredAbsence() throws Exception {
-		assertTrue(user.getAbsence() != null);
+		if(errorHandler.testEmployee.getAbsence().size() == 0) {
+			SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+			Date start = new Date();
+			Date end = new Date();
+			end.setTime(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
+			errorHandler.testAbsence = new Absence(start,end);
+			errorHandler.testEmployee.registerAbsence(errorHandler.testAbsence);
+		}
+		assertTrue(errorHandler.testEmployee.getAbsence().size() > 0);
 	}
 
 	@When("^the user edits his absence to \"([^\"]*)\" to \"([^\"]*)\"$")
@@ -71,77 +59,61 @@ public class TimeSteps {
 		Date end = DateFormatter.parse(absenceEnd);
 		Date testStart = DateFormatter.parse("01/01/01");
 		Date testEnd = DateFormatter.parse("02/01/02");
-		testAbsence = new Absence(testStart,testEnd);
-		user.registerAbsence(testAbsence);
-	    testAbsence.editAbsence(start,end);
+		errorHandler.testAbsence = new Absence(testStart,testEnd);
+		errorHandler.testEmployee.registerAbsence(errorHandler.testAbsence);
+	    errorHandler.testAbsence.editAbsence(start,end);
 	}
 
-	@Then("^change is registered within the system$")
-	public void changeIsRegisteredWithinTheSystem() throws Exception {
-		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		assertTrue(testAbsence.getAbsenceStart().equals(DateFormatter.parse("01/02/12")));
-		assertTrue(testAbsence.getAbsenceEnd().equals(DateFormatter.parse("02/03/12")));
+	@Then("^the absence's start date is \"([^\"]*)\" and the end date is \"([^\"]*)\"$")
+	public void theAbsenceSStartDateIsAndTheEndDateIs(String start, String end) throws Exception {
+	  	SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		assertTrue(errorHandler.testAbsence.getAbsenceStart().equals(DateFormatter.parse(start)));
+		assertTrue(errorHandler.testAbsence.getAbsenceEnd().equals(DateFormatter.parse(end)));
 		
 	}
 
 
-	@When("^he enters \"([^\"]*)\" with \"([^\"]*)\" hours worked$")
-	public void heEntersWithHoursWorked(String date, String hours) throws Exception {
-		try {
+	@When("^he enters \"([^\"]*)\" with (\\d+) hours worked$")
+	public void heEntersWithHoursWorked(String date, int hours) throws Exception {
+	 	try {
 			SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-			double hoursWorked = Double.parseDouble(hours);
-			user.updateRegisteredHours(DateFormatter.parse(date), hoursWorked);
+			errorHandler.testEmployee.updateRegisteredHours(DateFormatter.parse(date), hours);
 		}
 	    catch (Exception e){
 			errorHandler.errorMessage = e.getMessage();
 		}
 	}
 
-	@Then("^the number of hours is registered within the system$")
-	public void theNumberOfHoursIsRegisteredWithinTheSystem() throws Exception {
-		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-	    Date date = DateFormatter.parse("01/01/01");
-		assertTrue(user.getRegisteredHoursByDate(date) == 8.0);
+	@Then("^the number of hours the employee has worked on the date \"([^\"]*)\" is now (\\d+)$")
+	public void theNumberOfHoursTheEmployeeHasWorkedOnTheDateIsNow(String date, int hoursWorked) throws Exception {
+	  	SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+	    Date dateWorked = DateFormatter.parse(date);
+		assertTrue(errorHandler.testEmployee.getRegisteredHoursByDate(dateWorked) == hoursWorked);
 	}
 	
 	@Given("^the user has already registered the number of hours he has worked on \"([^\"]*)\"$")
 	public void theUserHasAlreadyRegisteredTheNumberOfHoursHeHasWorkedOn(String date) throws Exception {
 		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date1 = DateFormatter.parse(date);
-		user.updateRegisteredHours(date1, 6.0);
-	    assertTrue(user.getRegisteredHours().containsKey(date1));
+		errorHandler.testEmployee.updateRegisteredHours(date1, 6.0);
+	    assertTrue(errorHandler.testEmployee.getRegisteredHours().containsKey(date1));
 	}
 
-	@When("^the user edits the number of hours he has worked to \"([^\"]*)\"$")
-	public void theUserEditsTheNumberOfHoursHeHasWorkedTo(String hours) throws Exception {
-		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-	    Date date = DateFormatter.parse("01/01/01");
-	    double hoursWorked = Double.parseDouble(hours);
-	    user.updateRegisteredHours(date, hoursWorked);
+	@When("^the user edits the number of hours he has worked on \"([^\"]*)\" to (\\d+)$")
+	public void theUserEditsTheNumberOfHoursHeHasWorkedOnTo(String dateWorked, int hours) throws Exception {
+	 	SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+	    Date date = DateFormatter.parse(dateWorked);
+	    errorHandler.testEmployee.updateRegisteredHours(date, hours);
 	}
-
-	@Then("^the number of hours is updated within the system$")
-	public void theNumberOfHoursIsUpdatedWithinTheSystem() throws Exception {
-		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-	    Date date = DateFormatter.parse("01/01/01");
-		assertTrue(user.getRegisteredHoursByDate(date) == 7.0);
-	}
-
 
 	@Given("^the employee was absent \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void theEmployeeWasAbsentTo(String startAbsence, String endAbsence) throws Exception {
 		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date start = DateFormatter.parse(startAbsence);
 		Date end = DateFormatter.parse(endAbsence);
-		testAbsence = new Absence(start,end);
-		user.registerAbsence(testAbsence);
-		assertTrue(user.getAbsence().contains(testAbsence));
-	}
-
-
-	@Then("^the employee gets an error message \"([^\"]*)\"$")
-	public void theEmployeeGetsAnErrorMessage(String arg1) throws Exception {
-		assertTrue(errorHandler.errorMessage.equals(arg1));
+		errorHandler.testAbsence = new Absence(start,end);
+		errorHandler.testEmployee.registerAbsence(errorHandler.testAbsence);
+		assertTrue(errorHandler.testEmployee.getAbsence().contains(errorHandler.testAbsence));
 	}
 }
 
