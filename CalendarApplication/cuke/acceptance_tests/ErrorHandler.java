@@ -8,12 +8,12 @@ import business_logic.User;
 
 public class ErrorHandler {
 	
-	String errorMessage;
-	Project testProject;
-	Activity testActivity;
-	Employee testEmployee;
-	Absence testAbsence;
-	User testUser;
+	public String errorMessage;
+	public Project testProject;
+	public Activity testActivity;
+	public Employee testEmployee;
+	public Absence testAbsence;
+	public User testUser;
 	
 	public ErrorHandler() {
 		
