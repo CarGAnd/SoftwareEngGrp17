@@ -3,10 +3,10 @@ package cuke.acceptance_tests.whiteBox;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javax.security.auth.login.FailedLoginException;
 
 import business_logic.Admin;
 import business_logic.Employee;
+import business_logic.FailedLoginException;
 import business_logic.Management;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
