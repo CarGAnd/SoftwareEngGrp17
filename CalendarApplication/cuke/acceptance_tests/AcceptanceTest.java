@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-	features = "classpath:cuke/feature/", 
+	features = "classpath:cuke/whitebox/", 
 	glue = {"classpath:cuke/acceptance_tests/"},
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
