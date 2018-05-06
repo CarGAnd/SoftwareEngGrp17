@@ -1,5 +1,10 @@
 package cuke.acceptance_tests;
 
+import static org.junit.Assert.assertTrue;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import business_logic.Activity;
 import business_logic.Admin;
 import business_logic.Employee;
@@ -12,6 +17,7 @@ public class AssistanceSteps {
 
 	ErrorHandler errorHandler;
 	Employee testEmployee;
+	Employee testHelper;
 	Admin testAdmin;
 	Management management;
 	Activity testActivity;
@@ -22,27 +28,30 @@ public class AssistanceSteps {
 		this.management = management;
 	}
 	@Given("^the user with ID \"([^\"]*)\" is working on an activity with ID \"([^\"]*)\"$")
-	public void theUserWithIDIsWorkingOnAnActivityWithID(String arg1, String arg2) throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void theUserWithIDIsWorkingOnAnActivityWithID(String userID, String activityID) throws Exception {
+		SimpleDateFormat DateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date endDate = DateFormatter.parse("01/01/01");
+		errorHandler.testActivity = new Activity(activityID, endDate, 8, "blabla");
+		testEmployee.addActivityToEmployee(errorHandler.testActivity);
+		assertTrue(testEmployee.getMemberOfActivities().contains(errorHandler.testActivity));
+		
 	}
 
 	@Given("^there is an available employee$")
 	public void thereIsAnAvailableEmployee() throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    testHelper = new Employee("ID","pass");
+	    management.addUser(testHelper);
+	    assertTrue(!testHelper.checkAbsent() && !testHelper.isBusy());
 	}
 
 	@When("^the user with ID \"([^\"]*)\" requests assistance$")
 	public void theUserWithIDRequestsAssistance(String arg1) throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    management.requestAssistanceByID(arg1,testActivity);
 	}
 
 	@Then("^the available employee is assigned to the activity$")
 	public void theAvailableEmployeeIsAssignedToTheActivity() throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    assertTrue(testHelper.getMemberOfActivities().contains(testActivity));
 	}
 
 	@Given("^there is no available employees$")

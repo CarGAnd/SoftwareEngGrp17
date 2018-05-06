@@ -185,4 +185,17 @@ public class Management {
 	private void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
+
+	public void requestAssistanceByID(String UserID, Activity activity) {
+		boolean help;
+		int i = 0;
+		while(help = false) {
+			if(!getEmployees().get(i).isBusy() && !getEmployees().get(i).checkAbsent()) {
+				help = true;
+				getEmployees().get(i).addActivityToEmployee(activity);
+			}
+			i = i+1;
+		}
+		
+	}
 }

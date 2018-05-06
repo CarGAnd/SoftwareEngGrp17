@@ -32,15 +32,7 @@ public class TimeSteps {
 
 	@Given("^the user is logged in with ID \"([^\"]*)\"$")
 	public void theUserIsLoggedInWithID(String ID) throws Exception {
-		user = new Employee(ID,"password");
-		management.addUser(user);
-		if(!management.userIsLoggedIn()) {
-			management.userLogin(ID, "password");
-		}
-		if(management.getLoggedInUserID() != ID) {
-			management.logUserOut();
-			management.userLogin(ID, "password");
-		}
+		management.userLogin(ID, "password");
 		assertTrue(management.getLoggedInUserID().equals(ID));
 	}
 
