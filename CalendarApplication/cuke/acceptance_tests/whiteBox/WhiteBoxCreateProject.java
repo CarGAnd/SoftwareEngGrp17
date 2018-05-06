@@ -3,20 +3,11 @@ package cuke.acceptance_tests.whiteBox;
 import business_logic.Admin;
 import business_logic.Management;
 import business_logic.OperationNotAllowedException;
-import business_logic.Project;
 import cuke.acceptance_tests.ErrorHandler;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import business_logic.Admin;
-import business_logic.Employee;
-import business_logic.FailedLoginException;
-import business_logic.Management;
-import business_logic.User;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 
 public class WhiteBoxCreateProject {

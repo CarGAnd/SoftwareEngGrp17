@@ -5,22 +5,22 @@ Feature: White Box User Login.
 #Scenario: User already logged in
 #	Given a user is already logged in
 #	When a user with ID "SomeID" and password "passwording" attempts to log in 
-#	Then the user recieves the error message "A user is already logged in"
+#	Then the user gets the error message "A user is already logged in"
 #	
 #Scenario: User ID/Pass doesn't match
 #	Given a user is not logged in
-#	And a user with ID "SomeID" and password "passwording" exists
-#	When a user logs in with ID "SomeID" and password "passworded"
-#	Then the user recieves the error message "incorrect ID or password"
-#	
+#	And an employee exists with the ID "SomeID" and the password "passy"
+#	When the employee enters the ID "SomeID" and the password "Passoff"
+#	Then the user gets the error message "incorrect ID or password"
+	
 #Scenario: User doesn't exist
 #	Given a user is not logged in
-#	And a user with ID "SomeID" and password "passwording" doesn't exist
-#	When a user logs in with the ID "SomeID" and password "passwording"
-#	Then the user recieves the error message "incorrect ID or password"
-#	
-#Scenario: User logs in
-#	Given a user is not logged in
-#	And a user with ID "SomeID" and password "passwording" exists
-#	When a user logs in with the ID "SomeID" and password "passwording"
-#	Then the user with ID "SomeID" is now logged in
+#	And an employee with the ID "SomeID" and the password "passy" doesn't exist
+#	When the employee enters the ID "SomeID" and the password "passy"
+#	Then the user gets the error message "incorrect ID or password"
+#
+Scenario: User logs in
+	Given a user is not logged in
+	And an employee exists with the ID "SomeID" and the password "passy"
+	When the employee enters the ID "SomeID" and the password "passy"
+	Then the user with ID "SomeID" is now logged in
