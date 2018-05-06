@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
-	ArrayList<Activity> activities;
+	public ArrayList<Activity> activities;
 	String projectName;
 	private String projectID;
 
