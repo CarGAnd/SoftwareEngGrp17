@@ -3,7 +3,7 @@ Feature: White Box Add User.
 	Actor: Administrator and User
 
 Scenario: User Already Exists
-	Given the user with ID "SomeID" already exists
+	Given an employee exists with the ID "Test" and the password "Wubbadubawublob"
 	When a user with ID "SomeID" is added to the managment 
 	Then the user recieves the error message "A user with that ID already exists"
 	

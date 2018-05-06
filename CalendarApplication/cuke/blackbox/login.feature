@@ -40,3 +40,4 @@ Scenario: User logging in while another user is already logged in
 	When the employee enters the ID "test" and the password "password"
 	Then the user gets the error message "another user is already logged in"
 	And the employee is not logged in
+

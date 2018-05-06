@@ -32,4 +32,5 @@ Scenario: Register time worked in an absent period
 	And the employee was absent "01/01/01" to "03/01/01"
 	When he enters "01/01/01" with 8 hours worked
 	Then the user gets the error message "Cannot register hours, you were absent on this date" 
+
 	
