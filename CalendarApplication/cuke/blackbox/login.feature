@@ -15,6 +15,13 @@ Scenario: Administrator has the wrong password
 	Then the administrator is not logged in
 	And the user gets the error message "incorrect ID or password"
 	
+Scenario: Adminstrator removes user
+	Given an adminstrator exists
+	And an employee exists with the ID "test" and the password "password"
+	And an adminstrator is logged in
+	When the adminstrator removes the user with the ID "test"
+	Then the user is removed from the list of users
+	
 Scenario: Employee can login
 	Given a user is not logged in
 	And an employee exists with the ID "test" and the password "password"
