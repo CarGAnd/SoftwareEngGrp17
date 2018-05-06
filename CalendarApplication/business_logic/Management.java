@@ -72,7 +72,7 @@ public class Management {
 	}
 	
 	public void removeUser(User user) throws OperationNotAllowedException {
-		if(adminIsLoggedIn()) {
+		if(adminIsLoggedIn() && users.contains(user)) {
 			users.remove(user);			
 		}
 		else {
@@ -91,26 +91,24 @@ public class Management {
 		}	
 	}
 	
-	public Project removeProject(Project pro) {
-		listOfProjects.remove(pro);
-		pro.management = null;
+	public Project removeProject(Project pro) throws OperationNotAllowedException {
+		if(listOfProjects.contains(pro)) {
+			if(adminIsLoggedIn()) {
+				listOfProjects.remove(pro);
+				pro.management = null;
+			}
+			else {
+				throw new OperationNotAllowedException("Only an admin can remove a project");
+			}
+		}
+		else {
+			throw new OperationNotAllowedException("The project does not exist");
+		}
 		return pro;
 	}
 	
 	public enum userType{
 		Admin,Employee; //all the types of users
-		
-		@Override
-		public String toString() {
-			switch(this) {
-			case Admin:
-				return "Admin";
-			case Employee:
-				return "Employee";
-			default:
-				return null;			
-			}
-		}
 	}
 	
 	public User getUserByID(String ID) { // returns the user if it exists. Otherwise returns null

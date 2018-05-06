@@ -1,5 +1,6 @@
 package cuke.acceptance_tests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
@@ -62,30 +63,6 @@ public class CreateProjectSteps {
 		}
 		assertTrue(management.getListOfProjects().contains(management.getProjectByID(arg1)));
 	}
-
-	@Given("^the user ID \"([^\"]*)\" matches project leader ID$")
-	public void theUserIDMatchesProjectLeaderID(String arg1) throws Exception {
-	    testEmployee = new Employee(arg1, "pass");
-	    management.addUser(testEmployee);
-	    if(!management.adminIsLoggedIn()) {
-	    	management.logUserOut();
-	    	management.userLogin("Admin", "adminadmin");
-	    }
-	    management.getProjectByID("ID1234").setProjectLeader(arg1);
-	    
-	    assertTrue(management.getProjectByID("ID1234").getProjectLeaderID() == testEmployee.getUserID());
-	}
-
-	@Given("^the project state is \"([^\"]*)\"$")
-	public void theProjectStateIs(String arg1) throws Exception {
-	   if(management.getProjectByID("ID1234").getProjectLeaderID() != management.getLoggedInUserID()) {
-		   management.logUserOut();
-		   management.userLogin("TestUser", "pass");
-	   }
-	   management.getProjectByID("ID1234").setProjectState(arg1);
-	   
-	   assertTrue(management.getProjectByID("ID1234").getProjectState() == arg1);
-	}
 	
 	@When("^the user sets the project name to \"([^\"]*)\"$")
 	public void theUserSetsTheProjectNameTo(String arg1) throws Exception {
@@ -100,6 +77,16 @@ public class CreateProjectSteps {
 	@Then("^the project name is updated to \"([^\"]*)\"$")
 	public void theProjectNameIsUpdated(String arg1) throws Exception {
 		assertTrue(management.getProjectByID("ID1234").getProjectName() == arg1);
+	}
+	
+	@When("^the adminstrator removes the project with the ID \"([^\"]*)\"$")
+	public void theAdminstratorRemovesTheProjectWithTheID(String arg1) throws Exception {
+	    management.removeProject(management.getProjectByID(arg1));
+	}
+	
+	@Then("^the project is removed from the list of projects$")
+	public void theProjectIsRemovedFromTheListOfProjects() throws Exception {
+	    assertFalse(management.getListOfProjects().contains(errorHandler.testProject));
 	}
 
 

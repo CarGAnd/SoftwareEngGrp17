@@ -34,6 +34,7 @@ public class WhiteBoxAddUserSteps {
 		catch(OperationNotAllowedException e) {
 			errorHandler.errorMessage = e.getMessage();
 		}
+
 	}
 	
 	@Given("^the employee with ID \"([^\"]*)\" doesn't exist$")

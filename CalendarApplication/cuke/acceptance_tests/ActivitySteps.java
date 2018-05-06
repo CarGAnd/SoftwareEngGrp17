@@ -46,12 +46,6 @@ public class ActivitySteps {
 		assertTrue(errorHandler.testProject.getProjectLeaderID().equals(arg1));
 	}
 	
-	@Given("^an employee with the ID \"([^\"]*)\" is logged in$")
-	public void anEmployeeWithTheIDIsLoggedIn(String arg1) throws Exception {
-	    management.userLogin(arg1, "password");
-	    assertTrue(management.getLoggedInUser().getUserID().equals(arg1));
-	}
-	
 	@Given("^the logged in user's ID matches the project leader ID$")
 	public void theLoggedInUserSIDMatchesTheProjectLeaderID() throws Exception {
 	    assertTrue(errorHandler.testProject.getProjectLeaderID().equals(management.getLoggedInUserID()));
