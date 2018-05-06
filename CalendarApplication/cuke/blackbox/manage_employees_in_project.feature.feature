@@ -29,6 +29,7 @@ Scenario: Add busy employee to activity
 	And the employee is busy
 	When the user adds the employee to the activity
 	Then the user gets the error message "the employee is busy and cannot be added to the activity"
+	And the employee is not added to the activity
 	
 Scenario: Add absent employee to activity
 	Given an employee with the ID "test" and the password "password" is logged in
@@ -36,5 +37,6 @@ Scenario: Add absent employee to activity
 	And the employee is currently absent
 	When the user adds the employee to the activity
 	Then the user gets the error message "the employee is absent and cannot be added to the activity"
+	And the employee is not added to the activity
 
 
