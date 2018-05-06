@@ -3,6 +3,7 @@ package cuke.acceptance_tests;
 import business_logic.Activity;
 import business_logic.Employee;
 import business_logic.Project;
+import business_logic.User;
 
 public class ErrorHandler {
 	
@@ -10,6 +11,7 @@ public class ErrorHandler {
 	Project testProject;
 	Activity testActivity;
 	Employee testEmployee;
+	User testUser;
 	
 	public ErrorHandler() {
 		
