@@ -21,7 +21,7 @@ public class WhiteBoxAddUserSteps {
 
 	@When("^a user with ID \"([^\"]*)\" is added to the managment$")
 	public void aUserWithIDIsAddedToTheManagment(String arg1) throws Exception {
-		
+
 	}
 
 	@Given("^the user with ID \"([^\"]*)\" doesn't exist$")
