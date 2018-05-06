@@ -36,7 +36,7 @@ public class Activity {
 		listOfEmployees = new ArrayList<Employee>();
 	}
 
-	public void addEmployeeToActivity(Employee emp) throws OperationNotPossibleException, OperationNotAllowedException {
+	public void addEmployeeToActivity(Employee emp) throws OperationNotAllowedException {
 		if(!listOfEmployees.contains(emp)) {
 			if(!emp.isBusy() && !emp.getUserCalendar().isAbsent(startDate == null ? new Date(): startDate)) {
 				listOfEmployees.add(emp);
@@ -53,17 +53,17 @@ public class Activity {
 			
 		}
 		else {
-			throw new OperationNotPossibleException("the employee is already assigned to this activity");
+			throw new OperationNotAllowedException("the employee is already assigned to this activity");
 		}
 	}
 	
-	public void removeEmployeeFromActivity(Employee emp) throws OperationNotPossibleException {
+	public void removeEmployeeFromActivity(Employee emp) throws OperationNotAllowedException {
 		if(listOfEmployees.contains(emp)) {
 			listOfEmployees.remove(emp);
 			emp.removeActivityFromEmployee(this);
 		}
 		else {
-			throw new OperationNotPossibleException("the employee is not assigned to this activity");
+			throw new OperationNotAllowedException("the employee is not assigned to this activity");
 		}
 	}
 	
