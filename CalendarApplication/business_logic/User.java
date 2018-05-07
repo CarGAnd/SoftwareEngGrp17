@@ -21,7 +21,7 @@ public class User {
 		this.password = password;
 		this.typeOfUser = type;
 		
-		userCalendar = new UserCalendar();
+		this.userCalendar = new UserCalendar();
 	}
 	
 	public boolean hasAdminPermissions() {
@@ -30,6 +30,14 @@ public class User {
 	
 	public String getUserID() {
 		return userID;
+	}
+
+	public UserCalendar getUserCalendar() {
+		return userCalendar;
+	}
+
+	public void setUserCalendar(UserCalendar userCalendar) {
+		this.userCalendar = userCalendar;
 	}
 
 	public void setID(String iD) {

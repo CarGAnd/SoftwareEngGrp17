@@ -3,6 +3,10 @@ package cuke.acceptance_tests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
+import business_logic.Absence;
+import business_logic.Activity;
 import business_logic.Admin;
 import business_logic.Employee;
 import business_logic.Management;
@@ -26,11 +30,24 @@ public class ManageProjectEmployeeSteps {
 	    assertFalse(((Employee) management.getUserByID(arg1)).isBusy());
 	}
 	
+	@Given("^the employee is not absent during the period of the activity$")
+	public void theEmployeeIsNotAbsentDuringThePeriodOfTheActivity() throws Exception {
+	    assertTrue(errorHandler.testEmployee.getUserCalendar().isUserAvailable(new Date(), errorHandler.testActivity.getEndDate()));
+	}
+	
 	@Given("^the employee is assigned to the activity$")
 	public void theEmployeeIsAssignedToTheActivity() throws Exception {
 		errorHandler.testActivity.addEmployeeToActivity(errorHandler.testEmployee);
 	    assertTrue(errorHandler.testActivity.getListOfEmployees().contains(errorHandler.testEmployee));
 	    assertTrue(errorHandler.testEmployee.getMemberOfActivities().contains(errorHandler.testActivity));
+	}
+	
+	@Given("^the employee is busy$")
+	public void theEmployeeIsBusy() throws Exception {
+	    while(!errorHandler.testEmployee.isBusy()) {
+	    	errorHandler.testEmployee.addActivityToEmployee(new Activity());
+	    }
+	    assertTrue(errorHandler.testEmployee.isBusy());
 	}
 	
 	@Given("^the employee is not assigned to the activity$")
@@ -41,7 +58,20 @@ public class ManageProjectEmployeeSteps {
 	
 	@When("^the user adds the employee to the activity$")
 	public void theUserAddsTheEmployeeToTheActivity() throws Exception {
-	    errorHandler.testActivity.addEmployeeToActivity(errorHandler.testEmployee);
+		try {
+			errorHandler.testActivity.addEmployeeToActivity(errorHandler.testEmployee);
+		}
+		catch(Exception e) {
+			errorHandler.errorMessage = e.getMessage();
+		}
+	}
+	
+	@Given("^the employee is currently absent$")
+	public void theEmployeeIsCurrentlyAbsent() throws Exception {
+		Date endDate = new Date();
+		endDate.setTime(System.currentTimeMillis() + 1000 * 24 * 60 * 60); // adds a day in milliseconds
+	    errorHandler.testEmployee.getUserCalendar().addAbsence(new Absence(new Date(),endDate));
+	    assertTrue(errorHandler.testEmployee.getUserCalendar().isAbsent(new Date()));
 	}
 	
 	@When("^the user removes the employee from the activity$")
