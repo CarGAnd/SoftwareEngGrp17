@@ -48,14 +48,22 @@ public interface ActionEvents {
 							FrameController.getController().getManagement().logUserOut();
 							FrameController.getController().getProjectTree().updateProjectTree(userObj);
 							showCard("0");
-						} catch (FailedLoginException loginException) {
-							System.out.println(loginException.getMessage());
-							loginException.printStackTrace();
+						} catch (FailedLoginException exception) {
+							System.out.println(exception.getMessage());
 						}
 					}
 				}
 			}
 		}
+	}
+
+	public class NotImplemented implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(FrameController.getController().getLoginscreen(), "Not implemented", "This feature is missing.",
+					JOptionPane.WARNING_MESSAGE);
+		}
+
 	}
 
 	public class LoginAttempt implements ActionListener {

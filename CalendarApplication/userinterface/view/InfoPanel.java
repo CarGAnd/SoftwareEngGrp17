@@ -36,6 +36,7 @@ public class InfoPanel extends Panel {
 			@Override
 			public void run() {
 				clock = new Clock();
+				clock.gmtFormat();
 				
 			}
 		};

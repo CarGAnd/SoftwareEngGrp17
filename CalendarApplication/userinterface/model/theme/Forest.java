@@ -111,7 +111,6 @@ public interface Forest {
 			return component;
 		}
 		else if (component instanceof MenuBar) {
-			//MenuBar menu = (MenuBar) component;
 			component.setFont(new Font("Monospace", Font.CENTER_BASELINE, 20));
 			component.setForeground(Color.BLACK);
 			component.setBackground(Color.WHITE);
@@ -158,7 +157,7 @@ public interface Forest {
 			passfield.setBorder(BorderFactory.createEmptyBorder());
 			return passfield;
 		}
-		else if (component instanceof JScrollPane) {
+		else if (component instanceof TextPane) {
 			ProjectTree tree = (ProjectTree) component;
 			tree.setFont(new Font("Lucida", Font.CENTER_BASELINE, 11));
 			tree.setForeground(COLOR.BISQUE);
