@@ -4,6 +4,10 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class Management {
 	
 	private User loggedInUser;
@@ -12,6 +16,15 @@ public class Management {
 	
 	public Management() {
 		users.add(new Admin());
+	}
+	
+	public static void main(String args[]) throws OperationNotAllowedException, FailedLoginException {
+		Management test = new Management();
+		test.userLogin("admin", "adminadmin");
+		test.addUser(new Employee("test","password"));
+		Employee testEmp = (Employee) test.getUserByID("test");
+		System.out.println(testEmp.isBusy());
+		
 	}
 	
 	public boolean userIsLoggedIn() {
@@ -29,9 +42,15 @@ public class Management {
 	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 
 		if(adminIsLoggedIn()) {
+			 assert getLoggedInUser().hasAdminPermissions();
 			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
 			this.addProject(project);
+			 assert project.getProjectName().equals(name) && project.getProjectID().equals(ID)
+			 && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate)
+			 && project.getEstimatedTimeUsed() == estimatedTime; //post
+			 assert listOfProjects.contains(project);
 			return project;
+
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
@@ -39,19 +58,23 @@ public class Management {
 	}
 	
 	public boolean userLogin(String ID, String password) throws FailedLoginException {
-		if(userIsLoggedIn()) { // 1
+		if(userIsLoggedIn()) { 
 			throw new FailedLoginException("another user is already logged in");
 		}
 		else {
-			User user = getUserByID(ID); //2
-			if(user != null && password.equals(user.getPassword())) { //3
-				setLoggedInUser(user); //4
-				return true; //5
+			assert !userIsLoggedIn(); // pre
+			User user = getUserByID(ID); 
+			if(user != null && password.equals(user.getPassword())) { 
+				assert getUserByID(ID).getPassword().equals(password); //pre
+				setLoggedInUser(user); 
+				assert userIsLoggedIn() && getLoggedInUserID().equals(ID); //post
+				return true; 
 			}
 			else {
 				throw new FailedLoginException("incorrect ID or password");
 			}
 		}
+		
 	}
 	
 	public void logUserOut() {
@@ -59,9 +82,14 @@ public class Management {
 	}
 	
 	public User addUser(User emp) throws OperationNotAllowedException {
-		if(getUserByID(emp.getUserID()) == null) { //1
-			if(adminIsLoggedIn()) { //2
-				users.add(emp);			//3				
+		ArrayList<User> usersAtPre = new ArrayList<>(users);
+		if(getUserByID(emp.getUserID()) == null) { 
+			assert !getUsers().contains(emp); //pre
+			if(adminIsLoggedIn()) { 
+				assert getLoggedInUser().hasAdminPermissions(); //pre
+				users.add(emp);			
+				usersAtPre.add(emp);
+				assert users.equals(usersAtPre); //post
 			}
 			else {
 				throw new OperationNotAllowedException("Only an admin can add users");
@@ -70,8 +98,9 @@ public class Management {
 		else {
 			throw new OperationNotAllowedException("another user with that ID already exists");
 		}
-		return emp; //4
+		return emp; 
 	}
+	
 	
 	public void removeUser(User user) throws OperationNotAllowedException {
 		if(adminIsLoggedIn()) {
@@ -101,29 +130,6 @@ public class Management {
 	
 	public enum userType{
 		Admin,Employee; //all the types of users
-		
-		@Override
-		public String toString() {
-			switch(this) {
-			case Admin:
-				return "Admin";
-			case Employee:
-				return "Employee";
-			default:
-				return null;			
-			}
-		}
-		
-		public int toInteger() { 
-			switch(this) {
-			case Admin:
-				return 10;
-			case Employee:
-				return 1;
-			default:
-				return 0;			
-			}
-		}
 	}
 	
 	public User getUserByID(String ID) { // returns the user if it exists. Otherwise returns null
@@ -198,6 +204,7 @@ public class Management {
 		this.loggedInUser = loggedInUser;
 	}
 
+
 	public Employee requestAssistance(Activity activity) throws Exception {
 		boolean help = false;
 		Employee tempEmployee;
@@ -215,67 +222,6 @@ public class Management {
 			}
 		}
 		throw new OperationNotAllowedException("There are no available employees");
+	}
 		
-	}
-//	______________________________________________________________________________
-//	The following section only contains assertion copies of the specified methods.
-//	______________________________________________________________________________
-	public Project ASSERTcreateProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
-
-		if(adminIsLoggedIn()) {
-			 assert getLoggedInUser().hasAdminPermissions();
-			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
-			this.addProject(project);
-			 assert project.getProjectName().equals(name) && project.getProjectID().equals(ID)
-			 && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate)
-			 && project.getEstimatedTimeUsed() == estimatedTime; //post
-			 assert listOfProjects.contains(project);
-			return project;
-
-		}
-		else {
-			throw new OperationNotAllowedException("Insufficient permissions");
-		}
-	}
-	
-	
-	public User ASSERTaddUser(User emp) throws OperationNotAllowedException {
-		ArrayList<User> usersAtPre = new ArrayList<>(users);
-		if(getUserByID(emp.getUserID()) == null) { 
-			assert !getUsers().contains(emp); //pre
-			if(adminIsLoggedIn()) { 
-				assert getLoggedInUser().hasAdminPermissions(); //pre
-				users.add(emp);			
-				usersAtPre.add(emp);
-				assert users.equals(usersAtPre); //post
-			}
-			else {
-				throw new OperationNotAllowedException("Only an admin can add users");
-			}
-		}
-		else {
-			throw new OperationNotAllowedException("another user with that ID already exists");
-		}
-		return emp; 
-	}
-	
-	public boolean ASSERTuserLogin(String ID, String password) throws FailedLoginException {
-		if(userIsLoggedIn()) { 
-			throw new FailedLoginException("another user is already logged in");
-		}
-		else {
-			assert !userIsLoggedIn(); // pre
-			User user = getUserByID(ID); 
-			if(user != null && password.equals(user.getPassword())) { 
-				assert getUserByID(ID).getPassword().equals(password); //pre
-				setLoggedInUser(user); 
-				assert userIsLoggedIn() && getLoggedInUserID().equals(ID); //post
-				return true; 
-			}
-			else {
-				throw new FailedLoginException("incorrect ID or password");
-			}
-		}
-		
-	}
 }

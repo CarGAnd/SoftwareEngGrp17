@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * @author Mark Uttrup Ewing
+ */
+
 public class UserCalendar {
 	
 	ArrayList<Absence> absence;
