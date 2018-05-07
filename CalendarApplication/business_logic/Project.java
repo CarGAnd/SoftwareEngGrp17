@@ -32,6 +32,7 @@ public class Project {
 	
 	public Activity createActivity(String description, String ID, Date dueDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 		if(management.getLoggedInUserID().equals(this.projectLeaderID)) { //1
+			// assert management.getLoggedInUserID().equals(newProject.getProjectLeaderID());
 			Activity activity = new Activity(ID,dueDate,estimatedTime,description); //2
 			this.addActivity(activity); //3
 			return activity; //4
@@ -39,6 +40,7 @@ public class Project {
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
 		}
+		
 	}
 	
 	public void setProjectName(String projectname) throws Exception {

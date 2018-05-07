@@ -28,9 +28,11 @@ public class Management {
 	
 	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 		if(adminIsLoggedIn()) {
+			// assert management.getLoggedInUser().hasAdminPermissions();
 			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
 			this.addProject(project);
 			return project;
+			// assert project.getProjectName().equals(name) && project.getProjectID().equals(ID) && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate) && project.getEstimatedTimeUsed().equals(estimatedTime);
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
