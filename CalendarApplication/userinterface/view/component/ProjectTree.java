@@ -1,6 +1,7 @@
 package userinterface.view.component;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -65,8 +66,6 @@ public class ProjectTree extends JPanel {
 
 			// create the tree by passing in the root node
 			JTree tree = new JTree(usersProjectList);
-			add(tree);
-
 			FrameController.skinComponent(this);
 			this.add(tree, BorderLayout.CENTER);
 		}

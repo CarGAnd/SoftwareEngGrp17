@@ -15,7 +15,7 @@ import userinterface.view.LoginScreen;
  * 
  * @author Tobias
  * @version 1.05
- *
+ *s
  */
 public interface ActionEvents {
 	public class Exit implements ActionListener {
