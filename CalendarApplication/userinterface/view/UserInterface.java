@@ -16,6 +16,7 @@ import userinterface.view.component.Button;
 import userinterface.view.component.Label;
 import userinterface.view.component.Panel;
 import userinterface.view.component.ProjectTree;
+import userinterface.view.component.ScrollPane;
 import userinterface.view.component.TextArea;
 
 /**
@@ -42,8 +43,7 @@ public class UserInterface extends Panel implements ActionEvents {
 	}
 
 	/**
-	 * Create component and panels, and set the panels layoutmanagers. Orientation is as follows: m(main), n(north), s(south), w(west), e(east) or c(centered). A nested component/panel
-	 * is written f.e. as c_n for north inside a centered panel, or s_e for east placement inside a southern panel.
+	 * Create component and panels, and set the panels layoutmanager.
 	 * 
 	 * @param management
 	 */
@@ -58,7 +58,7 @@ public class UserInterface extends Panel implements ActionEvents {
 		promptLabel = new Label(" ", Label.ETCHED, new Listeners.HoverComponentListener());
 		projectsTree = new ProjectTree();
 		projectDescription = new TextArea(400, 200);/* rows and columns locks the textarea from auto-rezizing on input. */
-		scrollPaneHoldingProjectDescription = new JScrollPane(projectDescription);
+		scrollPaneHoldingProjectDescription = new ScrollPane(projectDescription, ScrollPane.VERT_SCROLL_ALWAYS);
 		scrollPaneHoldingProjectDescription.setViewportBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 	}
 
@@ -67,9 +67,7 @@ public class UserInterface extends Panel implements ActionEvents {
 	 */
 	private void attachAndNestLayoutManagers() {
 		center.add(scrollPaneHoldingProjectDescription, BorderLayout.CENTER);
-		
 		center.add(centerSouth, BorderLayout.SOUTH);
-		
 		mainPanelBorderLayout.add(projectsTree, BorderLayout.WEST);
 		mainPanelBorderLayout.add(center, BorderLayout.CENTER);
 		mainPanelBorderLayout.add(southGridbagLayout, BorderLayout.SOUTH);

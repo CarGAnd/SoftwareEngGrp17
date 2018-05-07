@@ -20,8 +20,7 @@ public class ScrollPane extends JScrollPane {
 	}
 
 	public ScrollPane(TextArea txtArea, int scrollConstant) {
-		super();
-		FrameController.skinComponent(this);
+		this();
 		switch (scrollConstant) {
 			case VERT_SCROLL_ALWAYS:
 				this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
