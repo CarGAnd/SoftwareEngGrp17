@@ -196,7 +196,7 @@ public class Management {
 	}
 
 
-	public Employee requestAssistance(Activity activity) throws Exception {
+	public Employee requestAssistance(Activity activity) throws Exception { //@author Carsten Andersen/Mark Uttrup Ewing
 		boolean help = false;
 		Employee tempEmployee;
 		for(int i = 0; i < getEmployees().size(); i++) {
