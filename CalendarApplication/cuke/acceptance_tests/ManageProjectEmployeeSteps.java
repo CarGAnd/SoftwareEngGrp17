@@ -50,7 +50,7 @@ public class ManageProjectEmployeeSteps {
 	    assertTrue(errorHandler.testEmployee.isBusy());
 	}
 	
-	@Given("^the employee is not assigned to the activity$")
+	@Then("^the employee is not added to the activity$")
 	public void theEmployeeIsNotAssignedToTheActivity() throws Exception {
 		assertFalse(errorHandler.testActivity.getListOfEmployees().contains(errorHandler.testEmployee));
 	    assertFalse(errorHandler.testEmployee.getMemberOfActivities().contains(errorHandler.testActivity));

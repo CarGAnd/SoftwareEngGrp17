@@ -15,32 +15,28 @@ Scenario: Add employee to activity
 	And the employee is not absent during the period of the activity
 	When the user adds the employee to the activity
 	Then the employee is added to the activity
-#	
+
 Scenario: Remove employee from activity
 	Given an employee with the ID "test" and the password "password" is logged in
 	And the logged in user's ID matches the project leader ID
 	And the employee is assigned to the activity
 	When the user removes the employee from the activity
 	Then the employee is removed from the activity
-#	
+	
 Scenario: Add busy employee to activity
 	Given an employee with the ID "test" and the password "password" is logged in
 	And the logged in user's ID matches the project leader ID
 	And the employee is busy
 	When the user adds the employee to the activity
 	Then the user gets the error message "the employee is busy and cannot be added to the activity"
-#	
+	And the employee is not added to the activity
+	
 Scenario: Add absent employee to activity
 	Given an employee with the ID "test" and the password "password" is logged in
 	And the logged in user's ID matches the project leader ID
 	And the employee is currently absent
 	When the user adds the employee to the activity
 	Then the user gets the error message "the employee is absent and cannot be added to the activity"
-#	
-Scenario: Remove a employee not assigned to activity
-	Given an employee with the ID "test" and the password "password" is logged in
-	And the logged in user's ID matches the project leader ID
-	And the employee is not assigned to the activity
-	When the user removes the employee from the activity
-	Then the user gets the error message "the employee is not assigned to this activity"
+	And the employee is not added to the activity
+
 

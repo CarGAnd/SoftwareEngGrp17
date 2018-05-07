@@ -12,4 +12,4 @@ Feature: Request assistance from employees'
 #	Given the user with ID "Tester" is working on an activity with ID "ID1234"
 #	And there is no available employees
 #	When the user with ID "Tester" requests assistance
-#	Then the user recieves the error message "There are no available employees" 
+#	Then the user gets the error message "There are no available employees" 

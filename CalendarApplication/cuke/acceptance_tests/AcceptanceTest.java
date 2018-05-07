@@ -8,6 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 	features = "classpath:cuke", 
+
 	glue = {"classpath:cuke/acceptance_tests/"},
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 

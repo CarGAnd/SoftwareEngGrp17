@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
-	ArrayList<Activity> activities;
+	public ArrayList<Activity> activities;
 	String projectName;
 	private String projectID;
 
@@ -31,10 +31,10 @@ public class Project {
 	}
 	
 	public Activity createActivity(String description, String ID, Date dueDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
-		if(management.getLoggedInUserID().equals(this.projectLeaderID)) {
-			Activity activity = new Activity(ID,dueDate,estimatedTime,description);
-			this.addActivity(activity);
-			return activity;
+		if(management.getLoggedInUserID().equals(this.projectLeaderID)) { //1
+			Activity activity = new Activity(ID,dueDate,estimatedTime,description); //2
+			this.addActivity(activity); //3
+			return activity; //4
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");

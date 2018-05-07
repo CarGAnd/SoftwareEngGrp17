@@ -59,11 +59,6 @@ public class AssistanceSteps {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}
-
-	@Then("^the user recieves the error message \"([^\"]*)\"$")
-	public void theUserRecievesTheErrorMessage(String arg1) throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
 }
+
 

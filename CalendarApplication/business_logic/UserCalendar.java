@@ -12,8 +12,6 @@ public class UserCalendar {
 	public Map<Date,Double> registeredHours;
 	private boolean absenceStatus;
 	
-	
-	
 	public UserCalendar() {
 		absence = new ArrayList<Absence>();
 		this.registeredHours = new HashMap<Date,Double>();
@@ -28,9 +26,7 @@ public class UserCalendar {
 		return Abs;
 	}
 	public ArrayList<Absence> getAbsence() {
-		return absence;
-		
-		
+		return absence;	
 	}
 	
 	public boolean isAbsent(Date date) {

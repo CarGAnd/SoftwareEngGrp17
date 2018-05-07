@@ -29,6 +29,12 @@ public class LoginSteps {
 	    assertTrue(management.userIsLoggedIn());
 	}
 	
+	@Given("^an adminstrator is logged in$")
+	public void anAdminstratorIsLoggedIn() throws Exception {
+		management.logUserOut();
+	    management.userLogin("admin", "adminadmin");
+	}
+	
 	@Given("^a user is not logged in$")
 	public void aUserIsNotLoggedIn() throws Exception {
 		management.logUserOut();
@@ -96,10 +102,14 @@ public class LoginSteps {
 	    	errorHandler.errorMessage = e.getMessage();
 	    }
 	}
+	
+	@When("^the adminstrator removes the user with the ID \"([^\"]*)\"$")
+	public void theAdminstratorRemovesTheUserWithTheID(String ID) throws Exception {
+	    management.removeUser(management.getUserByID(ID));
+	}
 
 	@Then("^the adminstrator is logged in$")
-	public void theAdminstratorIsLoggedIn() throws Exception {
-		
+	public void theAdminstratorIsLoggedIn() throws Exception {	
 		assertTrue(management.adminIsLoggedIn());
 	}
 	
@@ -108,9 +118,9 @@ public class LoginSteps {
 		assertTrue(management.getLoggedInUserID() == null || !management.getLoggedInUserID().equals(testAdmin.getUserID()));
 	}
 	
-	@Then("^i get the error message \"([^\"]*)\"$")
-	public void iGetTheErrorMessage(String error) throws Exception {
-	    assertTrue(errorHandler.errorMessage.equals(error));
+	@Then("^the user is removed from the list of users$")
+	public void theUserIsRemovedFromTheListOfUsers() throws Exception {
+	    assertFalse(management.getUsers().contains(errorHandler.testEmployee));
 	}
 	
 	@Then("^the user is no longer logged in$")
