@@ -1,4 +1,4 @@
-package DesignByContract;
+package cuke.DesignByContract;
 
 import business_logic.Admin;
 import business_logic.Employee;
