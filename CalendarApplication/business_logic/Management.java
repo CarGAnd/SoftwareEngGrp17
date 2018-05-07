@@ -191,6 +191,7 @@ public class Management {
 	public void requestAssistanceByID(String UserID, Activity activity) {
 		boolean help;
 		int i = 0;
+		help = false;
 		while(help = false) {
 			if(!getEmployees().get(i).isBusy() && !getEmployees().get(i).checkAbsent()) {
 				help = true;
