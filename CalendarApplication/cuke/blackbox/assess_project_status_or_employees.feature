@@ -6,7 +6,7 @@ Feature: xxx
 #	Given the user is logged in with his ID
 #	When the user assesses workers
 #	Then he receives a list of workers with their status
-
+#
 #Scenario: Project Leader checks project status
 #	Given the user ID matches the project leader ID
 #	When the user assesses a project’s status
