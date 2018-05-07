@@ -33,6 +33,7 @@ public class Management {
 			this.addProject(project);
 			return project;
 			// assert project.getProjectName().equals(name) && project.getProjectID().equals(ID) && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate) && project.getEstimatedTimeUsed().equals(estimatedTime);
+			// assert listOfProjects.contains(project);
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
