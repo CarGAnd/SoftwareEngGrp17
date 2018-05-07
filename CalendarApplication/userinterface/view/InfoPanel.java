@@ -31,17 +31,7 @@ public class InfoPanel extends Panel {
 
 	public InfoPanel() {
 		super(Themes.INFOPANEL);
-		
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				clock = new Clock();
-				
-			}
-		};
-		r.run();
-		time = new Label(clock.gmtFormat(), Label.USE_SKINBORDER);	
-		test = new Label("", Label.USE_SKINBORDER);
+		time = new Label("", Label.USE_SKINBORDER);	
 		test = new Label("", Label.USE_SKINBORDER);
 		test.add(FrameController.getController().getAllCards(), new HoverComponentListener());
 
@@ -52,6 +42,14 @@ public class InfoPanel extends Panel {
 		this.add(time, 2);
 		this.add(test, 3);
 
+	}
+
+	public Label getTime() {
+		return time;
+	}
+
+	public void setTime(Label time) {
+		this.time = time;
 	}
 
 	public void setTestInfo(String string) {

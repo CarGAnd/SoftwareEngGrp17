@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 
 import business_logic.Management;
+import userinterface.model.Clock;
 import userinterface.model.Themes;
 import userinterface.model.Themes.Theme;
 import userinterface.view.InfoPanel;
@@ -40,6 +41,8 @@ public class FrameController {
 	private CardLayout			   cardlayout;
 	private Management			   managementObj;
 	private ProjectTree			   projecttreeObj;
+
+	private Clock clock;
 	private static Rectangle	   screenDimension;
 
 	private static FrameController controller;
@@ -101,8 +104,10 @@ public class FrameController {
 		projecttreeObj = new ProjectTree();
 		uiObj = new UserInterface();
 		loginsreenObj = new LoginScreen();
+		clock = new Clock();
+		Thread t = new Thread(clock);
 		infoObj = new InfoPanel();
-
+		
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.anchor = GridBagConstraints.CENTER;
 		constraints.ipadx = FrameController.frame.getWidth() / 4;
@@ -111,6 +116,8 @@ public class FrameController {
 		uiCard.add(uiObj, BorderLayout.CENTER);
 		allCards.add(uiCard, "0");
 		allCards.add(loginscreenCard, "1");
+		
+		t.start();
 
 	}
 

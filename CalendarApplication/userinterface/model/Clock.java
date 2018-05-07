@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import userinterface.controller.FrameController;
+
 public class Clock implements Runnable {
 	/**
 	 * Snippet gmtFormat() by Lars Staalhagen, DTU.
@@ -23,7 +25,7 @@ public class Clock implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			gmtFormat();
+			FrameController.getController().getInfoPanel().setTestInfo(gmtFormat());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

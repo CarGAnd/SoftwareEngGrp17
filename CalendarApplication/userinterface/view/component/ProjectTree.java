@@ -28,13 +28,12 @@ public class ProjectTree extends JPanel {
 		super();
 		this.setLayout(new BorderLayout());
 		try {
+			this.add(Box.createHorizontalStrut(200), BorderLayout.SOUTH);
 			updateProjectTree(FrameController.getController().getManagement().getLoggedInUser());
 			System.out.println("Created project tree.");
 		} catch (Exception e) {
 			updateProjectTree(new User(null, null, null));
 			System.out.println("Caught an exception...");
-		} finally {
-			this.add(Box.createHorizontalStrut(200), BorderLayout.SOUTH);
 		}
 
 	}
