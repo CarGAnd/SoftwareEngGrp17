@@ -25,7 +25,11 @@ public class WhiteBoxAddUserSteps {
 
 	@When("^a user with ID \"([^\"]*)\" is added to the managment$")
 	public void aUserWithIDIsAddedToTheManagment(String arg1) throws Exception {
+		management.logUserOut();
+		management.userLogin("admin", "adminadmin");
 		errorHandler.testEmployee = new Employee("Tester", "passy");
+		management.addUser(errorHandler.testEmployee);
+		management.logUserOut();
 		management.userLogin("Tester", "passy");
 		errorHandler.testEmployee = new Employee(arg1, "passy");
 		try {
