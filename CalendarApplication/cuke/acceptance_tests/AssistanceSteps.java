@@ -27,8 +27,7 @@ public class AssistanceSteps {
 		if(!management.getProjectByID("project").getActivityByID(arg2).getListOfEmployees().contains(management.getEmployeeByID(arg1))) {
 			management.getProjectByID("project").getActivityByID(arg2).addEmployeeToActivity(management.getEmployeeByID(arg1));;	
 		}
-		errorHandler.testEmployee = (Employee) management.getUserByID(arg1);
-		assertTrue(management.getProjectByID("project").getActivityByID(arg2).getListOfEmployees().contains(management.getUserByID(arg1)));
+		assertTrue(management.getProjectByID("project").getActivityByID(arg2).getListOfEmployees().contains(management.getEmployeeByID(arg1)));
 	}
 
 	@Given("^there is an available employee$")

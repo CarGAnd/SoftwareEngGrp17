@@ -16,6 +16,7 @@ public class ErrorHandler {
 	public Project testProject;
 	public Activity testActivity;
 	public Employee testEmployee;
+	public Employee testEmployee2;
 	public Absence testAbsence;
 	public User testUser;
 	
