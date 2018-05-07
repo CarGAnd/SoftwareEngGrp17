@@ -27,10 +27,10 @@ public class Management {
 	}
 	
 	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
-		if(adminIsLoggedIn()) {
-			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
-			this.addProject(project);
-			return project;
+		if(adminIsLoggedIn()) { //1
+			Project project = new Project(name,ID,startDate,endDate,estimatedTime); //2
+			this.addProject(project); //3
+			return project; //4
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
@@ -38,14 +38,14 @@ public class Management {
 	}
 	
 	public boolean userLogin(String ID, String password) throws FailedLoginException {
-		if(userIsLoggedIn()) {
+		if(userIsLoggedIn()) { // 1
 			throw new FailedLoginException("another user is already logged in");
 		}
 		else {
-			User user = getUserByID(ID);
-			if(user != null && password.equals(user.getPassword())) {
-				setLoggedInUser(user);
-				return true;
+			User user = getUserByID(ID); //2
+			if(user != null && password.equals(user.getPassword())) { //3
+				setLoggedInUser(user); //4
+				return true; //5
 			}
 			else {
 				throw new FailedLoginException("incorrect ID or password");
@@ -58,9 +58,9 @@ public class Management {
 	}
 	
 	public User addUser(User emp) throws OperationNotAllowedException {
-		if(getUserByID(emp.getUserID()) == null) {
-			if(adminIsLoggedIn()) {
-				users.add(emp);							
+		if(getUserByID(emp.getUserID()) == null) { //1
+			if(adminIsLoggedIn()) { //2
+				users.add(emp);			//3				
 			}
 			else {
 				throw new OperationNotAllowedException("Only an admin can add users");
@@ -69,7 +69,7 @@ public class Management {
 		else {
 			throw new OperationNotAllowedException("another user with that ID already exists");
 		}
-		return emp;
+		return emp; //4
 	}
 	
 	public void removeUser(User user) throws OperationNotAllowedException {
