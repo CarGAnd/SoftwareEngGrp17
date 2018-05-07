@@ -11,6 +11,9 @@ import static org.junit.Assert.assertTrue;
 import cucumber.api.java.en.*;
 import cuke.acceptance_tests.ErrorHandler;
 
+/*
+ * @author Carsten Andersen
+ */
 
 public class WhiteBoxAddUserSteps {
 	

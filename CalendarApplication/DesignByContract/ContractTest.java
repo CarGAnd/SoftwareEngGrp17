@@ -16,6 +16,10 @@ import java.util.Date;
 import cucumber.api.java.en.*;
 import cuke.acceptance_tests.ErrorHandler;
 
+/*
+ * @author Mark Uttrup Ewing
+ */
+
 public class ContractTest {
 	
 	ErrorHandler errorHandler;

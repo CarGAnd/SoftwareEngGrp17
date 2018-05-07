@@ -6,6 +6,10 @@ import business_logic.Employee;
 import business_logic.Project;
 import business_logic.User;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class ErrorHandler {
 	
 	public String errorMessage;

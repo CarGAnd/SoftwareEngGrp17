@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * @author Carsten Andersen
+ */
+
 public class Project {
 	public ArrayList<Activity> activities;
 	String projectName;
@@ -138,6 +142,7 @@ public class Project {
 	
 //	______________________________________________________________________________
 //	The following section only contains assertion copies of the specified methods.
+//	@author Mark Uttrup Ewing
 //	______________________________________________________________________________
 	
 	public Activity ASSERTcreateActivity(String description, String ID, Date dueDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object

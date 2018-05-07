@@ -3,6 +3,10 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class Activity {
 	
 	private String name;

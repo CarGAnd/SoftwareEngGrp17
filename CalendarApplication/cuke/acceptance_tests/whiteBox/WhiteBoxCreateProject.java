@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import cucumber.api.java.en.*;
 
+/*
+ * @author Carsten Andersen
+ */
+
 public class WhiteBoxCreateProject {
 
 	ErrorHandler errorHandler;

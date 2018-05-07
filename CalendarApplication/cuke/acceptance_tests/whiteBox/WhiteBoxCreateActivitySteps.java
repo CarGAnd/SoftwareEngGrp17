@@ -19,6 +19,10 @@ import business_logic.User;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 
+/*
+ * @author Carsten Andersen
+ */
+
 public class WhiteBoxCreateActivitySteps {
 
 	ErrorHandler errorHandler;

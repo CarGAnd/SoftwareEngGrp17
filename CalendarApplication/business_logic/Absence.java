@@ -1,7 +1,9 @@
 package business_logic;
 
 import java.util.Date;
-
+/*
+ * * @author Mark Uttrup Ewing
+ */
 
 public class Absence {
 	

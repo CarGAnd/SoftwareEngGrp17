@@ -10,6 +10,10 @@ import business_logic.Management;
 import business_logic.User;
 import cucumber.api.java.en.*;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class LoginSteps {
 	
 	ErrorHandler errorHandler;
