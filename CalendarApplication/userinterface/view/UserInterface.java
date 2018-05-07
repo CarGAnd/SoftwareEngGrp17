@@ -71,7 +71,6 @@ public class UserInterface extends Panel implements ActionEvents {
 		center.add(centerSouth, BorderLayout.SOUTH);
 		
 		mainPanelBorderLayout.add(projectsTree, BorderLayout.WEST);
-		
 		mainPanelBorderLayout.add(center, BorderLayout.CENTER);
 		mainPanelBorderLayout.add(southGridbagLayout, BorderLayout.SOUTH);
 		this.add(mainPanelBorderLayout, BorderLayout.CENTER);

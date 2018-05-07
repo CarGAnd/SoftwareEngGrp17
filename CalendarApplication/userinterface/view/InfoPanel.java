@@ -36,12 +36,12 @@ public class InfoPanel extends Panel {
 			@Override
 			public void run() {
 				clock = new Clock();
-				clock.gmtFormat();
 				
 			}
 		};
 		r.run();
-		time = new Label(clock.gmtFormat(), Label.USE_SKINBORDER);		test = new Label("", Label.USE_SKINBORDER);
+		time = new Label(clock.gmtFormat(), Label.USE_SKINBORDER);	
+		test = new Label("", Label.USE_SKINBORDER);
 		test = new Label("", Label.USE_SKINBORDER);
 		test.add(FrameController.getController().getAllCards(), new HoverComponentListener());
 
