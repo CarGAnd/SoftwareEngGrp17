@@ -12,6 +12,10 @@ import business_logic.OperationNotAllowedException;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 
+/*
+ * @author Carsten Guldbrand Andersen
+ */
+
 public class AssistanceSteps {
 	
 	ErrorHandler errorHandler;

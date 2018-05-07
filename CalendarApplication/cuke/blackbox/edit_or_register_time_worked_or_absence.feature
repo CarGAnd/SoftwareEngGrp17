@@ -1,6 +1,6 @@
-Feature: xxx
-	Description: xxx
-	Actor: xxx
+Feature: register absence and time worked
+	Description: a user can register absence and time worked
+	Actor: user
 	
 Background:
 	Given an employee exists with the ID "test" and the password "password"
