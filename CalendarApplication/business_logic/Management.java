@@ -183,29 +183,38 @@ public class Management {
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
+	public Employee getEmployeeByID(String ID) {
+		Employee foundEmployee;
+		for(int i = 0; i < getEmployees().size(); i++) {
+			foundEmployee = getEmployees().get(i);	
+			if(foundEmployee.getUserID().equals(ID))
+				return foundEmployee;
+		}
+		
+		return null;
+	}
 
 	private void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
 
-	public Employee requestAssistance(Activity activity) {
-		boolean help;
-		int i = 0;
-		while(help = false) {
-			Employee tempEmployee = getEmployees().get(i);
+	public Employee requestAssistance(Activity activity) throws Exception {
+		boolean help = false;
+		Employee tempEmployee;
+		for(int i = 0; i < getEmployees().size(); i++) {
+			tempEmployee = getEmployees().get(i);
 			if(!tempEmployee.isBusy() && !tempEmployee.checkAbsent()) {
-				if(tempEmployee.getMemberOfActivities().contains(activity)) {
-					i += 1;
+				if(activity.getListOfEmployees().contains(tempEmployee)) {
+				continue;
 				}
 				else {	
 				help = true;
-				tempEmployee.addActivityToEmployee(activity);
+				activity.addEmployeeToActivity(tempEmployee);
 				return tempEmployee;
 				}
 			}
-			i = i+1;
 		}
-		return null;
+		throw new OperationNotAllowedException("There are no available employees");
 		
 	}
 //	______________________________________________________________________________

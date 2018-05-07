@@ -15,9 +15,15 @@ public class Employee extends User {
 		memberOfActivities = new ArrayList<Activity>();	
 	}
 	
-	public void addActivityToEmployee(Activity act) {
-		memberOfActivities.add(act);
-	}
+	public void addActivityToEmployee(Activity act) throws Exception {
+		if(!this.getMemberOfActivities().contains(act)) {
+			memberOfActivities.add(act);
+		}
+		else {
+			throw new OperationNotAllowedException("This employee is already part of this activity");
+		}
+	
+	}	
 	
 	public void removeActivityFromEmployee(Activity act) {
 		if(memberOfActivities.contains(act)) {

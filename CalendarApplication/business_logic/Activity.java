@@ -36,7 +36,7 @@ public class Activity {
 		listOfEmployees = new ArrayList<Employee>();
 	}
 
-	public void addEmployeeToActivity(Employee emp) throws OperationNotAllowedException {
+	public void addEmployeeToActivity(Employee emp) throws Exception {
 		if(!listOfEmployees.contains(emp)) {
 			if(!emp.isBusy() && !emp.getUserCalendar().isAbsent(startDate == null ? new Date(): startDate)) {
 				listOfEmployees.add(emp);

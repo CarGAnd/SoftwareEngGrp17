@@ -148,7 +148,7 @@ public class Project {
 			this.addActivity(activity); 
 			actAtPre.add(activity);
 			assert this.activities.equals(actAtPre);
-			return activity; 
+			return activity;
 		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
