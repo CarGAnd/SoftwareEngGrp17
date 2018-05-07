@@ -18,15 +18,6 @@ public class Management {
 		users.add(new Admin());
 	}
 	
-	public static void main(String args[]) throws OperationNotAllowedException, FailedLoginException {
-		Management test = new Management();
-		test.userLogin("admin", "adminadmin");
-		test.addUser(new Employee("test","password"));
-		Employee testEmp = (Employee) test.getUserByID("test");
-		System.out.println(testEmp.isBusy());
-		
-	}
-	
 	public boolean userIsLoggedIn() {
 		return loggedInUser != null;
 	}
