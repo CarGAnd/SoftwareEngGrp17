@@ -135,4 +135,24 @@ public class Project {
 		}
 	
 	}
+	
+//	______________________________________________________________________________
+//	The following section only contains assertion copies of the specified methods.
+//	______________________________________________________________________________
+	
+	public Activity ASSERTcreateActivity(String description, String ID, Date dueDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
+		ArrayList<Activity> actAtPre = new ArrayList<>(activities);
+		if(management.getLoggedInUserID().equals(this.projectLeaderID)) { 
+			assert management.getLoggedInUserID().equals(this.getProjectLeaderID()); //pre
+			Activity activity = new Activity(ID,dueDate,estimatedTime,description); 
+			this.addActivity(activity); 
+			actAtPre.add(activity);
+			assert this.activities.equals(actAtPre);
+			return activity; 
+		}
+		else {
+			throw new OperationNotAllowedException("Insufficient permissions");
+		}
+		
+	}
 }

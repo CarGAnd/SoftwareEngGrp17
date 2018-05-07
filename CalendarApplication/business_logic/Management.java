@@ -239,7 +239,7 @@ public class Management {
 		else {
 			throw new OperationNotAllowedException("another user with that ID already exists");
 		}
-		return emp; //4
+		return emp; 
 	}
 	
 	public boolean ASSERTuserLogin(String ID, String password) throws FailedLoginException {
