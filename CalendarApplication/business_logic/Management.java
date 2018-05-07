@@ -188,16 +188,24 @@ public class Management {
 		this.loggedInUser = loggedInUser;
 	}
 
-	public void requestAssistanceByID(String UserID, Activity activity) {
+	public Employee requestAssistance(Activity activity) {
 		boolean help;
 		int i = 0;
 		while(help = false) {
-			if(!getEmployees().get(i).isBusy() && !getEmployees().get(i).checkAbsent()) {
+			Employee tempEmployee = getEmployees().get(i);
+			if(!tempEmployee.isBusy() && !tempEmployee.checkAbsent()) {
+				if(tempEmployee.getMemberOfActivities().contains(activity)) {
+					i += 1;
+				}
+				else {	
 				help = true;
-				getEmployees().get(i).addActivityToEmployee(activity);
+				tempEmployee.addActivityToEmployee(activity);
+				return tempEmployee;
+				}
 			}
 			i = i+1;
 		}
+		return null;
 		
 	}
 //	______________________________________________________________________________
