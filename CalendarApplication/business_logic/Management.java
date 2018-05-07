@@ -29,13 +29,10 @@ public class Management {
 	public Project createProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 
 		if(adminIsLoggedIn()) {
-			// assert management.getLoggedInUser().hasAdminPermissions();
 			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
 			this.addProject(project);
 			return project;
-			// assert project.getProjectName().equals(name) && project.getProjectID().equals(ID) && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate) && project.getEstimatedTimeUsed().equals(estimatedTime);
-			// assert listOfProjects.contains(project);
-
+		}
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
 		}
@@ -202,5 +199,23 @@ public class Management {
 			i = i+1;
 		}
 		
+	}
+//	______________________________________________________________________________
+//	The following section only contains assertion copies of the specified methods.
+//	______________________________________________________________________________
+	public Project ASSERTcreateProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
+
+		if(adminIsLoggedIn()) {
+			 assert getLoggedInUser().hasAdminPermissions();
+			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
+			this.addProject(project);
+			 assert project.getProjectName().equals(name) && project.getProjectID().equals(ID) && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate) && project.getEstimatedTimeUsed() == estimatedTime;
+			 assert listOfProjects.contains(project);
+			return project;
+
+		}
+		else {
+			throw new OperationNotAllowedException("Insufficient permissions");
+		}
 	}
 }
