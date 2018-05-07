@@ -187,10 +187,21 @@ public class Management {
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
+	public Employee getEmployeeByID(String ID) {
+		Employee foundEmployee;
+		for(int i = 0; i < getEmployees().size(); i++) {
+			foundEmployee = getEmployees().get(i);	
+			if(foundEmployee.getUserID().equals(ID))
+				return foundEmployee;
+		}
+		
+		return null;
+	}
 
 	private void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
+<<<<<<< HEAD
 
 	//@author Mark Uttrup Ewing
 	public void requestAssistanceByID(String UserID, Activity activity) {
@@ -199,11 +210,26 @@ public class Management {
 		help = false;
 		while(help = false) {
 			if(!getEmployees().get(i).isBusy() && !getEmployees().get(i).checkAbsent()) {
+=======
+
+	public Employee requestAssistance(Activity activity) throws Exception {
+		boolean help = false;
+		Employee tempEmployee;
+		for(int i = 0; i < getEmployees().size(); i++) {
+			tempEmployee = getEmployees().get(i);
+			if(!tempEmployee.isBusy() && !tempEmployee.checkAbsent()) {
+				if(activity.getListOfEmployees().contains(tempEmployee)) {
+				continue;
+				}
+				else {	
+>>>>>>> branch 'master' of https://github.com/PepperYourAnguss/SoftwareEngGrp17.git
 				help = true;
-				getEmployees().get(i).addActivityToEmployee(activity);
+				activity.addEmployeeToActivity(tempEmployee);
+				return tempEmployee;
+				}
 			}
-			i = i+1;
 		}
+		throw new OperationNotAllowedException("There are no available employees");
 		
 	}
 //	______________________________________________________________________________
