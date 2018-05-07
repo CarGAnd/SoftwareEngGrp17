@@ -12,6 +12,10 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import cuke.acceptance_tests.ErrorHandler;
 
+/*
+ * @author Carsten Andersen
+ */
+
 public class WhiteBoxUserLogin {
 	
 	ErrorHandler errorHandler;

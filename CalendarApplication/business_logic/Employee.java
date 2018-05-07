@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import business_logic.Management.userType;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class Employee extends User {
 
 	public ArrayList<Project> leaderOfProjects;

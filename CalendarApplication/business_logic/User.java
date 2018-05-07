@@ -7,6 +7,9 @@ import java.util.Map;
 
 import business_logic.Management.userType;
 
+/*
+ * @author Mark Uttrup Ewing
+ */
 
 public class User {
 	

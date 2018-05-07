@@ -4,6 +4,10 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * @author Andreas Handberg
+ */
+
 public class Management {
 	
 	private User loggedInUser;
@@ -174,6 +178,16 @@ public class Management {
 	private void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
+<<<<<<< HEAD
+
+	//@author Mark Uttrup Ewing
+	public void requestAssistanceByID(String UserID, Activity activity) {
+		boolean help;
+		int i = 0;
+		help = false;
+		while(help = false) {
+			if(!getEmployees().get(i).isBusy() && !getEmployees().get(i).checkAbsent()) {
+=======
 
 	public Employee requestAssistance(Activity activity) throws Exception {
 		boolean help = false;
@@ -185,6 +199,7 @@ public class Management {
 				continue;
 				}
 				else {	
+>>>>>>> branch 'master' of https://github.com/PepperYourAnguss/SoftwareEngGrp17.git
 				help = true;
 				activity.addEmployeeToActivity(tempEmployee);
 				return tempEmployee;
@@ -196,6 +211,7 @@ public class Management {
 	}
 //	______________________________________________________________________________
 //	The following section only contains assertion copies of the specified methods.
+//	@author Mark Uttrup Ewing
 //	______________________________________________________________________________
 	public Project ASSERTcreateProject(String name, String ID, Date startDate, Date endDate, int estimatedTime) throws Exception { // creates a project and adds it to the management object
 
