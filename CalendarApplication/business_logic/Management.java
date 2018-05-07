@@ -217,7 +217,9 @@ public class Management {
 			 assert getLoggedInUser().hasAdminPermissions();
 			Project project = new Project(name,ID,startDate,endDate,estimatedTime);
 			this.addProject(project);
-			 assert project.getProjectName().equals(name) && project.getProjectID().equals(ID) && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate) && project.getEstimatedTimeUsed() == estimatedTime;
+			 assert project.getProjectName().equals(name) && project.getProjectID().equals(ID)
+			 && project.getProjectStartDate().equals(startDate) && project.getProjectEndDate().equals(endDate)
+			 && project.getEstimatedTimeUsed() == estimatedTime; //post
 			 assert listOfProjects.contains(project);
 			return project;
 
@@ -225,5 +227,46 @@ public class Management {
 		else {
 			throw new OperationNotAllowedException("Insufficient permissions");
 		}
+	}
+	
+	
+	public User ASSERTaddUser(User emp) throws OperationNotAllowedException {
+		ArrayList<User> usersAtPre = new ArrayList<>(users);
+		if(getUserByID(emp.getUserID()) == null) { 
+			assert !getUsers().contains(emp); //pre
+			if(adminIsLoggedIn()) { 
+				assert getLoggedInUser().hasAdminPermissions(); //pre
+				users.add(emp);			
+				usersAtPre.add(emp);
+				assert users.equals(usersAtPre); //post
+			}
+			else {
+				throw new OperationNotAllowedException("Only an admin can add users");
+			}
+		}
+		else {
+			throw new OperationNotAllowedException("another user with that ID already exists");
+		}
+		return emp; 
+	}
+	
+	public boolean ASSERTuserLogin(String ID, String password) throws FailedLoginException {
+		if(userIsLoggedIn()) { 
+			throw new FailedLoginException("another user is already logged in");
+		}
+		else {
+			assert !userIsLoggedIn(); // pre
+			User user = getUserByID(ID); 
+			if(user != null && password.equals(user.getPassword())) { 
+				assert getUserByID(ID).getPassword().equals(password); //pre
+				setLoggedInUser(user); 
+				assert userIsLoggedIn() && getLoggedInUserID().equals(ID); //post
+				return true; 
+			}
+			else {
+				throw new FailedLoginException("incorrect ID or password");
+			}
+		}
+		
 	}
 }
