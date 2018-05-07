@@ -89,7 +89,7 @@ public class FrameController {
 				frame.getContentPane().add(controller.infoObj, BorderLayout.NORTH);
 				frame.getContentPane().add(controller.allCards);
 				controller.cardlayout = (CardLayout) (controller.allCards.getLayout());
-				controller.cardlayout.show(controller.allCards, "0");
+				controller.cardlayout.show(controller.allCards, "1");
 				frame.setVisible(true);
 			}
 		};

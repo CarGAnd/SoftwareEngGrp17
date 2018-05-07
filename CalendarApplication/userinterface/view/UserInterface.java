@@ -54,7 +54,6 @@ public class UserInterface extends Panel implements ActionEvents {
 		southGridBagLayoutPanelTwo = new Panel(new FlowLayout(FlowLayout.RIGHT), Themes.STANDARD);
 		center = new Panel(new BorderLayout(), Themes.STANDARD);
 		centerSouth = new Panel(new FlowLayout(FlowLayout.CENTER),Themes.STANDARD);
-	//	centerSouth.add(Box.(100, 101, 102));
 		panelInput = new Panel(Themes.STANDARD);
 		promptLabel = new Label(" ", Label.ETCHED, new Listeners.HoverComponentListener());
 		projectsTree = new ProjectTree();
@@ -77,15 +76,15 @@ public class UserInterface extends Panel implements ActionEvents {
 		mainPanelBorderLayout.add(southGridbagLayout, BorderLayout.SOUTH);
 		this.add(mainPanelBorderLayout, BorderLayout.CENTER);
 		southGridBagLayoutPanelOne.add(new Button("Logout", new Logout(), "UI"));
-		centerSouth.add(new Button("Require Assistance", null, "UI"));
+		centerSouth.add(new Button("Require Assistance", new NotImplemented(), "UI"));
 		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
-		centerSouth.add(new Button("Switch Account (temp)", new SwitchAccount(), "UI"));
+		centerSouth.add(new Button("Switch Account", new SwitchAccount(), "UI"));
 		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
-		centerSouth.add(new Button("Open Calendar View", new SwitchAccount(), "UI"));
+		centerSouth.add(new Button("Open Calendar View", new NotImplemented(), "UI"));
 		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
-		centerSouth.add(new Button("Edit or Register Time Worked", new SwitchAccount(), "UI"));
+		centerSouth.add(new Button("Edit or Register Time Worked", new NotImplemented(), "UI"));
 		centerSouth.add(Box.createRigidArea(new Dimension(5, 1)));
-		centerSouth.add(new Button("Assess Project Status or Employee'", new SwitchAccount(), "UI"));
+		centerSouth.add(new Button("Assess Project Status or Employee'", new NotImplemented(), "UI"));
 		panelInput.add(southGridBagLayoutPanelOne);
 		southGridbagLayout.add(southGridBagLayoutPanelTwo, 0);
 		southGridbagLayout.add(panelInput, 1);

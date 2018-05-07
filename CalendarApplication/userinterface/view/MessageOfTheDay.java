@@ -14,6 +14,14 @@ import userinterface.view.component.Label;
  */
 public class MessageOfTheDay extends Label implements ColorList {
 	private static String	  text			   = "IDS picked up a Chinese IP adr. succesfully bruteforcing admins SSH password. Port 22 blocked on all servers temporarily.";
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		MessageOfTheDay.text = text;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public MessageOfTheDay() {

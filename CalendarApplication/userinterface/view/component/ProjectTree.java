@@ -1,5 +1,7 @@
 package userinterface.view.component;
 
+import java.awt.BorderLayout;
+
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTree;
@@ -22,7 +24,8 @@ public class ProjectTree extends JPanel {
 	private DefaultMutableTreeNode usersProjectList;
 
 	public ProjectTree() {
-		this.add(Box.createHorizontalStrut(175), null);
+		super();
+		this.setLayout(new BorderLayout());
 		try {
 			updateProjectTree(FrameController.getController().getManagement().getLoggedInUser());
 			System.out.println("Created project tree.");
@@ -30,7 +33,7 @@ public class ProjectTree extends JPanel {
 			updateProjectTree(new User(null, null, null));
 			System.out.println("Caught an exception...");
 		} finally {
-			
+			this.add(Box.createHorizontalStrut(200), BorderLayout.SOUTH);
 		}
 
 	}
@@ -65,6 +68,7 @@ public class ProjectTree extends JPanel {
 			add(tree);
 
 			FrameController.skinComponent(this);
+			this.add(tree, BorderLayout.CENTER);
 		}
 
 	}
